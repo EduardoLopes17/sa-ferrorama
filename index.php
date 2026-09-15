@@ -283,6 +283,7 @@
     <div id="cadastro2" class="content">
 
         <div class="col-md-12">
+        
         <h2>Cadastro de Usuario</h2>
                 <button class="btn btn-primary" type="button">Novo Usuário</button>
         </div>
@@ -321,60 +322,60 @@
 
     <div id="gerenciarUsuario" class="content">
 
-    <div class="col-md-12">
+        <div class="col-md-12">
+
         <h2>Gerenciar Usuário</h2>
-        <button class="btn btn-primary" type="button">Novo Usuário</button>
+                <button class="btn btn-primary" type="button">Novo Usuário</button>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Usuário</th>
+                    <th scope="col">Cpf</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Julio</td>
+                    <td>182.986.976-18</td>
+                    <td>julioferraz@gmail</td>
+                    <td>Ativo</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary" type="button">Editar</button>
+                        <button class="btn btn-sm btn-outline-danger" type="button">Excluir</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Bruno</td>
+                    <td>145.347.869-09</td>
+                    <td>brunolion@gmail</td>
+                    <td>Ativo</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary" type="button">Editar</button>
+                        <button class="btn btn-sm btn-outline-danger" type="button">Excluir</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Alisson</td>
+                    <td>172.987.735-78</td>
+                    <td>alissongfernandez@gmail</td>
+                    <td>Inativo</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary" type="button">Editar</button>
+                        <button class="btn btn-sm btn-outline-danger" type="button">Excluir</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Usuário</th>
-                <th scope="col">Cpf</th>
-                <th scope="col">Email</th>
-                <th scope="col">Status</th>
-                <th scope="col">Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Julio</td>
-                <td>182.986.976-18</td>
-                <td>julioferraz@gmail</td>
-                <td>Ativo</td>
-                <td>
-                    <button class="btn btn-sm btn-outline-primary" type="button">Editar</button>
-                    <button class="btn btn-sm btn-outline-danger" type="button">Excluir</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-
-                <td>Bruno</td>
-                <td>145.347.869-09</td>
-                <td>brunolion@gmail</td>
-                <td>Ativo</td>
-                <td>
-                    <button class="btn btn-sm btn-outline-primary" type="button">Editar</button>
-                    <button class="btn btn-sm btn-outline-danger" type="button">Excluir</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Alisson</td>
-                <td>172.987.735-78</td>
-                <td>alissongfernandez@gmail</td>
-                <td>Inativo</td>
-                <td>
-                    <button class="btn btn-sm btn-outline-primary" type="button">Editar</button>
-                    <button class="btn btn-sm btn-outline-danger" type="button">Excluir</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
 
 
     <div id="sair" class="content">
