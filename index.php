@@ -220,12 +220,6 @@
                     <input type="text" class="form-control" id="inputPassword4" placeholder="ex: Temperatura">
                 </div>
 
-                <div class="col-12">
-                    <label for="inputAddress" class="form-label">Endereço</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="ex: Rua Max Colin">
-                </div>
-
-
                 <div class="d-grid mt-3">
                     <button class="btn btn-primary" type="button">Cadastrar Sensor</button>
                 </div>
