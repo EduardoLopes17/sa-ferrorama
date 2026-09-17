@@ -307,9 +307,7 @@ td {
     align-items: center;
 }
 
-/* =========================================
-   MONITOR DE TRENS
-   ========================================= */
+
 
 .monitor-page {
     padding: 25px 35px 50px 35px;
@@ -375,100 +373,4 @@ td {
 
 .status-operacao {
     color: #5eaf5e;
-}
-
-<<<<<<< HEAD
-.alerts-page {
-    font-family: 'Georgia', 'Playfair Display', serif;
-    background-color: #ffffff;
-    color: #1a1a1a;
-    padding: 40px 60px;
-}
-
-.alerts-title {
-    font-size: 2rem;
-    font-weight: 500;
-    margin-bottom: 25px;
-}
-
-.alerts-card {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 18px;
-    padding: 30px 40px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-}
-
-.alerts-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.alerts-table th {
-    text-align: left;
-    font-size: 1.1rem;
-    font-weight: 600;
-    padding: 14px 10px;
-    border-bottom: 2px solid #d8d8d8;
-}
-
-.alerts-table td {
-    padding: 18px 10px;
-    font-size: 1.05rem;
-    border-bottom: 1px solid #eee;
-    vertical-align: top;
-}
-
-.alerts-table tr:last-child td {
-    border-bottom: none;
-}
-
-.severidade {
-    font-weight: 500;
-}
-
-.severidade.alta {
-    color: #c0392b;
-}
-
-.severidade.media {
-    color: #c0392b;
-}
-
-.severidade.baixa {
-    color: #2e7d32;
-=======
-#sair{
-    background-color: #f2ede9;  
-    text-align: center;
-    padding: 100px;
-    margin: 110px auto;
-    width: 500px;
-    border-radius: 30px;
-}
-
-.botoes-container {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 25px;
-}
-
-.btn-sair {
-    background-color: #a3a3a3;
-    color: #1a1a1a;
-    text-decoration: none;
-    border: none;
-    padding: 12px 30px;
-    font-size: 1rem;
-    font-weight: 500;
-    border-radius: 10px;
-    cursor: pointer;
-    display: inline-block;
-}
-
-.btn-sair:hover {
-    background-color: #949494;
-    color: #1a1a1a;
->>>>>>> a4ecabedcb379811b5ccbc2dbc2f760b2c1f4c4a
 }
