@@ -336,7 +336,7 @@ td {
 }
 
 .monitor-card {
-    background: #f0e9e4;
+    background: #ffffff;
     border-radius: 20px;
 
     min-height: 80px;
@@ -347,14 +347,7 @@ td {
 
     font-family: Georgia, "Times New Roman", serif;
 
-    transition: transform 0.2s ease,
-                box-shadow 0.2s ease;
-}
-
-.monitor-card:hover {
-    transform: translateY(-2px);
-
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+   
 }
 
 .card-label {
@@ -382,62 +375,4 @@ td {
 
 .status-operacao {
     color: #5eaf5e;
-}
-
-
-/* =========================================
-   RESPONSIVIDADE
-   ========================================= */
-
-@media (max-width: 768px) {
-
-    .monitor-page {
-        padding: 20px;
-    }
-
-    .monitor-title {
-        font-size: 30px;
-        margin-bottom: 20px;
-    }
-
-    .monitor-grid {
-        grid-template-columns: 1fr;
-        gap: 18px;
-    }
-
-    .monitor-card {
-        min-height: 85px;
-    }
-}
-
-
-/* =========================================
-   TELAS MUITO PEQUENAS
-   ========================================= */
-
-@media (max-width: 480px) {
-
-    .monitor-page {
-        padding: 15px;
-    }
-
-    .monitor-title {
-        font-size: 26px;
-    }
-
-    .monitor-card {
-        padding: 10px 16px;
-    }
-
-    .card-label {
-        font-size: 15px;
-    }
-
-    .card-main {
-        font-size: 19px;
-    }
-
-    .card-info {
-        font-size: 14px;
-    }
 }
