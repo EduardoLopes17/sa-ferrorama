@@ -159,115 +159,21 @@
     </div>
     
 
-    <div id="monitora" class="content monitor-page">
-    <br>
-    <center><h2 class="monitor-title">Monitor de Trens</h2>
-
-    <br>
-    <br>
-    <div class="monitor-grid">
-
-        <div class="monitor-card">
-            <div class="card-label">Trem em operação</div>
-
-            <div class="card-main">
-                TR-2401
-            </div>
-
-            <div class="card-info">
-                São Paulo → Rio de Janeiro
-            </div>
-        </div>
-
-        
-        <div class="monitor-card">
-            <div class="card-label">Velocidade Atual</div>
-
-            <div class="card-main">
-                120 km/h
-            </div>
-
-            <div class="card-info">
-                Velocidade média: 115 km/h
-            </div>
-        </div>
-
-        <div class="monitor-card">
-            <div class="card-label">Velocidade Atual</div>
-
-            <div class="card-main status-operacao">
-                Em Operação
-            </div>
-
-            <div class="card-info">
-                Sem atrasos
-            </div>
-        </div>
-
-        <div class="monitor-card">
-            <div class="card-label">Próxima parada</div>
-
-            <div class="card-main">
-                Santos
-            </div>
-
-            <div class="card-info">
-                Tempo estimado: 15 min
-            </div>
-        </div>
-
+    <div id="monitora" class="content">
+        <h2>Monitorar trens</h2>
     </div>
 
-</div>
 
-<div id="alertas" class="content">
-        <h2>Alertas e Falhas</h2>
-
-    <div class="alerts-card">
-        <table class="alerts-table">
-            <thead>
-                <tr>
-                    <th>DATA/HORA</th>
-                    <th>TIPO</th>
-                    <th>DESCRIÇÃO</th>
-                    <th>SEVERIDADE</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>18/05/26 14:35:22</td>
-                    <td>Sensor</td>
-                    <td>Sensor 001 offline</td>
-                    <td class="severidade alta">Alta</td>
-                </tr>
-                <tr>
-                    <td>14:22:15</td>
-                    <td>Trem</td>
-                    <td>Trem TR-45 com atraso de 12 min</td>
-                    <td class="severidade media">Média</td>
-                </tr>
-                <tr>
-                    <td>14:10:08</td>
-                    <td>Sistema</td>
-                    <td>Manutenção programada realizada</td>
-                    <td class="severidade baixa">Baixa</td>
-                </tr>
-                <tr>
-                    <td>13:45:30</td>
-                    <td>Sensor</td>
-                    <td>Sensor 005 voltou online</td>
-                    <td class="severidade baixa">Baixa</td>
-                </tr>
-            </tbody>
-        </table>
+    <div id="alertas" class="content">
+        <h2>Monitorar Alertas e Falhas</h2>
+        <p>Conteúdo dos alertas aqui</p>
     </div>
     
-    <br>
-    <br>
+    
     <div id="relatorios" class="content">
-        <center><h2>Relatórios</h2></center>
+        <h2>Relatórios</h2>
 
-    <br>
+    
     <div class="container">
         <form class="row g-3">
 
@@ -473,17 +379,13 @@
 
 
     <div id="sair" class="content">
- 
+
         <h2>Sair do Sistema?</h2>
         <p>Sua sessão será encerrada e você será redirecionado para a tela de login!</p>
- 
-       
 
         <div class="botoes-container">
-    <a class="btn-sair" href="./public/login.php">Confirmar</a>
-    <button class="btn-sair" type="button" onclick="mostrarConteudo('home')">Cancelar</button>
-</div>
-
+            <a class="nav-link active" href="./public/login.html">Confirmar</a>
+        </div>
     </div>
 
 
