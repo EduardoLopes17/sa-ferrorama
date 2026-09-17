@@ -167,7 +167,49 @@
     <div id="alertas" class="content">
         <h2>Monitorar Alertas e Falhas</h2>
         <p>Conteúdo dos alertas aqui</p>
+
+
+
+    <div class="alerts-card">
+        <table class="alerts-table">
+            <thead>
+                <tr>
+                    <th>DATA/HORA</th>
+                    <th>TIPO</th>
+                    <th>DESCRIÇÃO</th>
+                    <th>SEVERIDADE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>18/05/26 14:35:22</td>
+                    <td>Sensor</td>
+                    <td>Sensor 001 offline</td>
+                    <td class="severidade alta">Alta</td>
+                </tr>
+                <tr>
+                    <td>14:22:15</td>
+                    <td>Trem</td>
+                    <td>Trem TR-45 com atraso de 12 min</td>
+                    <td class="severidade media">Média</td>
+                </tr>
+                <tr>
+                    <td>14:10:08</td>
+                    <td>Sistema</td>
+                    <td>Manutenção programada realizada</td>
+                    <td class="severidade baixa">Baixa</td>
+                </tr>
+                <tr>
+                    <td>13:45:30</td>
+                    <td>Sensor</td>
+                    <td>Sensor 005 voltou online</td>
+                    <td class="severidade baixa">Baixa</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+
+</div>
     
     
     <div id="relatorios" class="content">
