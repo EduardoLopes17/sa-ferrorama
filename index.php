@@ -159,9 +159,68 @@
     </div>
     
 
-    <div id="monitora" class="content">
-        <h2>Monitorar trens</h2>
+   <div id="monitora" class="content monitor-page">
+    <br>
+    <center><h2 class="monitor-title">Monitor de Trens</h2>
+
+    <br>
+    <br>
+    <div class="monitor-grid">
+
+        <div class="monitor-card">
+            <div class="card-label">Trem em operação</div>
+
+            <div class="card-main">
+                TR-2401
+            </div>
+
+            <div class="card-info">
+                São Paulo → Rio de Janeiro
+            </div>
+        </div>
+
+        
+        <div class="monitor-card">
+            <div class="card-label">Velocidade Atual</div>
+
+            <div class="card-main">
+                120 km/h
+            </div>
+
+            <div class="card-info">
+                Velocidade média: 115 km/h
+            </div>
+        </div>
+
+        <div class="monitor-card">
+            <div class="card-label">Velocidade Atual</div>
+
+            <div class="card-main status-operacao">
+                Em Operação
+            </div>
+
+            <div class="card-info">
+                Sem atrasos
+            </div>
+        </div>
+
+        <div class="monitor-card">
+            <div class="card-label">Próxima parada</div>
+
+            <div class="card-main">
+                Santos
+            </div>
+
+            <div class="card-info">
+                Tempo estimado: 15 min
+            </div>
+        </div>
+
     </div>
+
+</div>
+
+
 
 
     <div id="alertas" class="content">
