@@ -306,3 +306,138 @@ td {
     justify-content: space-around;
     align-items: center;
 }
+
+/* =========================================
+   MONITOR DE TRENS
+   ========================================= */
+
+.monitor-page {
+    padding: 25px 35px 50px 35px;
+    text-align: left;
+    background: #ffffff;
+    min-height: 500px;
+}
+
+.monitor-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: #111111;
+    margin: 0 0 25px 0;
+}
+
+.monitor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 70px;
+
+    max-width: 880px;
+    margin: 0 auto;
+}
+
+.monitor-card {
+    background: #f0e9e4;
+    border-radius: 20px;
+
+    min-height: 80px;
+
+    padding: 9px 20px 10px 20px;
+
+    box-sizing: border-box;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.monitor-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.card-label {
+    font-size: 16px;
+    color: #111111;
+
+    margin-bottom: 3px;
+}
+
+.card-main {
+    font-size: 20px;
+    line-height: 1.15;
+
+    color: #111111;
+
+    margin-bottom: 2px;
+}
+
+.card-info {
+    font-size: 16px;
+    color: #111111;
+
+    line-height: 1.15;
+}
+
+.status-operacao {
+    color: #5eaf5e;
+}
+
+
+/* =========================================
+   RESPONSIVIDADE
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .monitor-page {
+        padding: 20px;
+    }
+
+    .monitor-title {
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+
+    .monitor-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .monitor-card {
+        min-height: 85px;
+    }
+}
+
+
+/* =========================================
+   TELAS MUITO PEQUENAS
+   ========================================= */
+
+@media (max-width: 480px) {
+
+    .monitor-page {
+        padding: 15px;
+    }
+
+    .monitor-title {
+        font-size: 26px;
+    }
+
+    .monitor-card {
+        padding: 10px 16px;
+    }
+
+    .card-label {
+        font-size: 15px;
+    }
+
+    .card-main {
+        font-size: 19px;
+    }
+
+    .card-info {
+        font-size: 14px;
+    }
+}
