@@ -431,13 +431,17 @@
 
 
     <div id="sair" class="content">
-
+ 
         <h2>Sair do Sistema?</h2>
         <p>Sua sessão será encerrada e você será redirecionado para a tela de login!</p>
+ 
+       
 
         <div class="botoes-container">
-            <a class="nav-link active" href="./public/login.php">Confirmar</a>
-        </div>
+    <a class="btn-sair" href="./public/login.php">Confirmar</a>
+    <button class="btn-sair" type="button" onclick="mostrarConteudo('home')">Cancelar</button>
+</div>
+
     </div>
 
 

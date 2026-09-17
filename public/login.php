@@ -33,7 +33,7 @@
                     <button type="submit" class="btn-entrar">Entrar</button>
                     
                     <p class="mt-3 text-center">
-                    <a href="nova_senha.html" class="signup-link">Esqueceu a senha? clique aqui!</a>
+                    <a href="nova_senha.php" class="signup-link">Esqueceu a senha? clique aqui!</a>
                     </p>
                 </form>
             </div>
