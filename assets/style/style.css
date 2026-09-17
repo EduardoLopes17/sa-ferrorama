@@ -306,3 +306,73 @@ td {
     justify-content: space-around;
     align-items: center;
 }
+
+/* =========================================
+   MONITOR DE TRENS
+   ========================================= */
+
+.monitor-page {
+    padding: 25px 35px 50px 35px;
+    text-align: left;
+    background: #ffffff;
+    min-height: 500px;
+}
+
+.monitor-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: #111111;
+    margin: 0 0 25px 0;
+}
+
+.monitor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 70px;
+
+    max-width: 880px;
+    margin: 0 auto;
+}
+
+.monitor-card {
+    background: #ffffff;
+    border-radius: 20px;
+
+    min-height: 80px;
+
+    padding: 9px 20px 10px 20px;
+
+    box-sizing: border-box;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+   
+}
+
+.card-label {
+    font-size: 16px;
+    color: #111111;
+
+    margin-bottom: 3px;
+}
+
+.card-main {
+    font-size: 20px;
+    line-height: 1.15;
+
+    color: #111111;
+
+    margin-bottom: 2px;
+}
+
+.card-info {
+    font-size: 16px;
+    color: #111111;
+
+    line-height: 1.15;
+}
+
+.status-operacao {
+    color: #5eaf5e;
+}
