@@ -377,6 +377,7 @@ td {
     color: #5eaf5e;
 }
 
+<<<<<<< HEAD
 .alerts-page {
     font-family: 'Georgia', 'Playfair Display', serif;
     background-color: #ffffff;
@@ -436,4 +437,38 @@ td {
 
 .severidade.baixa {
     color: #2e7d32;
+=======
+#sair{
+    background-color: #f2ede9;  
+    text-align: center;
+    padding: 100px;
+    margin: 110px auto;
+    width: 500px;
+    border-radius: 30px;
+}
+
+.botoes-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.btn-sair {
+    background-color: #a3a3a3;
+    color: #1a1a1a;
+    text-decoration: none;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn-sair:hover {
+    background-color: #949494;
+    color: #1a1a1a;
+>>>>>>> a4ecabedcb379811b5ccbc2dbc2f760b2c1f4c4a
 }
