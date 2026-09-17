@@ -456,3 +456,18 @@ td {
     background-color: #949494;
     color: #1a1a1a;
 }
+
+.nav-item{
+    background-color: #ff5f29;
+    width: auto;   /* antes era: width: 80px; */
+    color: rgb(255, 255, 255);
+    padding-left: 30px;     
+    padding-right: 30px;
+    border: none;    
+    height: 60px;  
+    white-space: nowrap;     
+}
+
+.nav-item.active {
+    box-shadow: inset 0 -3px 0 0 #030303;
+}
