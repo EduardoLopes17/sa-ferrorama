@@ -431,3 +431,28 @@ td {
 .severidade.baixa {
     color: #2e7d32;
 }
+
+.botoes-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.btn-sair {
+    background-color: #a3a3a3;
+    color: #1a1a1a;
+    text-decoration: none;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn-sair:hover {
+    background-color: #949494;
+    color: #1a1a1a;
+}

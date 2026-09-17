@@ -426,8 +426,10 @@
         <p>Sua sessão será encerrada e você será redirecionado para a tela de login!</p>
 
         <div class="botoes-container">
-            <a class="nav-link active" href="./public/login.html">Confirmar</a>
-        </div>
+    <a class="btn-sair" href="./public/login.php">Confirmar</a>
+    <button class="btn-sair" type="button" onclick="mostrarConteudo('home')">Cancelar</button>
+</div>
+
     </div>
 
 
