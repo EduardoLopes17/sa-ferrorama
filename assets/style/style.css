@@ -317,7 +317,7 @@ td {
 }
 
 .monitor-title {
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: 'Georgia', 'Playfair Display', serif;
     font-size: 36px;
     font-weight: 400;
     color: #111111;
@@ -343,7 +343,7 @@ td {
 
     box-sizing: border-box;
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family:'Georgia', 'Playfair Display', serif;
 
    
 }

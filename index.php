@@ -224,11 +224,12 @@
 
 
     <div id="alertas" class="content">
-        <h2>Monitorar Alertas e Falhas</h2>
-        <p>Conteúdo dos alertas aqui</p>
+        <br>
+        <br>
+        <center><h2>Monitorar Alertas e Falhas</h2>
 
 
-
+<br>
     <div class="alerts-card">
         <table class="alerts-table">
             <thead>
@@ -272,9 +273,11 @@
     
     
     <div id="relatorios" class="content">
-        <h2>Relatórios</h2>
+        <br>
+        <br>
+        <center><h2>Relatórios</h2></center>
 
-    
+    <br>
     <div class="container">
         <form class="row g-3">
 
@@ -302,7 +305,6 @@
 
     <div id="cadastro" class="content">
         <h2>Cadastrar Sensores</h2>
-        <br>
 
         <div class="container">
             <form class="row g-3">
@@ -330,13 +332,14 @@
 
 
     <div id="gerenciar" class="content">
-
+    <br>
+    <br>
         <div class="col-md-12">
-
-        <h2>Gerenciar Sensores</h2>
-                <button class="btn btn-primary" type="button">Novo Sensor</button>
+            <center><h2>Gerenciar Sensores</h2><center>
+                <br>
+            <button class="btn btn-primary" type="button">Novo Sensor</button>
         </div>
-
+        <br>
         <table class="table">
             <thead>
                 <tr>
@@ -383,9 +386,11 @@
 
     <div id="cadastro2" class="content">
 
+        <br>
+        <br>
         <div class="col-md-12">
-        
-        <h2>Cadastro de Usuario</h2>
+        <center><h2>Cadastro de Usuario</h2>
+        <br>
                 <button class="btn btn-primary" type="button">Novo Usuário</button>
         </div>
 
@@ -422,10 +427,11 @@
     </div>
 
     <div id="gerenciarUsuario" class="content">
-
+        <br>
+        <br>
         <div class="col-md-12">
-
-        <h2>Gerenciar Usuário</h2>
+        <center><h2>Gerenciar Usuário</h2>
+            <br>
                 <button class="btn btn-primary" type="button">Novo Usuário</button>
         </div>
 
