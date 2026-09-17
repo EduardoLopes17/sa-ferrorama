@@ -160,12 +160,13 @@
     
 
     <div id="monitora" class="content monitor-page">
+    <br>
+    <center><h2 class="monitor-title">Monitor de Trens</h2>
 
-    <h2 class="monitor-title">Monitor de Trens</h2>
-
+    <br>
+    <br>
     <div class="monitor-grid">
 
-        <!-- Trem em operação -->
         <div class="monitor-card">
             <div class="card-label">Trem em operação</div>
 
@@ -178,7 +179,7 @@
             </div>
         </div>
 
-        <!-- Velocidade -->
+        
         <div class="monitor-card">
             <div class="card-label">Velocidade Atual</div>
 
@@ -191,7 +192,6 @@
             </div>
         </div>
 
-        <!-- Status -->
         <div class="monitor-card">
             <div class="card-label">Velocidade Atual</div>
 
@@ -204,7 +204,6 @@
             </div>
         </div>
 
-        <!-- Próxima parada -->
         <div class="monitor-card">
             <div class="card-label">Próxima parada</div>
 
@@ -221,11 +220,12 @@
 
 </div>
     
-    
+    <br>
+    <br>
     <div id="relatorios" class="content">
-        <h2>Relatórios</h2>
+        <center><h2>Relatórios</h2></center>
 
-    
+    <br>
     <div class="container">
         <form class="row g-3">
 
