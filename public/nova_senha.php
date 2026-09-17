@@ -33,7 +33,7 @@
                     <button type="submit" class="btn-entrar">Redefinir</button>
                     
                     <p class="mt-3 text-center">
-                    <a href="login.html" class="signup-link">Redefiniu a senha? faça login!</a>
+                    <a href="login.php" class="signup-link">Redefiniu a senha? faça login!</a>
                     </p>
                 </form>
             </div>

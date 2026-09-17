@@ -384,7 +384,7 @@
         <p>Sua sessão será encerrada e você será redirecionado para a tela de login!</p>
 
         <div class="botoes-container">
-            <a class="nav-link active" href="./public/login.html">Confirmar</a>
+            <a class="nav-link active" href="./public/login.php">Confirmar</a>
         </div>
     </div>
 
