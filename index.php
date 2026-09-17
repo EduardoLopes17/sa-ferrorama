@@ -385,7 +385,6 @@
 
         <div class="botoes-container">
             <a class="nav-link active" href="./public/login.html">Confirmar</a>
-            <a class="nav-link" href="#" onclick="">Cancelar</a>
         </div>
     </div>
 

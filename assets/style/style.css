@@ -2,7 +2,7 @@
 #P1{
     margin: 0;
     padding: 0px;
-    background: #f3f3f3;
+    background: white;
 
 }
 nav{
@@ -59,7 +59,7 @@ nav{
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 #sair{
-    background-color: #969191;
+    background-color: #ffffff;
     text-align: center;
     padding: 100px;
     margin: 110px auto;
@@ -77,14 +77,14 @@ nav{
 .container {
     width: 100%;
     max-width: 1000px;
-    background-color: #f3e8df; 
+    background-color: #ffffff; 
     padding: 25px;
     border-radius: 12px;
 }
 
 
 .alert-bar {
-    background-color: #fdf6f0;
+    background-color: #ffffff;
     padding: 18px 25px;
     border-radius: 15px;
     margin-bottom: 25px;
@@ -108,7 +108,7 @@ nav{
 }
 
 .card {
-    background-color: #b5b5b5; 
+    background-color: #ffffff; 
     padding: 20px;
     border-radius: 25px;
     text-align: center;
@@ -142,7 +142,7 @@ nav{
 }
 
 .table-container {
-    background-color: #b5b5b5; 
+    background-color: #ffffff; 
     border-radius: 25px;
     padding: 20px 25px;
 }
