@@ -19,23 +19,25 @@
             <div class="login-box">
                 <h1 id="h13">LOGIN</h1>
                 
-                <form>
-                    <div class="mb-3">
-                        <label for="Usuario" class="form-label">Usuário</label>
-                        <input type="usuario" class="form-control custom-input" id="usuario" placeholder="seu_usuario">
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="Senha1" class="form-label">Senha</label>
-                        <input type="password" class="form-control custom-input" id="Senha1" placeholder="********">
-                    </div>
-                    
-                    <button type="submit" class="btn-entrar">Entrar</button>
-                    
-                    <p class="mt-3 text-center">
-                    <a href="nova_senha.php" class="signup-link">Esqueceu a senha? clique aqui!</a>
-                    </p>
-                </form>
+            <form method="POST" action="../backend/login.php">
+
+    <div class="mb-3">
+        <label for="Usuario" class="form-label">Usuário</label>
+        <input type="text" name="email" class="form-control custom-input" id="usuario" placeholder="seu_email">
+    </div>
+
+    <div class="mb-3">
+        <label for="Senha1" class="form-label">Senha</label>
+        <input type="password" name="senha" class="form-control custom-input" id="Senha1" placeholder="********">
+    </div>
+
+    <button type="submit" class="btn-entrar">Entrar</button>
+
+    <p class="mt-3 text-center">
+        <a href="nova_senha.php" class="signup-link">Esqueceu a senha? clique aqui!</a>
+    </p>
+
+</form>
             </div>
         </div>
     </div>
