@@ -7,7 +7,14 @@ if (empty($_SESSION['usuario_id'])) {
     exit;
 }
 
+require_once "infra/conexao.php";
+
+$sql_usuarios = "SELECT id, nome, cpf, email, status FROM usuarios";
+
+$resultado_usuarios = $conexao->query($sql_usuarios);
+
 ?>
+
 
 <html lang="en">
 
@@ -40,8 +47,15 @@ if (empty($_SESSION['usuario_id'])) {
         <button class="nav-item" onclick="mostrarConteudo('relatorios')">Relatórios</button>
         <button class="nav-item" onclick="mostrarConteudo('cadastro')">Cadastrar Sensores</button>
         <button class="nav-item" onclick="mostrarConteudo('gerenciar')">Gerenciar Sensores</button>
-        <button class="nav-item" onclick="mostrarConteudo('cadastro2')">Cadastro</button>
-        <button class="nav-item" onclick="mostrarConteudo('gerenciarUsuario')">Gerenciar Usuário</button>
+
+        <?php if ($_SESSION['perfil'] == 'admin') { ?> 
+
+<button class="nav-item" onclick="mostrarConteudo('gerenciarUsuario')">
+    Gerenciar Usuário
+</button>
+
+<?php } ?>
+
         <button class="nav-item logout" onclick="mostrarConteudo('sair')">Sair</button>
     </nav>
 
@@ -395,106 +409,90 @@ if (empty($_SESSION['usuario_id'])) {
     </div>
 
 
-    <div id="cadastro2" class="content">
+    <?php if ($_SESSION['perfil'] == 'admin') { ?>
+
+<div id="gerenciarUsuario" class="content">
+
+    <br>
+    <br>
+
+    <div class="col-md-12">
+
+        <center>
+            <h2>Gerenciar Usuário</h2>
+        </center>
 
         <br>
-        <br>
-        <div class="col-md-12">
-        <center><h2>Cadastro de Usuario</h2>
-        <br>
-                <button class="btn btn-primary" type="button">Novo Usuário</button>
-        </div>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Usuário</th>
-                    <th scope="col">Cpf</th>
-                    <th scope="col">Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Julio</td>
-                    <td>182.986.976-18</td>
-                    <td>julioferraz@gmail</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Bruno</td>
-                    <td>145.347.869-09</td>
-                    <td>brunolion@gmail</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Alisson</td>
-                    <td>172.987.735-78</td>
-                    <td>alissongfernandez@gmail</td>
-                </tr>
-            </tbody>
-        </table>
+        <a href="public/cadastro.php">
+            <button class="btn btn-primary" type="button">
+                Novo Usuário
+            </button>
+        </a>
+
     </div>
 
-    <div id="gerenciarUsuario" class="content">
-        <br>
-        <br>
-        <div class="col-md-12">
-        <center><h2>Gerenciar Usuário</h2>
-            <br>
-                <button class="btn btn-primary" type="button">Novo Usuário</button>
-        </div>
+    <table class="table">
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Usuário</th>
-                    <th scope="col">Cpf</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Julio</td>
-                    <td>182.986.976-18</td>
-                    <td>julioferraz@gmail</td>
-                    <td>Ativo</td>
-                    <td>
-                        <button class="btn btn-sm btn-outline-primary" type="button">Editar</button>
-                        <button class="btn btn-sm btn-outline-danger" type="button">Excluir</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Bruno</td>
-                    <td>145.347.869-09</td>
-                    <td>brunolion@gmail</td>
-                    <td>Ativo</td>
-                    <td>
-                        <button class="btn btn-sm btn-outline-primary" type="button">Editar</button>
-                        <button class="btn btn-sm btn-outline-danger" type="button">Excluir</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Alisson</td>
-                    <td>172.987.735-78</td>
-                    <td>alissongfernandez@gmail</td>
-                    <td>Inativo</td>
-                    <td>
-                        <button class="btn btn-sm btn-outline-primary" type="button">Editar</button>
-                        <button class="btn btn-sm btn-outline-danger" type="button">Excluir</button>
-                    </td>
-                </tr>
-            </tbody>
+        <thead>
+
+            <tr>
+
+                <th scope="col">Id</th>
+                <th scope="col">Usuário</th>
+                <th scope="col">Cpf</th>
+                <th scope="col">Email</th>
+                <th scope="col">Status</th>
+                <th scope="col">Ações</th>
+
+            </tr>
+    </thead>
+        <tbody>
+        <?php while ($usuario = $resultado_usuarios->fetch_assoc()) { ?>
+
+            <tr>
+                <th scope="row">
+                    <?= $usuario['id'] ?>
+                </th>
+
+                <td>
+                    <?= $usuario['nome'] ?>
+                </td>
+
+                <td>
+                    <?= $usuario['cpf'] ?>
+                </td>
+
+                <td>
+                    <?= $usuario['email'] ?>
+                </td>
+
+                <td>
+                    <?= $usuario['status'] ?>
+                </td>
+
+                <td>
+                    <a href="public/editar_usuario.php?id=<?= $usuario['id'] ?>"
+                       class="btn btn-sm btn-outline-primary">
+                        Editar
+                    </a>
+
+                    <a href="backend/excluir_usuario.php?id=<?= $usuario['id'] ?>"
+                       class="btn btn-sm btn-outline-danger"
+                       onclick="return confirm('Deseja realmente excluir este usuário?')">
+                        Excluir
+                    </a>
+                </td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+</div>
+<?php } ?>
+
+</tbody>
         </table>
     </div>
-
 
     <div id="sair" class="content">
 
@@ -507,7 +505,6 @@ if (empty($_SESSION['usuario_id'])) {
 </div>
 
     </div>
-
 
     <script src="./script/botoes.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
