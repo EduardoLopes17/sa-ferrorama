@@ -50,10 +50,6 @@ if ($usuario['status'] !== 'ativo') {
     exit;
 }
 
-if ($usuario['perfil'] !== 'admin') {
-    header('Location: ../public/login.php?erro=naoadmin');
-    exit;
-}
 
 if (!password_verify($senha, $usuario['senha'])) {
     header('Location: ../public/login.php?erro=login');
