@@ -15,65 +15,54 @@
 <body>
     
     <div class="container">
-        <form class="row g-3">
+        <form class="row g-3" method="POST" action="../backend/cadastrar_usuario.php">
 
             <h2>Cadastro de usuario</h2>
             <p>Preencha os dados abaixo para realizar o registro completo do usuario no sistema acadêmico.</p>
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Nome Completo</label>
-                <input type="text" class="form-control" id="inputEmail4">
+                <input type="text" class="form-control" name="nome" required>
             </div>
             <div class="col-md-6">
                 <label for="inputPassword4" class="form-label">CPF</label>
-                <input type="number" class="form-control" id="inputPassword4">
+                <input type="text" class="form-control" name="cpf" required>
             </div>
 
-
-            <div class="col-md-4">
-                <label for="inputCity" class="form-label">Data de Nascimento</label>
-                <input type="date" class="form-control" id="inputCity">
-            </div>
-            <div class="col-md-4">
-                <label for="inputPassword4" class="form-label">Telefone</label>
-                <input type="number" class="form-control" id="inputPassword4">
-            </div>
             <div class="col-md-4">
                 <label for="inputZip" class="form-label">E-mail</label>
-                <input type="email" class="form-control" id="inputZip">
+                <input type="email" class="form-control" name="email" required>
             </div>
 
-
-
-            <div class="col-12">
-                <label for="inputAddress" class="form-label">Endereço completo</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Urusanga">
-            </div>
-
-
-            <div class="col-md-4">
-                <label for="inputCity" class="form-label">Cidade</label>
-                <input type="text" class="form-control" id="inputCity">
-            </div>
-            <div class="col-md-4">
-                <label for="inputPassword4" class="form-label">Estado</label>
-                <input type="text" class="form-control" id="inputPassword4">
-            </div>
-            <div class="col-md-4">
-                <label for="inputZip" class="form-label">CEP</label>
-                <input type="number" class="form-control" id="inputZip">
-            </div>
             <div class="col-md-6">
                 <label for="inputCity" class="form-label">Senha</label>
-                <input type="text" class="form-control" id="inputCity">
+                <input type="password" class="form-control" name="senha" required>
             </div>
             <div class="col-md-6">
                 <label for="inputPassword4" class="form-label">Confirmar Senha</label>
-                <input type="text" class="form-control" id="inputPassword4">
+                <input type="password" class="form-control" name="confirmar_senha" required>
             </div>
 
+                <div class="col-md-6">
+                    <label class="form-label">Perfil</label>
+                        <select class="form-control" name="perfil">
+                        <option value="usuario">Usuário</option>
+                        <option value="admin">Administrador</option>
+                    </select>
+                </div>
 
-            <div class="d-grid mt-3">
-                <button class="btn btn-primary" type="button">Cadastrar usuario</button>
+                <div class="col-md-6">
+                    <label class="form-label">Status</label>
+                        <select class="form-control" name="status">
+                            <option value="ativo">Ativo</option>
+                            <option value="inativo">Inativo</option>
+                        </select>
+                </div>
+
+                <div class="d-grid mt-3">
+                <button class="btn btn-primary" type="submit">
+                    Cadastrar usuario
+                </button>
+
             </div>
         </form>
     </div>
