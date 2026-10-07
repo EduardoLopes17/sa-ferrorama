@@ -471,3 +471,42 @@ td {
 .nav-item.active {
     box-shadow: inset 0 -3px 0 0 #030303;
 }
+
+.cadastro-usuario {
+    width: 700px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.cadastro-usuario h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.cadastro-usuario label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.cadastro-usuario input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.cadastro-usuario button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+
