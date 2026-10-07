@@ -335,7 +335,7 @@ $resultado_usuarios = $conexao->query($sql_usuarios);
 
                 <br>
             <a href="public/cadastro_sensores.php">
-            <button class="btn btn-primary" type="button">
+            <button class="btn.btn-primary" type="button">
                 Novo Sensor
             </button>
         </a>
