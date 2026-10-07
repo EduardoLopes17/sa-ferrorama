@@ -13,12 +13,11 @@
         crossorigin="anonymous"></script>
 </head>
 <body>
-    
-    <div class="container">
+    <div class="cadastro-usuario">
+        <div class="container">
         <form class="row g-3" method="POST" action="../backend/cadastrar_usuario.php">
 
             <h2>Cadastro de usuario</h2>
-            <p>Preencha os dados abaixo para realizar o registro completo do usuario no sistema acadêmico.</p>
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Nome Completo</label>
                 <input type="text" class="form-control" name="nome" required>
