@@ -10,3 +10,5 @@ CREATE TABLE IF NOT EXISTS usuarios (
     status ENUM('ativo', 'inativo') NOT NULL DEFAULT 'ativo',
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+teste teste
