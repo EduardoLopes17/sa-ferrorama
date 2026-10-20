@@ -1,32 +1,32 @@
-Pesquisa sobre PDO
-O que é PDO?
+## Pesquisa sobre PDO no PHP
 
-PDO significa PHP Data Objects. Ele é um recurso do PHP usado para fazer a comunicação entre uma aplicação e um banco de dados.
+## **1. O que é PDO?**
 
+PDO significa **PHP Data Objects**. Ele é um recurso do PHP utilizado para fazer a comunicação entre uma aplicação e um banco de dados.
 Com o PDO, podemos conectar o sistema ao banco e realizar operações como consultar, cadastrar, alterar e excluir informações.
+Uma das principais características do PDO é que ele não funciona somente com MySQL. Ele também pode ser utilizado com outros bancos de dados, como PostgreSQL e SQLite, desde que o driver correspondente esteja disponível.
 
-Uma das principais características do PDO é que ele não funciona somente com o MySQL. Ele também pode ser utilizado com outros bancos de dados, como PostgreSQL e SQLite.
+## **2. Para que o PDO é utilizado?**
 
-Para que o PDO é utilizado?
+O PDO é utilizado para facilitar a comunicação entre o PHP e o banco de dados. Por meio dele, uma aplicação consegue executar comandos SQL e acessar informações armazenadas.
 
-O PDO é utilizado para facilitar a comunicação entre o PHP e o banco de dados. Por meio dele, uma aplicação consegue enviar comandos SQL e receber informações armazenadas no banco.
+Em um sistema de cadastro, o PDO pode ser usado para:
 
-Por exemplo, em um sistema de cadastro, o PDO pode ser usado para:
+- **Cadastrar** novos usuários;
+- **Consultar** usuários já cadastrados;
+- **Alterar** informações;
+- **Excluir** registros;
+- **Realizar** buscas no banco de dados.
 
-Cadastrar novos usuários;
-Consultar usuários já cadastrados;
-Alterar informações;
-Excluir registros;
-Fazer buscas no banco de dados.
+Dessa forma, ele conecta a parte do sistema desenvolvida em PHP aos dados armazenados no banco.
 
-Dessa forma, ele ajuda a conectar a parte do sistema feita em PHP com os dados que ficam armazenados no banco.
-
-Como funciona uma conexão com PDO?
+## **3. Como funciona uma conexão com PDO?**
 
 Para criar uma conexão com PDO, são informados alguns dados do banco, como servidor, nome do banco, usuário e senha.
 
-Um exemplo simples de conexão com MySQL seria:
+**Exemplo de conexão com MySQL:**
 
+```php
 <?php
 
 $servidor = "localhost";
@@ -41,75 +41,76 @@ try {
         $senha
     );
 
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo->setAttribute(
+        PDO::ATTR_ERRMODE,
+        PDO::ERRMODE_EXCEPTION
+    );
 
     echo "Conexão realizada com sucesso!";
+
 } catch (PDOException $e) {
     echo "Erro ao conectar com o banco de dados.";
 }
-?>
+```
 
+Nesse exemplo, o `try` tenta realizar a conexão com o banco. Se ocorrer algum problema, o `catch` é responsável por tratar a exceção.
+A configuração `PDO::ATTR_ERRMODE` com `PDO::ERRMODE_EXCEPTION` permite que os erros sejam tratados por meio de exceções.
 
-Nesse exemplo, o try tenta realizar a conexão com o banco. Se alguma coisa der errado, o catch é responsável por tratar o erro.
+## **4. Principais características do PDO**
 
-O PDO::ERRMODE_EXCEPTION faz com que o PDO informe uma exceção quando ocorrer algum problema na conexão ou em uma operação realizada no banco.
+As principais características do PDO são:
 
-Principais características do PDO
+- **Compatibilidade:** trabalha com diferentes bancos de dados;
+- **Prepared Statements:** permite executar consultas utilizando parâmetros;
+- **Tratamento de erros:** possibilita utilizar exceções;
+- **Orientação a objetos:** utiliza uma interface baseada em objetos;
+- **Transações:** permite agrupar operações no banco de dados;
+- **Segurança:** ajuda a proteger consultas quando os parâmetros são utilizados corretamente.
 
-Algumas das principais características do PDO são:
+Uma característica importante é a possibilidade de trabalhar com diferentes bancos de dados compatíveis, o que pode facilitar mudanças futuras no projeto.
 
-Pode trabalhar com diferentes bancos de dados;
-Possui suporte a Prepared Statements;
-Permite tratamento de erros;
-Trabalha com programação orientada a objetos;
-Permite realizar transações;
-Facilita a execução de comandos SQL;
-Ajuda a tornar as consultas mais seguras.
-
-Uma característica que chama bastante atenção é a possibilidade de utilizar o PDO com diferentes bancos de dados. Isso pode ser útil em projetos que podem mudar de banco futuramente.
-
-Diferença entre PDO e MySQLi
+## **5. Diferença entre PDO e MySQLi**
 
 O PDO e o MySQLi são duas formas de conectar uma aplicação PHP a um banco de dados.
+A principal diferença é que o **PDO suporta diferentes bancos de dados**, enquanto o **MySQLi é específico para MySQL**.
 
-A principal diferença é que o MySQLi foi criado especificamente para trabalhar com MySQL, enquanto o PDO pode trabalhar com vários tipos de banco de dados.
+| Característica | PDO | MySQLi |
+|---|---|---|
+| Bancos de dados | Diferentes bancos compatíveis | MySQL |
+| Prepared Statements | Sim | Sim |
+| Programação orientada a objetos | Sim | Sim |
+| Programação procedural | Não | Sim |
+| Transações | Sim | Sim |
 
-PDO	MySQLi
-Trabalha com vários bancos de dados	Trabalha principalmente com MySQL
-Suporta Prepared Statements	Suporta Prepared Statements
-Orientado a objetos	Orientado a objetos e também procedural
-Possui suporte a transações	Possui suporte a transações
-Possui uma interface mais padronizada	É específico para MySQL
+No projeto Ferroramas, estamos utilizando **MySQLi**, pois essa foi a tecnologia definida para esta etapa. O PDO foi estudado como uma alternativa para conhecer outra forma de realizar a conexão com o banco.
 
-No nosso projeto, estamos utilizando o MySQLi, pois essa foi a tecnologia definida para esta etapa. O PDO foi estudado como uma alternativa para entender outra maneira de fazer a conexão com o banco.
+## **6. Vantagens do PDO**
 
-Vantagens do PDO
+O PDO possui algumas vantagens importantes:
 
-O PDO possui algumas vantagens importantes.
+- **Suporte a diferentes bancos:** facilita o trabalho com bancos de dados compatíveis;
+- **Segurança:** oferece suporte a Prepared Statements;
+- **Organização:** utiliza programação orientada a objetos;
+- **Tratamento de erros:** permite identificar e tratar problemas por meio de exceções;
+- **Transações:** permite confirmar ou desfazer operações agrupadas.
 
-A primeira é o suporte a diferentes bancos de dados. Se futuramente um sistema precisar deixar de utilizar MySQL e passar para outro banco compatível, o PDO pode facilitar essa mudança.
+## **7. Desvantagens do PDO**
 
-Outra vantagem é o uso de Prepared Statements, que tornam as consultas mais seguras.
+Apesar de possuir várias vantagens, o PDO também apresenta alguns pontos que precisam ser considerados:
 
-Também existe uma forma organizada de tratar erros utilizando exceções, além do suporte a transações.
+- Para quem está começando no PHP, sua utilização pode parecer mais complicada por envolver programação orientada a objetos.
+- É necessário ter o driver correto instalado para o banco de dados utilizado.
+- Em projetos que utilizam somente MySQL, o MySQLi também pode ser uma opção adequada.
 
-Desvantagens do PDO
+## **8. O que são Prepared Statements?**
 
-Apesar de possuir várias vantagens, o PDO também tem alguns pontos que podem ser considerados desvantagens.
+**Prepared Statements**, ou instruções preparadas, são uma forma mais segura de executar consultas SQL utilizando parâmetros.
+Em vez de colocar diretamente os valores recebidos do usuário dentro da consulta, utilizamos parâmetros para enviar esses valores separadamente.
 
-Para quem está começando no PHP, a utilização do PDO pode parecer um pouco mais complicada por trabalhar com programação orientada a objetos.
+**Exemplo:**
 
-Além disso, é necessário ter o driver correto instalado para o banco de dados que será utilizado.
-
-Em um projeto que utiliza somente MySQL, o MySQLi também pode ser uma opção adequada, principalmente quando a equipe já possui conhecimento sobre ele.
-
-O que são Prepared Statements?
-
-Prepared Statements, ou instruções preparadas, são uma forma mais segura de executar consultas SQL.
-
-Em vez de colocar diretamente os valores recebidos pelo usuário dentro da consulta, utilizamos parâmetros.
-
-Por exemplo:
+```php
+<?php
 
 $sql = "SELECT * FROM usuarios WHERE email = :email";
 
@@ -119,51 +120,36 @@ $stmt->execute([
     "email" => $email
 ]);
 
+?>
+```
 
-Nesse caso, o valor do e-mail é enviado separadamente da estrutura da consulta.
+Nesse exemplo, o método `prepare()` prepara a consulta, enquanto `execute()` executa o comando utilizando o valor informado para o parâmetro `:email`. Essa abordagem ajuda a evitar ataques de **SQL Injection**, que podem ocorrer quando dados enviados pelo usuário interferem indevidamente nos comandos SQL.
 
-Isso é importante porque ajuda a evitar problemas de SQL Injection. Esse tipo de ataque pode acontecer quando uma aplicação permite que dados enviados por usuários sejam interpretados como parte de um comando SQL.
+## **9. Por que Prepared Statements são importantes?**
 
-Por esse motivo, o uso de Prepared Statements é uma prática importante em sistemas que trabalham com banco de dados.
+Os Prepared Statements ajudam a separar o comando SQL dos dados que serão utilizados na consulta.
+Isso aumenta a segurança da aplicação, pois os valores são tratados como dados, em vez de serem interpretados como parte do comando SQL.
+Além disso, eles deixam o código mais organizado e facilitam a execução de consultas com diferentes valores.
 
-Por que Prepared Statements são importantes?
+## **10. Quando o PDO pode ser uma boa escolha?**
 
-Os Prepared Statements ajudam a separar o comando SQL dos dados que serão utilizados nele.
+O PDO pode ser uma boa escolha em projetos que precisam trabalhar com diferentes bancos de dados ou que podem precisar trocar de banco no futuro. Também pode ser interessante para aplicações que utilizam programação orientada a objetos, Prepared Statements e transações.
+Por outro lado, se o sistema utilizar somente MySQL, o MySQLi também pode atender muito bem às necessidades do projeto.
 
-Isso evita que um valor enviado pelo usuário seja interpretado como parte do comando SQL, aumentando a segurança da aplicação.
+## **11. PDO no projeto Ferroramas**
 
-Além da segurança, eles também deixam o código mais organizado e podem facilitar o trabalho com consultas que precisam ser executadas várias vezes usando valores diferentes.
+No projeto Ferroramas, a conexão com o banco de dados nesta etapa está sendo realizada utilizando **MySQLi**, conforme a tecnologia definida para a atividade. Mesmo assim, pesquisar sobre PDO é importante para conhecer outra opção disponível no PHP.
+Após comparar as duas alternativas, podemos perceber que ambas permitem realizar operações no MySQL e utilizar Prepared Statements.
+A principal diferença é que o **PDO permite trabalhar com diferentes bancos de dados**, enquanto o **MySQLi é voltado especificamente para MySQL**. Por isso, dependendo das necessidades do projeto, o PDO pode ser uma alternativa interessante.
 
-Quando o PDO pode ser uma boa escolha?
+## **12. Conclusão**
 
-O PDO pode ser uma boa escolha em projetos que precisam trabalhar com diferentes bancos de dados ou que podem precisar trocar de banco no futuro.
+O PDO é um recurso do PHP que permite conectar aplicações a bancos de dados e realizar operações com as informações armazenadas.
+Entre suas principais vantagens estão o suporte a diferentes bancos de dados, o tratamento de erros e o uso de Prepared Statements, que ajudam a aumentar a segurança das consultas. Apesar de o projeto Ferroramas utilizar MySQLi nesta etapa, conhecer o PDO é importante para entender que existem diferentes maneiras de trabalhar com bancos de dados no PHP. A escolha entre PDO e MySQLi depende das necessidades de cada projeto. Para aplicações que utilizam apenas MySQL, os dois podem ser boas opções, enquanto o PDO pode ser mais interessante quando existe a possibilidade de trabalhar com diferentes bancos de dados.
 
-Também pode ser interessante para projetos que utilizam bastante programação orientada a objetos, Prepared Statements e transações.
+## **13. Fontes consultadas**
 
-Por outro lado, se o sistema vai utilizar somente MySQL, o MySQLi também pode atender muito bem às necessidades do projeto.
-
-PDO no projeto Ferroramas
-
-No Ferroramas, a conexão com o banco de dados nesta etapa está sendo feita utilizando MySQLi, pois essa é a tecnologia solicitada na atividade.
-
-Mesmo assim, pesquisar sobre PDO é importante para conhecer outra opção disponível no PHP.
-
-Depois de comparar os dois, podemos perceber que ambos conseguem realizar operações com MySQL e possuem suporte a Prepared Statements. A principal diferença é que o PDO permite trabalhar com diferentes tipos de bancos, enquanto o MySQLi é voltado para o MySQL.
-
-Por isso, dependendo do projeto e de suas necessidades, o PDO pode ser uma alternativa interessante.
-
-Conclusão
-
-O PDO é uma ferramenta do PHP que permite conectar aplicações a bancos de dados e realizar diversas operações com os dados armazenados.
-
-Entre suas principais vantagens estão o suporte a diferentes bancos, o tratamento de erros e o uso de Prepared Statements, que ajudam na segurança das consultas.
-
-Apesar de o nosso projeto utilizar MySQLi nesta etapa, conhecer o PDO é importante para entender que existem diferentes maneiras de trabalhar com bancos de dados no PHP.
-
-A escolha entre PDO e MySQLi depende das necessidades de cada projeto. Para aplicações que utilizam apenas MySQL, os dois podem ser boas opções, enquanto o PDO pode ser mais interessante quando existe a possibilidade de trabalhar com diferentes bancos de dados.
-
-Fontes consultadas
-PHP.net — Documentação oficial do PHP sobre PDO: https://www.php.net/manual/pt_BR/book.pdo.php
-PHP.net — Documentação sobre PDO::prepare: https://www.php.net/manual/pt_BR/pdo.prepare.php
-PHP.net — Documentação sobre PDOStatement::execute: https://www.php.net/manual/pt_BR/pdostatement.execute.php
-PHP.net — Documentação sobre MySQLi: https://www.php.net/manual/pt_BR/book.mysqli.php
+- **PHP.net — Documentação oficial do PDO:** https://www.php.net/manual/pt_BR/book.pdo.php
+- **PHP.net — Documentação sobre PDO::prepare:** https://www.php.net/manual/pt_BR/pdo.prepare.php
+- **PHP.net — Documentação sobre PDOStatement::execute:** https://www.php.net/manual/pt_BR/pdostatement.execute.php
+- **PHP.net — Documentação oficial do MySQLi:** https://www.php.net/manual/pt_BR/book.mysqli.php
