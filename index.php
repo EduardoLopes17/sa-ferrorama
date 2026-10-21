@@ -21,6 +21,11 @@ $resultado_sensores = $conexao->query($sql_sensores);
 ?>
 
 
+
+
+
+
+
 <html lang="en">
 
 <head>
