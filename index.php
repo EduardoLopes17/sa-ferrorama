@@ -13,6 +13,11 @@ $sql_usuarios = "SELECT id, nome, cpf, email, status FROM usuarios";
 
 $resultado_usuarios = $conexao->query($sql_usuarios);
 
+$sql_sensores = "SELECT id, nome, localizacao, tipo_sensor, endereco, status FROM sensores ORDER BY id ASC";
+
+$resultado_sensores = $conexao->query($sql_sensores);
+
+
 ?>
 
 
@@ -327,21 +332,19 @@ $resultado_usuarios = $conexao->query($sql_usuarios);
     </div>
 
     <div id="gerenciar" class="content">
-    <br>
-    <br>
-        <div class="col-md-12">
-            
-            <center><h2>Gerenciar Sensores</h2><center>
+    
+        
+<div class="cabecalho-gerenciar-sensores">
 
-                <br>
-            <a href="public/cadastro_sensores.php">
-            <button class="btn.btn-primary" type="button">
-                Novo Sensor
-            </button>
-        </a>
-        </div>
+    <h2>Gerenciar Sensores</h2>
 
-        <br>
+    <a href="public/cadastro_sensores.php"
+       class="btn-novo-sensor">
+        Novo Sensor
+    </a>
+
+</div>
+
         <table class="table">
             <thead>
                 <tr>
@@ -351,37 +354,76 @@ $resultado_usuarios = $conexao->query($sql_usuarios);
                     <th scope="col">Tipo de Sensor</th>
                     <th scope="col">Endereço</th>
                     <th scope="col">Status do Sensor</th>
+                    <th scope="col">Ações</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Sensor 01</td>
-                    <td>Plataforma 1</td>
-                    <td>Temperatura</td>
-                    <td>Rua Urussanga</td>
-                    <td>Ativo</td>
+            
+<tbody>
+    <?php if ($resultado_sensores && $resultado_sensores->num_rows > 0) { ?>
 
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Sensor 02</td>
-                    <td>Plataforma 2</td>
-                    <td>Movimento</td>
-                    <td>Rua Doutor João Colin</td>
-                    <td>Ativo</td>
+        <?php while ($sensor = $resultado_sensores->fetch_assoc()) { ?>
+            <tr>
+                <th scope="row">
+                    <?= htmlspecialchars($sensor['id']) ?>
+                </th>
 
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Sensor 03</td>
-                    <td>Plataforma 3</td>
-                    <td>Umidade</td>
-                    <td>Rua Max Colin</td>
-                    <td>Inativo</td>
+                <td>
+                    <?= htmlspecialchars($sensor['nome']) ?>
+                </td>
 
-                </tr>
-            </tbody>
+                <td>
+                    <?= htmlspecialchars($sensor['localizacao']) ?>
+                </td>
+
+                <td>
+                    <?= htmlspecialchars($sensor['tipo_sensor']) ?>
+                </td>
+
+                <td>
+                    <?= htmlspecialchars($sensor['endereco']) ?>
+                </td>
+
+                <td>
+                    <?= htmlspecialchars($sensor['status']) ?>
+                </td>
+                
+                <td>
+        
+    <div class="acoes-sensores">
+
+        <a href="public/editar_sensor.php?id=<?= urlencode($sensor['id']) ?>"
+           class="btn btn-outline-primary btn-sm">
+            Editar
+        </a>
+
+        <form action="backend/excluir_sensor.php" method="POST"
+              onsubmit="return confirm('Tem certeza que deseja excluir este sensor?');">
+
+            <input type="hidden" name="id"
+                   value="<?= htmlspecialchars($sensor['id']) ?>">
+
+            <button type="submit" class="btn btn-outline-danger btn-sm">
+                Excluir
+            </button>
+        </form>
+
+    </div>
+</td>
+
+            </tr>
+        <?php } ?>
+
+    <?php } else { ?>
+
+        <tr>
+            <td colspan="7" class="text-center">
+                Nenhum sensor cadastrado.
+            </td>
+        </tr>
+
+    <?php } ?>
+</tbody>
+
         </table>
     </div>
 
@@ -399,6 +441,7 @@ $resultado_usuarios = $conexao->query($sql_usuarios);
             <h2>Gerenciar Usuário</h2>
         </center>
 
+        <br>
         <br>
 
         <a href="public/cadastro.php">
