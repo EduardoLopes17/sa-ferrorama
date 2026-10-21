@@ -564,7 +564,6 @@ td {
     background-color: #ff5f29;
 }
 
-/* GERENCIAR SENSORES */
 
 #gerenciar .cabecalho-gerenciar-sensores {
     display: flex;
@@ -716,3 +715,258 @@ td {
         margin-bottom: 35px;
     }
 }
+
+/* ===================================
+   GERENCIAR TRENS
+=================================== */
+
+#gerenciarTrens .cabecalho-gerenciar-trens {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 60px auto 45px;
+    padding: 0 25px;
+}
+
+#gerenciarTrens .cabecalho-gerenciar-trens h2 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 500;
+    color: #212529;
+}
+
+#gerenciarTrens .btn-novo-trem {
+    display: inline-block;
+    background-color: #ff5b2a;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+#gerenciarTrens .btn-novo-trem:hover {
+    background-color: #e94e20;
+    color: white;
+}
+
+#gerenciarTrens .acoes-trens {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#gerenciarTrens .acoes-trens form {
+    margin: 0;
+}
+
+#gerenciarTrens .acoes-trens .btn {
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    #gerenciarTrens .cabecalho-gerenciar-trens {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        margin-top: 30px;
+    }
+}
+
+
+#gerenciarRotas .cabecalho-gerenciar-rotas {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 60px auto 45px;
+    padding: 0 25px;
+}
+
+#gerenciarRotas .cabecalho-gerenciar-rotas h2 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 500;
+    color: #212529;
+}
+
+#gerenciarRotas .btn-nova-rota {
+    display: inline-block;
+    background-color: #ff5b2a;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+#gerenciarRotas .btn-nova-rota:hover {
+    background-color: #e94e20;
+    color: white;
+}
+
+#gerenciarRotas .acoes-rotas {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#gerenciarRotas .acoes-rotas form {
+    margin: 0;
+}
+
+#gerenciarRotas .acoes-rotas .btn {
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    #gerenciarRotas .cabecalho-gerenciar-rotas {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        margin-top: 30px;
+    }
+}
+
+.secao-paradas-rota {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.secao-paradas-rota h3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #212529;
+}
+
+.linha-parada {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.linha-parada select {
+    flex: 1;
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    background-color: white;
+}
+
+.btn-adicionar-parada {
+    background-color: #fff;
+    color: #ff5b2a;
+    border: 1px solid #ff5b2a;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-adicionar-parada:hover {
+    background-color: #fff0eb;
+}
+
+.btn-remover-parada {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 12px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-remover-parada:hover {
+    background-color: #bb2d3b;
+}
+
+@media (max-width: 600px) {
+    .linha-parada {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+.pagina-cadastro-sensor .formulario-cadastro-sensor form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.pagina-cadastro-sensor .formulario-cadastro-sensor .campos-cadastro-sensor {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 18px;
+    width: 100%;
+}
+
+.pagina-cadastro-sensor .formulario-cadastro-sensor .campos-cadastro-sensor > div {
+    width: 100%;
+    min-width: 0;
+}
+
+.pagina-cadastro-sensor .formulario-cadastro-sensor .campos-cadastro-sensor input,
+.pagina-cadastro-sensor .formulario-cadastro-sensor .campos-cadastro-sensor select {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.pagina-cadastro-sensor .formulario-cadastro-sensor .secao-paradas-rota {
+    width: 100%;
+    margin: 5px 0 0;
+    grid-column: 1 / -1;
+}
+
+.pagina-cadastro-sensor .formulario-cadastro-sensor .secao-paradas-rota h3 {
+    margin-bottom: 18px;
+    font-size: 20px;
+}
+
+.pagina-cadastro-sensor .formulario-cadastro-sensor .linha-parada {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.pagina-cadastro-sensor .formulario-cadastro-sensor .linha-parada select {
+    flex: 1;
+    min-width: 0;
+}
+
+.pagina-cadastro-sensor .formulario-cadastro-sensor .botao-cadastrar-sensor {
+    display: block;
+    width: 100%;
+    max-width: 350px;
+    margin: 8px auto 0;
+    grid-column: 1 / -1;
+}
+
+.pagina-cadastro-sensor .formulario-cadastro-sensor .voltar-cadastro-sensor {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+    grid-column: 1 / -1;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .pagina-cadastro-sensor .formulario-cadastro-sensor .campos-cadastro-sensor {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .pagina-cadastro-sensor .formulario-cadastro-sensor .linha-parada {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .pagina-cadastro-sensor .formulario-cadastro-sensor .botao-cadastrar-sensor {
+        max-width: 100%;
+    }
+}
+
