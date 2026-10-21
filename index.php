@@ -30,6 +30,28 @@ $sql_trens = "SELECT
 $resultado_trens = $conexao->query($sql_trens);
 
 
+$sql_monitoramento = "SELECT
+    trens.id,
+    trens.codigo,
+    trens.modelo,
+    trens.velocidade,
+    trens.status,
+    trens.rota_id,
+    rotas.nome AS nome_rota
+    FROM trens
+    LEFT JOIN rotas ON trens.rota_id = rotas.id
+    ORDER BY trens.codigo ASC";
+
+$resultado_monitoramento = $conexao->query($sql_monitoramento);
+
+$trens_monitoramento = [];
+
+while ($trem_monitoramento = $resultado_monitoramento->fetch_assoc()) {
+    $trens_monitoramento[] = $trem_monitoramento;
+}
+
+
+
 
 $sql_rotas = "SELECT
     rotas.id,
@@ -224,65 +246,68 @@ $resultado_rotas = $conexao->query($sql_rotas);
 
    <div id="monitora" class="content monitor-page">
     <br>
-    <center><h2 class="monitor-title">Monitor de Trens</h2>
+    
+    <h2 class="monitor-title">Monitor de Trens</h2>
+
+    
+<div class="selecao-trem-monitoramento">
+
+    <label for="selecionar-trem">Selecionar Trem</label>
+
+    <select id="selecionar-trem" class="form-select">
+
+        <option value="">Selecione um trem</option>
+
+        <?php foreach ($trens_monitoramento as $trem_monitoramento) { ?>
+
+            <option value="<?= htmlspecialchars($trem_monitoramento['id']) ?>">
+                <?= htmlspecialchars($trem_monitoramento['codigo']) ?>
+                -
+                <?= htmlspecialchars($trem_monitoramento['modelo']) ?>
+            </option>
+
+        <?php } ?>
+
+    </select>
+
+    <?php if (empty($trens_monitoramento)) { ?>
+        <p>Nenhum trem cadastrado para monitoramento.</p>
+    <?php } ?>
+
+</div>
 
     <br>
     <br>
+    
     <div class="monitor-grid">
 
-        <div class="monitor-card">
-            <div class="card-label">Trem em operação</div>
+    <div class="monitor-card">
+        <div class="card-label">Trem selecionado</div>
+        <div class="card-main" id="monitor-codigo">--</div>
+        <div class="card-info" id="monitor-modelo">Selecione um trem</div>
+    </div>
 
-            <div class="card-main">
-                TR-2401
-            </div>
+    <div class="monitor-card">
+        <div class="card-label">Velocidade Atual</div>
+        <div class="card-main" id="monitor-velocidade">-- km/h</div>
+        <div class="card-info">Velocidade cadastrada no sistema</div>
+    </div>
 
-            <div class="card-info">
-                São Paulo → Rio de Janeiro
-            </div>
-        </div>
+    <div class="monitor-card">
+        <div class="card-label">Status</div>
+        <div class="card-main" id="monitor-status">--</div>
+        <div class="card-info">Situação atual do trem</div>
+    </div>
 
-        
-        <div class="monitor-card">
-            <div class="card-label">Velocidade Atual</div>
-
-            <div class="card-main">
-                120 km/h
-            </div>
-
-            <div class="card-info">
-                Velocidade média: 115 km/h
-            </div>
-        </div>
-
-        <div class="monitor-card">
-            <div class="card-label">Velocidade Atual</div>
-
-            <div class="card-main status-operacao">
-                Em Operação
-            </div>
-
-            <div class="card-info">
-                Sem atrasos
-            </div>
-        </div>
-
-        <div class="monitor-card">
-            <div class="card-label">Próxima parada</div>
-
-            <div class="card-main">
-                Santos
-            </div>
-
-            <div class="card-info">
-                Tempo estimado: 15 min
-            </div>
-        </div>
+    <div class="monitor-card">
+        <div class="card-label">Rota do Trem</div>
+        <div class="card-main" id="monitor-rota">--</div>
+        <div class="card-info">Rota vinculada ao trem</div>
+    </div>
 
     </div>
 
 </div>
-
 
 
 
@@ -740,6 +765,14 @@ $resultado_rotas = $conexao->query($sql_rotas);
 </div>
 
     </div>
+
+    
+        <script id="dados-monitoramento" type="application/json"><?= json_encode(
+            $trens_monitoramento,
+            JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>
+        </script>
+
+<script src="./script/monitorar_trens.js"></script>
 
     <script src="./script/botoes.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
