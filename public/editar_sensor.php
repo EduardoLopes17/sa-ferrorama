@@ -1,6 +1,8 @@
 
 <?php
-require_once __DIR__ . '/../infra/conexao.php';
+
+require_once __DIR__ . '/../infra/verificar_admin.php';
+require_once '../infra/conexao.php';
 
 if (!isset($_GET['id']) || !filter_var($_GET['id'], FILTER_VALIDATE_INT)) {
     header('Location: ../index.php?erro_sensor=id');
