@@ -4,6 +4,10 @@ Ferrovia HELG
 Sistema de Gerenciamento e Monitoramento Ferroviário
 
 
+<p align="center">
+  <img class="icon" src="./assets/img/icone trem.png" alt="Ícone Ferrorama"> width="350">
+</p>
+  
 
 </div>
 
