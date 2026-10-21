@@ -8,6 +8,65 @@ if (empty($_SESSION['usuario_id'])) {
 }
 
 require_once "infra/conexao.php";
+ 
+$sql_dashboard = "SELECT
+    (SELECT COUNT(*) FROM trens WHERE status = 'Em Operação') AS trens_ativos,
+    (SELECT COUNT(*) FROM sensores WHERE status = 'Ativo') AS sensores_ativos,
+    (SELECT COUNT(*) FROM rotas WHERE status = 'Ativa') AS rotas_ativas,
+    (SELECT COUNT(*) FROM usuarios WHERE status = 'ativo') AS usuarios_ativos";
+
+$resultado_dashboard = $conexao->query($sql_dashboard);
+$dados_dashboard = $resultado_dashboard->fetch_assoc();
+
+$sql_trens_dashboard = "SELECT
+    trens.codigo,
+    trens.modelo,
+    trens.velocidade,
+    trens.status,
+    rotas.nome AS nome_rota
+    FROM trens
+    LEFT JOIN rotas ON trens.rota_id = rotas.id
+    ORDER BY trens.codigo ASC";
+
+$resultado_trens_dashboard = $conexao->query($sql_trens_dashboard);
+$sql_alertas_trens = "SELECT
+    codigo,
+    modelo,
+    status
+    FROM trens
+    WHERE status IN ('Manutenção', 'Inativo')
+    ORDER BY codigo ASC";
+
+$resultado_alertas_trens = $conexao->query($sql_alertas_trens);
+
+$sql_alertas_sensores = "SELECT
+    id,
+    nome,
+    localizacao,
+    status,
+    criado_em
+    FROM sensores
+    WHERE status = 'Inativo'
+    ORDER BY nome ASC";
+
+$resultado_alertas_sensores = $conexao->query($sql_alertas_sensores);
+
+$sql_total_alertas = "SELECT
+    (
+        SELECT COUNT(*)
+        FROM trens
+        WHERE status IN ('Manutenção', 'Inativo')
+    ) +
+    (
+        SELECT COUNT(*)
+        FROM sensores
+        WHERE status = 'Inativo'
+    ) AS total";
+
+$resultado_total_alertas = $conexao->query($sql_total_alertas);
+$dados_total_alertas = $resultado_total_alertas->fetch_assoc();
+
+$total_alertas = (int) $dados_total_alertas['total'];
 
 $sql_usuarios = "SELECT id, nome, cpf, email, status FROM usuarios";
 
@@ -81,8 +140,9 @@ $resultado_rotas = $conexao->query($sql_rotas);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SA Ferrorama</title>
-    <link rel="stylesheet" href="./assets/style/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/style/style.css?v=3">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
 </head>
@@ -180,73 +240,94 @@ $resultado_rotas = $conexao->query($sql_rotas);
         <div class="container">
 
             <div class="alert-bar">
-                <span class="alert-title">2 alertas ativos!</span>
-                <span class="alert-text">Sensor 001 offline, Trem TR-45 com atraso</span>
-            </div>
+    <span class="alert-title">
+        <?= $total_alertas ?>
+        <?= $total_alertas === 1 ? 'alerta ativo!' : 'alertas ativos!' ?>
+    </span>
+
+    <span class="alert-text">
+        <?php if ($total_alertas > 0): ?>
+            Existem <?= $total_alertas ?> ocorrências que precisam de atenção.
+            Consulte a aba Alertas e Falhas.
+        <?php else: ?>
+            Nenhuma ocorrência identificada.
+        <?php endif; ?>
+    </span>
+</div>
 
             <div class="metrics-grid">
                 <div class="card">
-                    <div class="card-title">Trens ativos:</div>
-                    <div class="card-value text-red">8</div>
-                </div>
-                <div class="card">
-                    <div class="card-title">Sensores online</div>
-                    <div class="card-value text-red">47</div>
-                </div>
-                <div class="card">
-                    <div class="card-title">Taxa Sucesso</div>
-                    <div class="card-value text-red">98,5%</div>
-                </div>
-                <div class="card">
-                    <div class="card-title">Trocar isso</div>
-                    <div class="card-value text-red">42min</div>
-                </div>
-            </div>
-
-            <div class="table-container">
-                <div class="table-title">Trens em operação</div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="col-id">ID</th>
-                            <th class="col-rota">Rota</th>
-                            <th class="col-status">Status</th>
-                            <th class="col-vel">Velocidade</th>
-                            <th class="col-parada">Próxima parada</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="col-id">TR-2401</td>
-                            <td class="col-rota">São Paulo &rarr; Rio</td>
-                            <td class="col-status status-ok">Em operação</td>
-                            <td class="col-vel">120 km/h</td>
-                            <td class="col-parada">Santos <span class="text-light">- 15min</span></td>
-                        </tr>
-                        <tr>
-                            <td class="col-id">TR-2402</td>
-                            <td class="col-rota">Campinas &rarr; SP</td>
-                            <td class="col-status status-ok">Em operação</td>
-                            <td class="col-vel">95 km/h</td>
-                            <td class="col-parada">Jundiaí <span class="text-light">- 28min</span></td>
-                        </tr>
-                        <tr>
-                            <td class="col-id">TR-2403</td>
-                            <td class="col-rota">Campinas &rarr; SP</td>
-                            <td class="col-status status-delay">Atraso</td>
-                            <td class="col-vel">85 km/h</td>
-                            <td class="col-parada">Itu <span class="text-light">- 35min</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div class="card-title">Trens em operação</div>
+    <div class="card-value text-red">
+        <?= (int) $dados_dashboard['trens_ativos'] ?>
     </div>
+</div>
+
+<div class="card">
+    <div class="card-title">Sensores ativos</div>
+    <div class="card-value text-red">
+        <?= (int) $dados_dashboard['sensores_ativos'] ?>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-title">Rotas ativas</div>
+    <div class="card-value text-red">
+        <?= (int) $dados_dashboard['rotas_ativas'] ?>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-title">Usuários ativos</div>
+    <div class="card-value text-red">
+        <?= (int) $dados_dashboard['usuarios_ativos'] ?>
+    </div>
+</div>
+</div>
+<div class="dashboard-tabela">
+    <h3>Trens cadastrados</h3>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Modelo</th>
+                    <th>Rota</th>
+                    <th>Velocidade</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php if ($resultado_trens_dashboard->num_rows > 0): ?>
+                    <?php while ($trem = $resultado_trens_dashboard->fetch_assoc()): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($trem['codigo']) ?></td>
+                            <td><?= htmlspecialchars($trem['modelo']) ?></td>
+                            <td><?= htmlspecialchars($trem['nome_rota'] ?? 'Sem rota') ?></td>
+                            <td><?= (float) $trem['velocidade'] ?> km/h</td>
+                            <td><?= htmlspecialchars($trem['status']) ?></td>
+                        </tr>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="5" class="text-center">
+                            Nenhum trem cadastrado.
+                        </td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+</div>
     
 
    <div id="monitora" class="content monitor-page">
     <br>
-    
+
     <h2 class="monitor-title">Monitor de Trens</h2>
 
     
@@ -306,8 +387,11 @@ $resultado_rotas = $conexao->query($sql_rotas);
     </div>
 
     </div>
-
-</div>
+            <div class="monitor-mapa-container">
+                <h3>Mapa de Monitoramento</h3>
+            <div id="mapa-trens"></div>
+            </div>
+    </div>
 
 
 
@@ -329,31 +413,49 @@ $resultado_rotas = $conexao->query($sql_rotas);
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>18/05/26 14:35:22</td>
-                    <td>Sensor</td>
-                    <td>Sensor 001 offline</td>
-                    <td class="severidade alta">Alta</td>
-                </tr>
-                <tr>
-                    <td>14:22:15</td>
-                    <td>Trem</td>
-                    <td>Trem TR-45 com atraso de 12 min</td>
-                    <td class="severidade media">Média</td>
-                </tr>
-                <tr>
-                    <td>14:10:08</td>
-                    <td>Sistema</td>
-                    <td>Manutenção programada realizada</td>
-                    <td class="severidade baixa">Baixa</td>
-                </tr>
-                <tr>
-                    <td>13:45:30</td>
-                    <td>Sensor</td>
-                    <td>Sensor 005 voltou online</td>
-                    <td class="severidade baixa">Baixa</td>
-                </tr>
-            </tbody>
+    <?php while ($alerta = $resultado_alertas_trens->fetch_assoc()): ?>
+        <?php
+            $manutencao = $alerta['status'] === 'Manutenção';
+            $severidade = $manutencao ? 'Alta' : 'Média';
+            $classe = $manutencao ? 'alta' : 'media';
+        ?>
+        <tr>
+            <td>—</td>
+            <td>Trem</td>
+            <td>
+                Trem <?= htmlspecialchars($alerta['codigo']) ?>
+                está <?= $manutencao ? 'em manutenção' : 'inativo' ?>.
+            </td>
+            <td class="severidade <?= $classe ?>">
+                <?= $severidade ?>
+            </td>
+        </tr>
+    <?php endwhile; ?>
+
+    <?php while ($sensor = $resultado_alertas_sensores->fetch_assoc()): ?>
+        <tr>
+            <td>—</td>
+            <td>Sensor</td>
+            <td>
+                Sensor <?= htmlspecialchars($sensor['nome']) ?>
+                está inativo.
+                Localização: <?= htmlspecialchars($sensor['localizacao']) ?>.
+            </td>
+            <td class="severidade alta">Alta</td>
+        </tr>
+    <?php endwhile; ?>
+
+    <?php if (
+        $resultado_alertas_trens->num_rows === 0 &&
+        $resultado_alertas_sensores->num_rows === 0
+    ): ?>
+        <tr>
+            <td colspan="4" class="text-center">
+                Nenhum alerta encontrado.
+            </td>
+        </tr>
+    <?php endif; ?>
+</tbody>
         </table>
     </div>
 
@@ -361,34 +463,51 @@ $resultado_rotas = $conexao->query($sql_rotas);
     
     
     <div id="relatorios" class="content">
-        <br>
-        <br>
-        <center><h2>Relatórios</h2></center>
+    <div class="relatorios-container">
+        <h2>Relatórios</h2>
 
-    <br>
-    <div class="container">
-        <form class="row g-3">
+        <form id="form-relatorios" class="form-relatorios" method="GET" action="./public/gerar_relatorio.php">
+            <div class="relatorios-campos">
 
-            <div class="col-md-4">
-                <label for="inputPassword4" class="form-label">Tipo de Relatório</label>
-                <input type="text" class="form-control" id="inputPassword4" placeholder="ex: Desempenho de Trens">
-            </div>
-            <div class="col-md-4">
-                <label for="inputPassword4" class="form-label">Período</label>
-                <input type="number" class="form-control" id="inputPassword4" placeholder="ex: Últimos 30 dias">
+                <div class="relatorios-campo">
+                    <label for="tipo-relatorio">Tipo de Relatório</label>
+                    <select id="tipo-relatorio" name="tipo" required>
+                        <option value="">Selecione um relatório</option>
+                        <option value="trens">Relatório de Trens</option>
+                        <option value="rotas">Relatório de Rotas</option>
+                        <option value="sensores">Relatório de Sensores</option>
+                        <option value="usuarios">Relatório de Usuários</option>
+                        <option value="alertas">Relatório de Alertas e Falhas</option>
+                    </select>
+                </div>
+
+                <div class="relatorios-campo">
+                    <label for="periodo-relatorio">Período</label>
+                    <select id="periodo-relatorio" name="periodo" required>
+                        <option value="todos">Todos os registros</option>
+                        <option value="7">Últimos 7 dias</option>
+                        <option value="30">Últimos 30 dias</option>
+                    </select>
+                </div>
+
+                <div class="relatorios-campo">
+                    <label for="formato-relatorio">Formato</label>
+                    <select id="formato-relatorio" name="formato" required>
+                        <option value="pdf">PDF</option>
+                        <option value="csv">CSV</option>
+                    </select>
+                </div>
+
             </div>
 
-            <div class="col-md-4">
-                <label for="inputPassword4" class="form-label">Formato</label>
-                <input type="text" class="form-control" id="inputPassword4" placeholder="ex: PDF">
+            <div class="relatorios-acoes">
+                    <button type="submit" class="btn-gerar-relatorio">                    Gerar Relatório
+                </button>
             </div>
 
-            <div class="col-md-12">
-                <button class="btn btn-primary" type="button">Gerar Relatório</button>
-            </div>
-            </form>
-        </div>
+        </form>
     </div>
+</div>
 
        
 <div id="gerenciarRotas" class="content">
@@ -771,7 +890,8 @@ $resultado_rotas = $conexao->query($sql_rotas);
             $trens_monitoramento,
             JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>
         </script>
-
+        
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="./script/monitorar_trens.js"></script>
 
     <script src="./script/botoes.js"></script>
