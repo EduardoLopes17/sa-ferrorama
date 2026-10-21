@@ -86,5 +86,7 @@ GitHub: Ferrovia HELG — SA Ferrorama
 Ferrovia HELG
 Sistema de Gerenciamento e Monitoramento Ferroviário
 
-Projeto em desenvolvimento
+<p align="center">
+<img width="300" height="300" alt="pmp5" src="https://github.com/user-attachments/assets/bcf043f7-7b6f-4393-8cd0-3c01835d52de" />
+</p>
 </div>
