@@ -14,6 +14,12 @@ if (($_SESSION['perfil'] ?? '') !== 'admin') {
 
 require_once __DIR__ . '/../infra/conexao.php';
 
+$sql_trens_disponiveis = "SELECT id, codigo, modelo
+                         FROM trens
+                         ORDER BY codigo ASC";
+
+$resultado_trens_disponiveis = $conexao->query($sql_trens_disponiveis);
+
 $bairros = [
     'Adhemar Garcia',
     'América',
@@ -22,7 +28,6 @@ $bairros = [
     'Aventureiro',
     'Boa Vista',
     'Boehmerwald',
-    'Bom Retiro',
     'Bucarein',
     'Centro',
     'Costa e Silva',
@@ -53,6 +58,7 @@ $bairros = [
 $erro = '';
 $nome = '';
 $status = 'Ativa';
+$trem_id = 0;
 $saida = '';
 $chegada = '';
 $intermediarias = [];
@@ -61,6 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $nome = trim($_POST['nome'] ?? '');
     $status = $_POST['status'] ?? '';
+    $trem_id = filter_var($_POST['trem_id'] ?? null, FILTER_VALIDATE_INT) ?: 0;
     $saida = $_POST['saida'] ?? '';
     $chegada = $_POST['chegada'] ?? '';
     $intermediarias = $_POST['intermediarias'] ?? [];
@@ -86,6 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (
         $nome === '' ||
+         $trem_id <= 0 ||
         mb_strlen($nome) > 100 ||
         !in_array($status, ['Ativa', 'Inativa'], true) ||
         !$validas ||
@@ -130,6 +138,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $stmt_parada->close();
 
+            $sql_vincular_trem = "UPDATE trens
+                     SET rota_id = ?
+                     WHERE id = ?";
+
+            $stmt_vincular_trem = $conexao->prepare($sql_vincular_trem);
+            $stmt_vincular_trem->bind_param("ii", $rota_id, $trem_id);
+            $stmt_vincular_trem->execute();
+
+            if ($stmt_vincular_trem->affected_rows !== 1) {
+            throw new mysqli_sql_exception('Trem não encontrado.');
+            }
+
+            $stmt_vincular_trem->close();
             $conexao->commit();
 
             header('Location: ../index.php?rota_cadastrada=sucesso');
@@ -203,6 +224,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </select>
                 </div>
 
+                    <div>
+                        <label for="trem_id">Trem Responsável</label>
+
+                    <select id="trem_id" name="trem_id">
+                    <option value="">Selecione um trem</option>
+
+                        <?php while ($trem = $resultado_trens_disponiveis->fetch_assoc()) { ?>
+                            <option value="<?= (int) $trem['id'] ?>">
+                        <?= htmlspecialchars($trem['codigo'] . ' - ' . $trem['modelo']) ?>
+                            </option>
+                        <?php } ?>
+                    </select>
+                </div>
+                
                 <div>
                     <label for="saida">Ponto de Saída</label>
 

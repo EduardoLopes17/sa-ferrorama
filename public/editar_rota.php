@@ -32,8 +32,8 @@ $bairros = [
     'Petrópolis', 'Pirabeiraba', 'Profipo', 'Rio Bonito',
     'Saguaçu', 'Santa Catarina', 'Santo Antônio',
     'São Marcos', 'Ulysses Guimarães', 'Vila Cubatão',
-    'Vila Nova', 'Zona Industrial Norte', 'Zona Industrial Tupy'
-];
+    'Vila Nova', 'Zona Industrial Norte'
+    ];
 
 $stmt = $conexao->prepare(
     "SELECT id, nome, status FROM rotas WHERE id = ?"
@@ -46,6 +46,20 @@ $stmt->close();
 if (!$rota) {
     exit('Rota não encontrada.');
 }
+
+$stmt_trem_atual = $conexao->prepare(
+    "SELECT id FROM trens WHERE rota_id = ? LIMIT 1"
+);
+$stmt_trem_atual->bind_param("i", $id);
+$stmt_trem_atual->execute();
+$trem_atual = $stmt_trem_atual->get_result()->fetch_assoc();
+$stmt_trem_atual->close();
+
+$trem_id = (int) ($trem_atual['id'] ?? 0);
+
+$resultado_trens = $conexao->query(
+    "SELECT id, codigo, modelo FROM trens ORDER BY codigo ASC"
+);
 
 $stmt = $conexao->prepare(
     "SELECT nome FROM paradas WHERE rota_id = ? ORDER BY ordem ASC"
@@ -72,6 +86,7 @@ $erro = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = trim($_POST['nome'] ?? '');
     $status = $_POST['status'] ?? '';
+    $trem_id = filter_var($_POST['trem_id'] ?? null, FILTER_VALIDATE_INT) ?: 0;
     $saida = $_POST['saida'] ?? '';
     $chegada = $_POST['chegada'] ?? '';
     $intermediarias = $_POST['intermediarias'] ?? [];
@@ -93,6 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (
         $nome === '' ||
         mb_strlen($nome) > 100 ||
+        $trem_id <= 0 ||
         !in_array($status, ['Ativa', 'Inativa'], true) ||
         !$validas ||
         count($intermediarias) > 50 ||
@@ -128,6 +144,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             $stmt->close();
+            $stmt_desvincular = $conexao->prepare(
+                "UPDATE trens SET rota_id = NULL WHERE rota_id = ?"
+            );
+            $stmt_desvincular->bind_param("i", $id);
+            $stmt_desvincular->execute();
+            $stmt_desvincular->close();
+
+            $stmt_vincular = $conexao->prepare(
+            "UPDATE trens SET rota_id = ? WHERE id = ?");
+            $stmt_vincular->bind_param("ii", $id, $trem_id);
+            $stmt_vincular->execute();
+
+                if ($stmt_vincular->affected_rows !== 1) {
+                throw new mysqli_sql_exception('Não foi possível vincular o trem.');
+                }
+
+            $stmt_vincular->close();
             $conexao->commit();
 
             header('Location: ../index.php?rota_editada=sucesso');
@@ -184,6 +217,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <select id="status" name="status" required>
                         <option value="Ativa" <?= $status === 'Ativa' ? 'selected' : '' ?>>Ativa</option>
                         <option value="Inativa" <?= $status === 'Inativa' ? 'selected' : '' ?>>Inativa</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="trem_id">Trem Responsável</label>
+                <select id="trem_id" name="trem_id" required>
+                    <option value="">Selecione um trem</option>
+
+                        <?php while ($trem = $resultado_trens->fetch_assoc()) { ?>
+                            <option
+                            value="<?= (int) $trem['id'] ?>"
+                            <?= $trem_id === (int) $trem['id'] ? 'selected' : '' ?>
+                                >
+                            <?= htmlspecialchars($trem['codigo'] . ' - ' . $trem['modelo']) ?>
+                            </option>
+                        <?php } ?>
                     </select>
                 </div>
 
