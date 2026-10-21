@@ -75,10 +75,10 @@ O Scrum é utilizado para planejar as entregas, enquanto o Kanban ajuda a acompa
 
 O código é mantido no GitHub.
 Desenvolvedores
-- Eduardo Lopes
-- Guilherme Floriano
-- Hugo Gramme
-- Luis Gustavo
+1. Eduardo Lopes
+2. Guilherme Floriano
+3. Hugo Gramme
+4. Luis Gustavo
 Repositório
 GitHub: Ferrovia HELG — SA Ferrorama
 <div align="center">
@@ -86,7 +86,5 @@ GitHub: Ferrovia HELG — SA Ferrorama
 Ferrovia HELG
 Sistema de Gerenciamento e Monitoramento Ferroviário
 
-<p align="center">
-<img width="300" height="300" alt="pmp5" src="https://github.com/user-attachments/assets/bcf043f7-7b6f-4393-8cd0-3c01835d52de" />
-</p>
+Projeto em desenvolvimento
 </div>
