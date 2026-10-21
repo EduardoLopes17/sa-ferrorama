@@ -16,13 +16,40 @@ $resultado_usuarios = $conexao->query($sql_usuarios);
 $sql_sensores = "SELECT id, nome, localizacao, tipo_sensor, endereco, status FROM sensores ORDER BY id ASC";
 
 $resultado_sensores = $conexao->query($sql_sensores);
+$sql_trens = "SELECT
+            trens.id,
+            trens.codigo,
+            trens.modelo,
+            trens.velocidade,
+            trens.status,
+            usuarios.nome AS responsavel
+            FROM trens
+            LEFT JOIN usuarios
+            ON trens.usuario_responsavel_id = usuarios.id
+            ORDER BY trens.id ASC";
+$resultado_trens = $conexao->query($sql_trens);
 
+
+
+$sql_rotas = "SELECT
+    rotas.id,
+    rotas.nome,
+    rotas.status,
+    COUNT(paradas.id) AS total_paradas,
+    MAX(CASE WHEN paradas.ordem = 1 THEN paradas.nome END) AS ponto_saida,
+    MAX(CASE WHEN paradas.ordem = (
+        SELECT MAX(p2.ordem)
+        FROM paradas p2
+        WHERE p2.rota_id = rotas.id
+    ) THEN paradas.nome END) AS ponto_chegada
+    FROM rotas
+    LEFT JOIN paradas ON paradas.rota_id = rotas.id
+    GROUP BY rotas.id, rotas.nome, rotas.status
+    ORDER BY rotas.id ASC";
+
+$resultado_rotas = $conexao->query($sql_rotas);
 
 ?>
-
-
-
-
 
 
 
@@ -52,9 +79,11 @@ $resultado_sensores = $conexao->query($sql_sensores);
     <nav id="botoes" class="main-nav">
         <button class="nav-item active" onclick="mostrarConteudo('home')">Home</button>
         <button class="nav-item" onclick="mostrarConteudo('dashboard')">Dashboard</button>
-        <button class="nav-item" onclick="mostrarConteudo('monitora')">Monitorar trens</button>
         <button class="nav-item" onclick="mostrarConteudo('alertas')">Alertas Falhas</button>
         <button class="nav-item" onclick="mostrarConteudo('relatorios')">Relatórios</button>
+        <button class="nav-item" onclick="mostrarConteudo('monitora')">Monitorar trens</button>
+        <button class="nav-item" onclick="mostrarConteudo('gerenciarTrens')">Gerenciar Trens</button>
+        <button class="nav-item" onclick="mostrarConteudo('gerenciarRotas')">Gerenciar Rotas</button>
         <button class="nav-item" onclick="mostrarConteudo('gerenciar')">Gerenciar Sensores</button>
 
         <?php if ($_SESSION['perfil'] == 'admin') { ?> 
@@ -336,9 +365,190 @@ $resultado_sensores = $conexao->query($sql_sensores);
         </div>
     </div>
 
+       
+<div id="gerenciarRotas" class="content">
+
+    <div class="cabecalho-gerenciar-rotas">
+        <h2>Gerenciar Rotas</h2>
+
+        <?php if (($_SESSION['perfil'] ?? '') === 'admin') { ?>
+            <a href="public/cadastro_rotas.php" class="btn-nova-rota">
+                Nova Rota
+            </a>
+        <?php } ?>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome da Rota</th>
+                <th>Ponto de Saída</th>
+                <th>Ponto de Chegada</th>
+                <th scope="col">Paradas</th>
+                <th scope="col">Status</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php if ($resultado_rotas && $resultado_rotas->num_rows > 0) { ?>
+
+                <?php while ($rota = $resultado_rotas->fetch_assoc()) { ?>
+                    <tr>
+                        <td><?= htmlspecialchars($rota['id']) ?></td>
+
+                        <td><?= htmlspecialchars($rota['nome']) ?></td>
+
+                        <td><?= htmlspecialchars($rota['ponto_saida'] ?? '-') ?></td>
+                        <td><?= htmlspecialchars($rota['ponto_chegada'] ?? '-') ?></td>
+
+                        <td><?= htmlspecialchars($rota['total_paradas']) ?></td>
+
+                        <td><?= htmlspecialchars($rota['status']) ?></td>
+
+                        <td>
+                            <?php if (($_SESSION['perfil'] ?? '') === 'admin') { ?>
+                                <div class="acoes-rotas">
+                                    <a
+                                        href="public/editar_rota.php?id=<?= urlencode($rota['id']) ?>"
+                                        class="btn btn-outline-primary btn-sm"
+                                    >
+                                        Editar
+                                    </a>
+
+                                    <form
+                                        action="backend/excluir_rota.php"
+                                        method="POST"
+                                        onsubmit="return confirm('Deseja realmente excluir esta rota e suas paradas?');"
+                                    >
+                                        <input
+                                            type="hidden"
+                                            name="id"
+                                            value="<?= htmlspecialchars($rota['id']) ?>"
+                                        >
+
+                                        <button
+                                            type="submit"
+                                            class="btn btn-outline-danger btn-sm"
+                                        >
+                                            Excluir
+                                        </button>
+                                    </form>
+                                </div>
+                            <?php } else { ?>
+                                <span>Somente consulta</span>
+                            <?php } ?>
+                        </td>
+                    </tr>
+                <?php } ?>
+
+            <?php } else { ?>
+
+                <tr>
+                    <td colspan="7" class="text-center">                        Nenhuma rota cadastrada.
+                    </td>
+                </tr>
+
+            <?php } ?>
+        </tbody>
+    </table>
+
+</div>
+
+    
+    <div id="gerenciarTrens" class="content">
+    
+    <br><br>
+
+    <div class="cabecalho-gerenciar-trens">
+
+        <h2>Gerenciar Trens</h2>
+
+        <a href="public/cadastro_trens.php"
+           class="btn-novo-trem">
+            Novo Trem
+        </a>
+
+    </div>
+
+    <br>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Código</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Velocidade</th>
+                <th scope="col">Status</th>
+                <th scope="col">Responsável</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php if ($resultado_trens && $resultado_trens->num_rows > 0) { ?>
+
+                <?php while ($trem = $resultado_trens->fetch_assoc()) { ?>
+                    <tr>
+                        <td><?= htmlspecialchars($trem['id']) ?></td>
+
+                        <td><?= htmlspecialchars($trem['codigo']) ?></td>
+
+                        <td><?= htmlspecialchars($trem['modelo']) ?></td>
+
+                        <td>
+                            <?= htmlspecialchars($trem['velocidade']) ?> km/h
+                        </td>
+
+                        <td><?= htmlspecialchars($trem['status']) ?></td>
+
+                        <td>
+                            <?= htmlspecialchars($trem['responsavel'] ?? 'Não definido') ?>
+                        </td>
+
+                        <td>
+                            <div class="acoes-trens">
+
+                                <a href="public/editar_trem.php?id=<?= urlencode($trem['id']) ?>"
+                                   class="btn btn-outline-primary btn-sm">
+                                    Editar
+                                </a>
+
+                                <form action="backend/excluir_trem.php"
+                                      method="POST"
+                                      onsubmit="return confirm('Deseja realmente excluir este trem?');">
+
+                                    <input type="hidden" name="id"
+                                           value="<?= htmlspecialchars($trem['id']) ?>">
+
+                                    <button type="submit"
+                                            class="btn btn-outline-danger btn-sm">
+                                        Excluir
+                                    </button>
+                                </form>
+
+                            </div>
+                        </td>
+                    </tr>
+                <?php } ?>
+
+            <?php } else { ?>
+                <tr>
+                    <td colspan="7" class="text-center">
+                        Nenhum trem cadastrado.
+                    </td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+
+</div>
+
+
     <div id="gerenciar" class="content">
     
-        
 <div class="cabecalho-gerenciar-sensores">
 
     <h2>Gerenciar Sensores</h2>
