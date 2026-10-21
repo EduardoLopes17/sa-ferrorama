@@ -49,6 +49,7 @@ if (!$sensor) {
 
             <div class="campos-cadastro-sensor">
 
+            
                 <div>
                     <label for="nome">Nome do Sensor</label>
                     <input type="text" id="nome" name="nome"
