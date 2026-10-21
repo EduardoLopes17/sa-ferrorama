@@ -158,26 +158,24 @@ $resultado_rotas = $conexao->query($sql_rotas);
         </nav>
     </header>
 
-    <nav id="botoes" class="main-nav">
-        <button class="nav-item active" onclick="mostrarConteudo('home')">Home</button>
-        <button class="nav-item" onclick="mostrarConteudo('dashboard')">Dashboard</button>
-        <button class="nav-item" onclick="mostrarConteudo('alertas')">Alertas Falhas</button>
-        <button class="nav-item" onclick="mostrarConteudo('relatorios')">Relatórios</button>
-        <button class="nav-item" onclick="mostrarConteudo('monitora')">Monitorar trens</button>
-        <button class="nav-item" onclick="mostrarConteudo('gerenciarTrens')">Gerenciar Trens</button>
-        <button class="nav-item" onclick="mostrarConteudo('gerenciarRotas')">Gerenciar Rotas</button>
-        <button class="nav-item" onclick="mostrarConteudo('gerenciar')">Gerenciar Sensores</button>
+    
+            <nav id="botoes" class="main-nav">
+                <button class="nav-item active" onclick="mostrarConteudo('home')">Home</button>
+                <button class="nav-item" onclick="mostrarConteudo('dashboard')">Dashboard</button>
+                <button class="nav-item" onclick="mostrarConteudo('alertas')">Alertas Falhas</button>
+                <button class="nav-item" onclick="mostrarConteudo('relatorios')">Relatórios</button>
+                <button class="nav-item" onclick="mostrarConteudo('monitora')">Monitorar trens</button>
 
-        <?php if ($_SESSION['perfil'] == 'admin') { ?> 
+            <?php if (($_SESSION['perfil'] ?? '') === 'admin'): ?>
+                <button class="nav-item" onclick="mostrarConteudo('gerenciarTrens')">Gerenciar Trens</button>
+                <button class="nav-item" onclick="mostrarConteudo('gerenciarRotas')">Gerenciar Rotas</button>
+                <button class="nav-item" onclick="mostrarConteudo('gerenciar')">Gerenciar Sensores</button>
+                <button class="nav-item" onclick="mostrarConteudo('gerenciarUsuario')">Gerenciar Usuário</button>
+            <?php endif; ?>
 
-<button class="nav-item" onclick="mostrarConteudo('gerenciarUsuario')">
-    Gerenciar Usuário
-</button>
+                <button class="nav-item logout" onclick="mostrarConteudo('sair')">Sair</button>
+            </nav>
 
-<?php } ?>
-
-        <button class="nav-item logout" onclick="mostrarConteudo('sair')">Sair</button>
-    </nav>
 
 
     <div id="home" class="content active">
@@ -220,16 +218,6 @@ $resultado_rotas = $conexao->query($sql_rotas);
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-
-        <br>
-        <br>
-        <center>
-            <h2 class="H222"> ROTAS E TRAJETO </h2>
-
-            <div>
-                <center><img src="assets/img/trajeto trem.jpg" alt="">
-            </div>
-    </div>
 
 
     <div id="dashboard" class="content">

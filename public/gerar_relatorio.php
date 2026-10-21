@@ -14,6 +14,11 @@ $tipo = $_GET['tipo'] ?? '';
 $formato = $_GET['formato'] ?? '';
 $periodo = $_GET['periodo'] ?? 'todos';
 
+if ($tipo === 'usuarios' && ($_SESSION['perfil'] ?? '') !== 'admin') {
+    http_response_code(403);
+    exit('Acesso negado. Apenas administradores podem gerar relatórios de usuários.');
+}
+
 $tipos_permitidos = ['trens', 'rotas', 'sensores', 'usuarios', 'alertas'];
 $formatos_permitidos = ['csv', 'pdf'];
 
