@@ -182,6 +182,9 @@ $resultado_rotas = $conexao->query($sql_rotas);
         <br>
 
         <h2 class="H222">BEM VINDO A FERROVIA UNIÃO HELG</h2>
+        <p class="saudacao-usuario">
+            Olá, <?= htmlspecialchars($_SESSION['nome'] ?? 'Usuário', ENT_QUOTES, 'UTF-8') ?>!
+        </p>
         <p class="H222">A melhor plataforma de monitoramento do MUNDO</p>
 
         <div id="carouselExampleIndicators" class="carousel slide">
@@ -779,6 +782,13 @@ $resultado_rotas = $conexao->query($sql_rotas);
 
 <div id="gerenciarUsuario" class="content">
 
+            <?php if (($_GET['sucesso'] ?? '') === 'usuario_atualizado'): ?>
+
+    <div id="mensagem-usuario-atualizado" class="alert alert-success text-center" role="alert">
+    Usuário atualizado com sucesso!
+    </div>
+<?php endif; ?>
+
     <br>
     <br>
 
@@ -886,6 +896,22 @@ $resultado_rotas = $conexao->query($sql_rotas);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+                
+        <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const mensagem = document.getElementById('mensagem-usuario-atualizado');
+
+    if (mensagem) {
+        setTimeout(function () {
+            mensagem.remove();
+
+            const url = new URL(window.location.href);
+            url.searchParams.delete('sucesso');
+            window.history.replaceState({}, '', url);
+        }, 8000);
+    }
+});
+</script>
 
 </body>
 </html>
