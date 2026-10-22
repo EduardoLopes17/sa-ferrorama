@@ -1235,3 +1235,67 @@ td {
         padding: 25px 20px;
     }
 }
+.saudacao-usuario {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+.botao-voltar-relatorio {
+    display: inline-block;
+    padding: 11px 22px;
+    background-color: #6c757d;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.acoes-relatorio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.botao-imprimir-relatorio,
+.botao-voltar-relatorio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.botao-imprimir-relatorio {
+    background-color: #ff612e;
+}
+
+.botao-imprimir-relatorio:hover {
+    background-color: #e65325;
+}
+
+.botao-voltar-relatorio {
+    background-color: #6c757d;
+}
+
+.botao-voltar-relatorio:hover {
+    background-color: #565e64;
+    color: #fff;
+}
+
+@media print {
+    .acoes-relatorio {
+        display: none !important;
+    }
+}

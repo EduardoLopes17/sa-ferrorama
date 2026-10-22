@@ -3,7 +3,6 @@
 
 require_once __DIR__ . '/../infra/verificar_admin.php';
 require_once __DIR__ . '/../infra/conexao.php';
-session_start();
 
 if (empty($_SESSION['usuario_id'])) {
     header('Location: ../public/login.php');
