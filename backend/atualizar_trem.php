@@ -1,13 +1,8 @@
 
 <?php
 
-<?php
-
 require_once __DIR__ . '/../infra/verificar_admin.php';
 require_once __DIR__ . '/../infra/conexao.php';
-
-
-session_start();
 
 if (empty($_SESSION['usuario_id'])) {
     header('Location: ../public/login.php');
@@ -28,7 +23,6 @@ if (!$id) {
     exit;
 }
 
-// Buscar o trem e seu responsável
 $sql_trem = "SELECT id, usuario_responsavel_id
              FROM trens
              WHERE id = ?";
@@ -45,7 +39,6 @@ if (!$trem) {
     exit;
 }
 
-// Verificar permissões
 $eh_admin = ($_SESSION['perfil'] ?? '') === 'admin';
 
 $eh_responsavel = (
@@ -58,7 +51,6 @@ if (!$eh_admin && !$eh_responsavel) {
     exit('Você não tem permissão para editar este trem.');
 }
 
-// Validar velocidade e status
 $velocidade = trim($_POST['velocidade'] ?? '');
 $status = trim($_POST['status'] ?? '');
 
@@ -85,7 +77,6 @@ try {
 
     if ($eh_admin) {
 
-        // Administrador pode alterar todos os dados
         $codigo = trim($_POST['codigo'] ?? '');
         $modelo = trim($_POST['modelo'] ?? '');
 
@@ -105,7 +96,6 @@ try {
             exit;
         }
 
-        // Verificar se o novo responsável está ativo
         $sql_usuario = "SELECT id
                         FROM usuarios
                         WHERE id = ? AND status = 'ativo'";
@@ -144,8 +134,7 @@ try {
 
     } else {
 
-        // Usuário normal altera apenas velocidade e status
-        // Somente se continuar sendo responsável pelo trem
+        
         $sql = "UPDATE trens
                 SET velocidade = ?,
                     status = ?

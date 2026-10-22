@@ -2,39 +2,23 @@
 <?php
 
 require_once __DIR__ . '/../infra/verificar_admin.php';
-require_once '../infra/conexao.php';
-
-session_start();
-
-if (empty($_SESSION['usuario_id'])) {
-    header('Location: login.php');
-    exit;
-}
-
 require_once __DIR__ . '/../infra/conexao.php';
 
 $erro = '';
-$nome_responsavel = '';
 
-$id_usuario = (int) $_SESSION['usuario_id'];
+$sql_usuarios = "SELECT id, nome, email
+                 FROM usuarios
+                 WHERE status = 'ativo'
+                 ORDER BY nome ASC";
 
-$sql_usuario = "SELECT nome FROM usuarios WHERE id = ?";
-$stmt_usuario = $conexao->prepare($sql_usuario);
-$stmt_usuario->bind_param("i", $id_usuario);
-$stmt_usuario->execute();
-
-$resultado_usuario = $stmt_usuario->get_result();
-$usuario = $resultado_usuario->fetch_assoc();
-$stmt_usuario->close();
-
-if (!$usuario) {
-    header('Location: login.php');
-    exit;
-}
-
-$nome_responsavel = $usuario['nome'];
+$resultado_usuarios = $conexao->query($sql_usuarios);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+$responsavel_id = filter_var(
+    $_POST['usuario_responsavel_id'] ?? null,
+    FILTER_VALIDATE_INT
+);
 
     if (($_SESSION['perfil'] ?? '') !== 'admin') {
         http_response_code(403);
@@ -61,12 +45,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         !is_numeric($velocidade) ||
         (float) $velocidade < 0 ||
         (float) $velocidade > 9999.99 ||
-        !in_array($status, $status_permitidos, true)
+        !in_array($status, $status_permitidos, true) ||
+        !$responsavel_id
     ) {
         $erro = 'Preencha os campos corretamente.';
     } else {
 
-        $sql = "INSERT INTO trens
+    $sql_verificar = "SELECT id FROM usuarios
+                     WHERE id = ? AND status = 'ativo'";
+
+    $stmt_verificar = $conexao->prepare($sql_verificar);
+    $stmt_verificar->bind_param("i", $responsavel_id);
+    $stmt_verificar->execute();
+
+    $usuario_valido = $stmt_verificar->get_result()->fetch_assoc();
+    $stmt_verificar->close();
+
+    if (!$usuario_valido) {
+        $erro = 'Selecione um funcionário responsável válido.';
+    } else {
+
+    $sql = "INSERT INTO trens
                 (codigo, modelo, velocidade, status, usuario_responsavel_id)
                 VALUES (?, ?, ?, ?, ?)";
 
@@ -75,13 +74,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $velocidade_numero = (float) $velocidade;
 
         $stmt->bind_param(
-            "ssdsi",
-            $codigo,
-            $modelo,
-            $velocidade_numero,
-            $status,
-            $id_usuario
-        );
+    "ssdsi",
+    $codigo,
+    $modelo,
+    $velocidade_numero,
+    $status,
+    $responsavel_id
+);
 
         try {
             $stmt->execute();
@@ -95,10 +94,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ? 'Já existe um trem com esse código.'
                 : 'Não foi possível cadastrar o trem.';
             $stmt->close();
-        }
+                }
     }
 }
+}
 ?>
+
+<!DOCTYPE html>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -167,11 +169,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div>
-                    <label for="responsavel">Funcionário Responsável</label>
-                    <input type="text" id="responsavel"
-                           value="<?= htmlspecialchars($nome_responsavel) ?>"
-                           readonly>
-                </div>
+    <label for="usuario_responsavel_id">Funcionário Responsável</label>
+
+    <select
+        id="usuario_responsavel_id"
+        name="usuario_responsavel_id"
+        required
+    >
+        <option value="">Selecione um funcionário</option>
+
+        <?php while ($usuario = $resultado_usuarios->fetch_assoc()): ?>
+            <option
+                value="<?= (int) $usuario['id'] ?>"
+                <?= (int) ($responsavel_id ?? 0) === (int) $usuario['id'] ? 'selected' : '' ?>
+            >
+                <?= htmlspecialchars($usuario['nome'], ENT_QUOTES, 'UTF-8') ?>
+                - <?= htmlspecialchars($usuario['email'], ENT_QUOTES, 'UTF-8') ?>
+            </option>
+        <?php endwhile; ?>
+    </select>
+</div>
 
             </div>
 
@@ -179,8 +196,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 Cadastrar Trem
             </button>
 
-            <a href="../index.php" class="voltar-cadastro-sensor">
-                Voltar
+            <a href="../index.php?aba=gerenciarTrens" class="voltar-cadastro-sensor">
+                Voltar para Gerenciar Trens
             </a>
 
         </form>

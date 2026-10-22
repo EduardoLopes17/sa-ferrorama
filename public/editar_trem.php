@@ -2,18 +2,8 @@
 <?php
 
 require_once __DIR__ . '/../infra/verificar_admin.php';
-require_once '../infra/conexao.php';
-
-session_start();
-
-if (empty($_SESSION['usuario_id'])) {
-    header('Location: login.php');
-    exit;
-}
-
 require_once __DIR__ . '/../infra/conexao.php';
 
-// Buscar o ID do trem
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
 if (!$id) {
@@ -21,7 +11,6 @@ if (!$id) {
     exit;
 }
 
-// Buscar as informações do trem
 $sql = "SELECT id, codigo, modelo, velocidade, status,
                usuario_responsavel_id
         FROM trens
