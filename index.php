@@ -175,7 +175,7 @@ $resultado_rotas = $conexao->query($sql_rotas);
 
                 <button class="nav-item logout" onclick="mostrarConteudo('sair')">Sair</button>
             </nav>
-
+            
 
 
     <div id="home" class="content active">
@@ -218,7 +218,7 @@ $resultado_rotas = $conexao->query($sql_rotas);
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-
+            </div>
 
     <div id="dashboard" class="content">
         <br>
