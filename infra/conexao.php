@@ -9,8 +9,7 @@ $conexao = new mysqli(
     $servidor,
     $usuario,
     $senha,
-    $banco,
-    3389
+    $banco
 );
 
 if ($conexao->connect_error) {
