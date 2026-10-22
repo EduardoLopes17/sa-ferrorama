@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__ . '/../infra/verificar_admin.php';
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -18,6 +22,24 @@
         <form class="row g-3" method="POST" action="../backend/cadastrar_usuario.php">
 
             <h2>Cadastro de usuario</h2>
+            <?php if (isset($_GET['sucesso']) && $_GET['sucesso'] === '1'): ?>
+    <div class="alert alert-success" role="alert">
+        Usuário cadastrado com sucesso!
+    </div>
+<?php endif; ?>
+
+<?php if (isset($_GET['erro'])): ?>
+    <div class="alert alert-danger" role="alert">
+        <?php
+        if ($_GET['erro'] === 'senhas') {
+            echo 'As senhas informadas não coincidem.';
+        } else {
+            echo 'Não foi possível cadastrar o usuário. Verifique os dados e tente novamente.';
+        }
+        ?>
+    </div>
+<?php endif; ?>
+
             <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Nome Completo</label>
                 <input type="text" class="form-control" name="nome" required>
@@ -58,14 +80,29 @@
                 </div>
 
                 <div class="d-grid mt-3">
-                <button class="btn btn-primary" type="submit">
-                    Cadastrar usuario
-                </button>
+                        <button class="btn btn-primary" type="submit">
+                            Cadastrar usuário
+                        </button>
+
+                <a href="../index.php?aba=gerenciarUsuario"
+                    class="btn btn-outline-secondary mt-2">
+                    Voltar para Gerenciar Usuários
+                </a>
+            </div>
 
             </div>
         </form>
     </div>
 
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                const parametros = new URLSearchParams(window.location.search);
+
+                if (parametros.get('aba') === 'gerenciarUsuario') {
+                mostrarConteudo('gerenciarUsuario');
+            }
+        });
+</script>
 </body>
 
 </html>

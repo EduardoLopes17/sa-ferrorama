@@ -9,9 +9,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cpf = $_POST['cpf'];
     $email = $_POST['email'];
     $senha = $_POST['senha'];
+    $confirmar_senha = $_POST['confirmar_senha'];
     $perfil = $_POST['perfil'];
     $status = $_POST['status'];
-
+    if ($senha !== $confirmar_senha) {
+    header("Location: ../public/cadastro.php?erro=senhas");
+    exit;
+    }
     $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
 
 
@@ -36,14 +40,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
 
-    header("Location: ../index.php");
-
+    header("Location: ../public/cadastro.php?sucesso=1");
     exit;
 
 } else {
-        echo "Erro ao cadastrar usuário: " . $conexao->error;
 
-    }
+    header("Location: ../public/cadastro.php?erro=cadastro");
+    exit;
+
+}
 
 }
 
