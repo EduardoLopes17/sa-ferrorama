@@ -2,9 +2,24 @@
 
 session_start();
 
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Pragma: no-cache');
+
 if (empty($_SESSION['usuario_id'])) {
     header('Location: public/login.php');
     exit;
+}
+
+if (($_GET['erro_trem'] ?? '') === 'rota_ativa') {
+    echo "<script>
+        alert('Não é possível excluir este trem porque ele possui uma rota ativa. Desative a rota antes de excluir.');
+    </script>";
+}
+
+if (($_GET['erro_usuario'] ?? '') === 'responsavel_trem') {
+    echo "<script>
+        alert('Não é possível excluir este usuário porque ele é responsável por um trem. Altere o responsável antes de excluir.');
+    </script>";
 }
 
 require_once "infra/conexao.php";
@@ -174,6 +189,7 @@ $resultado_rotas = $conexao->query($sql_rotas);
             <?php endif; ?>
 
                 <button class="nav-item logout" onclick="mostrarConteudo('sair')">Sair</button>
+
             </nav>
             
 
@@ -877,9 +893,9 @@ $resultado_rotas = $conexao->query($sql_rotas);
         <p>Sua sessão será encerrada e você será redirecionado para a tela de login!</p>
 
         <div class="botoes-container">
-    <a class="btn-sair" href="./public/login.php">Confirmar</a>
+    <a class="btn-sair" href="./backend/logout.php">Confirmar</a>
     <button class="btn-sair" type="button" onclick="mostrarConteudo('home')">Cancelar</button>
-</div>
+        </div>
 
     </div>
 
