@@ -4,7 +4,9 @@
 require_once __DIR__ . '/../infra/verificar_admin.php';
 require_once '../infra/conexao.php';
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (empty($_SESSION['usuario_id'])) {
     header('Location: login.php');
