@@ -4,7 +4,9 @@
 require_once __DIR__ . '/../infra/verificar_admin.php';
 require_once __DIR__ . '/../infra/conexao.php';
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (empty($_SESSION['usuario_id'])) {
     header('Location: ../public/login.php');
@@ -30,7 +32,27 @@ if (!$id) {
     exit;
 }
 
+$sql_verificar_rota = "SELECT rotas.id
+    FROM trens
+    INNER JOIN rotas ON trens.rota_id = rotas.id
+    WHERE trens.id = ?
+    AND rotas.status = 'Ativa'
+    LIMIT 1";
+
+$stmt_verificar = $conexao->prepare($sql_verificar_rota);
+$stmt_verificar->bind_param("i", $id);
+$stmt_verificar->execute();
+$stmt_verificar->store_result();
+
+if ($stmt_verificar->num_rows > 0) {
+    $stmt_verificar->close();
+
+    header('Location: ../index.php?erro_trem=rota_ativa');
+    exit;
+}
+
 $sql = "DELETE FROM trens WHERE id = ?";
+$stmt_verificar->close();
 
 $stmt = $conexao->prepare($sql);
 $stmt->bind_param("i", $id);
