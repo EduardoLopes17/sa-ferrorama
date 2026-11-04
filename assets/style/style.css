@@ -1299,3 +1299,153 @@ td {
         display: none !important;
     }
 }
+
+
+.clima-painel {
+    width: 100%;
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 24px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-left: 5px solid #e65325;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    text-align: left;
+}
+
+.clima-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.clima-cabecalho h3 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #252525;
+}
+
+#clima-localizacao {
+    margin: 0;
+    color: #666666;
+}
+
+#clima-temperatura {
+    font-size: 32px;
+    font-weight: 700;
+    color: #e65325;
+    white-space: nowrap;
+}
+
+#clima-condicao {
+    margin: 15px 0 5px;
+    font-size: 16px;
+    color: #333333;
+}
+
+#clima-atualizacao {
+    margin: 0;
+    font-size: 13px;
+    color: #777777;
+}
+
+@media (max-width: 600px) {
+    .clima-painel {
+        padding: 18px;
+    }
+
+    .clima-cabecalho {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #clima-temperatura {
+        font-size: 28px;
+    }
+}
+
+#home .home-apresentacao {
+    max-width: 1100px;
+    margin: 25px auto 20px;
+    padding: 45px 35px;
+    background: #fff8f5;
+    border: 1px solid #f3ddd3;
+    border-radius: 16px;
+    text-align: center;
+}
+
+#home .home-etiqueta {
+    display: inline-block;
+    margin-bottom: 14px;
+    color: #d94c24;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+#home .home-apresentacao h2 {
+    color: #202020;
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+#home .home-apresentacao p {
+    max-width: 700px;
+    margin: 0 auto 25px;
+    color: #555;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+#home .home-acoes {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+#home .home-acoes button {
+    padding: 12px 24px;
+    border: 1px solid #e65325;
+    border-radius: 8px;
+    background: #e65325;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+#home .home-acoes button:hover {
+    background: #c83e19;
+    transform: translateY(-2px);
+}
+
+#home .home-acoes button:nth-child(2) {
+    background: white;
+    color: #e65325;
+}
+
+#home .home-acoes button:nth-child(2):hover {
+    background: #fff0e9;
+}
+
+@media (max-width: 600px) {
+    #home .home-apresentacao {
+        padding: 28px 18px;
+        margin: 15px;
+    }
+
+    #home .home-acoes {
+        flex-direction: column;
+    }
+
+    #home .home-acoes button {
+        width: 100%;
+    }
+}
