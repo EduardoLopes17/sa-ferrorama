@@ -197,11 +197,28 @@ $resultado_rotas = $conexao->query($sql_rotas);
     <div id="home" class="content active">
         <br>
 
-        <h2 class="H222">BEM VINDO A FERROVIA UNIÃO HELG</h2>
+        <div class="home-apresentacao">
+    <span class="home-etiqueta">Sistema de gerenciamento ferroviário</span>
+    <h2>Bem-vindo à Ferrovia União HELG</h2>
+    <p>
+        Acompanhe as operações ferroviárias, consulte informações
+        dos trens, monitore sensores e visualize alertas em um
+        ambiente integrado.
+    </p>
+
+    <div class="home-acoes">
+        <button type="button" onclick="mostrarConteudo('dashboard')">
+            Acessar Dashboard
+        </button>
+
+        <button type="button" onclick="mostrarConteudo('monitora')">
+            Monitorar Trens
+        </button>
+    </div>
+</div>
         <p class="saudacao-usuario">
             Olá, <?= htmlspecialchars($_SESSION['nome'] ?? 'Usuário', ENT_QUOTES, 'UTF-8') ?>!
         </p>
-        <p class="H222">A melhor plataforma de monitoramento do MUNDO</p>
 
         <div id="carouselExampleIndicators" class="carousel slide">
             <div class="carousel-indicators">
@@ -243,6 +260,21 @@ $resultado_rotas = $conexao->query($sql_rotas);
         <br>
         <br>
         <center><h2>DASHBOARD</h2>
+
+        <section class="clima-painel" aria-label="Informações meteorológicas">
+    <div class="clima-cabecalho">
+        <div>
+            <h3>Condições meteorológicas</h3>
+            <p id="clima-localizacao">Joinville, SC</p>
+        </div>
+        <span id="clima-temperatura">-- °C</span>
+    </div>
+
+            <p id="clima-condicao" aria-live="polite">Consultando clima...</p>
+            <p id="clima-atualizacao">Aguardando atualização</p>
+        </section>
+
+
             <br>
         <div class="container">
 
@@ -907,6 +939,7 @@ $resultado_rotas = $conexao->query($sql_rotas);
         
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="./script/monitorar_trens.js"></script>
+<script src="./script/clima.js" defer></script>
 
     <script src="./script/botoes.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
