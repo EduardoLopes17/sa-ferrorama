@@ -184,10 +184,10 @@ $resultado_rotas = $conexao->query($sql_rotas);
                 <button class="nav-item" onclick="mostrarConteudo('monitora')">Monitorar trens</button>
 
             <?php if (($_SESSION['perfil'] ?? '') === 'admin'): ?>
-                <button class="nav-item" onclick="mostrarConteudo('gerenciarTrens')">Gerenciar Trens</button>
-                <button class="nav-item" onclick="mostrarConteudo('gerenciarRotas')">Gerenciar Rotas</button>
-                <button class="nav-item" onclick="mostrarConteudo('gerenciar')">Gerenciar Sensores</button>
-                <button class="nav-item" onclick="mostrarConteudo('gerenciarUsuario')">Gerenciar Usuário</button>
+                <button class="nav-item" onclick="mostrarConteudo('gerenciarTrens')"> Trens</button>
+                <button class="nav-item" onclick="mostrarConteudo('gerenciarRotas')"> Rotas</button>
+                <button class="nav-item" onclick="mostrarConteudo('gerenciar')"> Sensores</button>
+                <button class="nav-item" onclick="mostrarConteudo('gerenciarUsuario')"> Usuário</button>
             <?php endif; ?>
 
                 <button class="nav-item logout" onclick="mostrarConteudo('sair')">Sair</button>

@@ -1742,10 +1742,29 @@ button:disabled,
     color: #ffffff;
 }
 
+
+
+html,
+body {
+    min-height: 100%;
+    background-color: #F5F2ED;
+}
+
+body#P1,
+body.pagina-cadastro-sensor {
+    background-color: #F5F2ED;
+}
+
+.pagina-cadastro-sensor {
+    background-color: #F5F2ED;
+}
+
+
 body {
     position: relative;
     overflow-x: hidden;
 }
+
 
 body::before {
     content: "";
@@ -2118,4 +2137,18 @@ body {
     font-size: 16px;
     color: #65584D;
     margin: 0;
+}
+
+#home {
+    background-color: #F5F2ED;
+    min-height: 100vh;
+}
+
+body:has(#login-box) ::before {
+    animation: none;
+}
+
+body:has(.login-box)::before,
+body:has(#conheca.active)::before {
+    display: none;
 }
