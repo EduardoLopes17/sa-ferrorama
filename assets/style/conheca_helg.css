@@ -1,0 +1,220 @@
+
+#conhecaHelg {
+    color: #252525;
+}
+
+#conhecaHelg .helg-apresentacao {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+    padding: 55px 45px;
+    margin: 25px 0 50px;
+    background: #fff7f1;
+    border-radius: 18px;
+}
+
+#conhecaHelg .helg-etiqueta {
+    display: inline-block;
+    color: #e46a24;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+#conhecaHelg .helg-apresentacao h1 {
+    margin: 14px 0 8px;
+    font-size: clamp(32px, 4vw, 50px);
+    font-weight: 800;
+    color: #1f1f1f;
+}
+
+#conhecaHelg .helg-apresentacao h2 {
+    margin-bottom: 22px;
+    font-size: 21px;
+    font-weight: 600;
+}
+
+#conhecaHelg p,
+#conhecaHelg li {
+    line-height: 1.75;
+}
+
+#conhecaHelg .helg-apresentacao p {
+    color: #555;
+    margin-bottom: 15px;
+}
+
+#conhecaHelg .helg-apresentacao-imagem img {
+    width: 100%;
+    max-height: 390px;
+    object-fit: cover;
+    border-radius: 14px;
+    display: block;
+}
+
+#conhecaHelg .helg-botao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 14px;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 9px;
+    background: #e46a24;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+#conhecaHelg .helg-botao:hover {
+    background: #bd4f15;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+#conhecaHelg .helg-funcionalidades {
+    padding: 20px 25px 60px;
+}
+
+#conhecaHelg .helg-secao-titulo {
+    max-width: 760px;
+    margin: 0 auto 45px;
+    text-align: center;
+}
+
+#conhecaHelg .helg-secao-titulo h2,
+#conhecaHelg .helg-divisao h2 {
+    margin: 12px 0;
+    font-size: clamp(26px, 3vw, 36px);
+    font-weight: 800;
+}
+
+#conhecaHelg .helg-secao-titulo p,
+#conhecaHelg .helg-divisao p {
+    color: #666;
+}
+
+#conhecaHelg .helg-recurso {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 30px;
+    padding: 32px;
+    background: #fff;
+    border: 1px solid #e9e9e9;
+    border-radius: 16px;
+    box-shadow: 0 5px 22px rgba(0, 0, 0, 0.035);
+}
+
+#conhecaHelg .helg-recurso:nth-of-type(even) .helg-recurso-imagem {
+    order: 2;
+}
+
+#conhecaHelg .helg-recurso:nth-of-type(even) .helg-recurso-texto {
+    order: 1;
+}
+
+#conhecaHelg .helg-recurso-imagem {
+    min-width: 0;
+}
+
+#conhecaHelg .helg-recurso-imagem img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+#conhecaHelg .helg-recurso-texto {
+    min-width: 0;
+}
+
+#conhecaHelg .helg-recurso-texto h3 {
+    margin: 10px 0 15px;
+    font-size: clamp(25px, 2.5vw, 32px);
+    font-weight: 800;
+    color: #222;
+}
+
+#conhecaHelg .helg-recurso-texto h4 {
+    margin: 20px 0 10px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+#conhecaHelg .helg-recurso-texto p,
+#conhecaHelg .helg-recurso-texto li {
+    color: #555;
+    font-size: 14px;
+}
+
+#conhecaHelg .helg-recurso-texto ul,
+#conhecaHelg .helg-recurso-texto ol {
+    padding-left: 22px;
+    margin-bottom: 15px;
+}
+
+#conhecaHelg .helg-recurso-texto li {
+    margin-bottom: 5px;
+}
+
+#conhecaHelg .helg-divisao {
+    max-width: 780px;
+    margin: 65px auto 40px;
+    text-align: center;
+}
+
+#conhecaHelg .helg-acesso-restrito {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 16px;
+    background: #f3f3f3;
+    border-radius: 8px;
+    color: #666;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+@media (max-width: 900px) {
+    #conhecaHelg .helg-apresentacao,
+    #conhecaHelg .helg-recurso {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    #conhecaHelg .helg-apresentacao {
+        padding: 30px 22px;
+    }
+
+    #conhecaHelg .helg-recurso {
+        padding: 22px;
+    }
+
+    #conhecaHelg .helg-recurso:nth-of-type(even) .helg-recurso-imagem,
+    #conhecaHelg .helg-recurso:nth-of-type(even) .helg-recurso-texto {
+        order: initial;
+    }
+}
+
+@media (max-width: 600px) {
+    #conhecaHelg .helg-funcionalidades {
+        padding: 15px 5px 35px;
+    }
+
+    #conhecaHelg .helg-recurso {
+        padding: 16px;
+        gap: 20px;
+    }
+
+    #conhecaHelg .helg-recurso-texto h3 {
+        font-size: 25px;
+    }
+}
