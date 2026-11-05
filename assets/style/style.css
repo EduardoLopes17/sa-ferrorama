@@ -2,7 +2,7 @@
 #P1{
     margin: 0;
     padding: 0px;
-    background: white;
+    background: #242424;
 
 }
 nav{
@@ -1052,10 +1052,10 @@ td {
 }
 #dashboard .metrics-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 22px;
     width: 100%;
-    max-width: 850px;
+    max-width: 1200px;
     margin: 30px auto;
 }
 
@@ -1109,8 +1109,8 @@ td {
     }
 }
 #dashboard .dashboard-tabela {
-    width: 100%;
-    max-width: 850px;
+        width: 80%;
+    max-width: none;
     margin: 35px auto;
     padding: 25px;
     background-color: #fffaf7;
@@ -1793,11 +1793,10 @@ bottom: 0;
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    body::before {
-        animation: none;
-        transform: none;
-    }
+
+html,
+body {
+    background-color: #E8D8C5;
 }
 
 body::after {
@@ -1807,22 +1806,10 @@ body::after {
     left: 0;
     width: 100%;
     height: 3px;
-    background-color: #C49A45;
-    opacity: 0.65;
+    background-color: #E8D8C5;
+    opacity: 1;
     pointer-events: none;
     z-index: 0;
-}
-#gerenciarTrens .table,
-#gerenciarRotas .table,
-#gerenciar .table,
-#gerenciarUsuario .table,
-#dashboard .dashboard-tabela,
-.alerts-card,
-#relatorios .form-relatorios,
-#monitora .monitor-card {
-    position: relative;
-    z-index: 2;
-    background-color: #ffffff;
 }
 
 .cadastro-usuario,
@@ -2151,4 +2138,98 @@ body:has(#login-box) ::before {
 body:has(.login-box)::before,
 body:has(#conheca.active)::before {
     display: none;
+}
+.topo-sistema {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 100px;
+    padding: 10px 30px;
+    background-color: #242424;
+}
+
+.marca-sistema {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.marca-sistema .icon {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+}
+
+.marca-sistema h1 {
+    margin: 0;
+    font-size: 26px;
+    white-space: nowrap;
+}
+
+.usuario-topo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.perfil-usuario {
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.btn-sair-topo {
+    background-color: #ff5f29;
+    color: white;
+    text-decoration: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.btn-sair-topo:hover {
+    background-color: #e94e20;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .topo-sistema {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .marca-sistema h1 {
+        font-size: 19px;
+    }
+
+    .marca-sistema .icon {
+        width: 50px;
+    }
+}
+body#P1 {
+    background-color: #E8D8C5;
+}
+
+#home,
+#dashboard,
+#gerenciarTrens,
+#gerenciarRotas,
+#gerenciar,
+#gerenciarUsuarios,
+#monitora {
+    background-color: #E8D8C5;
+}
+#alertas,
+#relatorios {
+    background-color: #E8D8C5;
+}
+#dashboard .dashboard-tabela {
+    width: 80% !important;
+    max-width: 1000px !important;
+    margin: 35px auto !important;
+    box-sizing: border-box;
 }
