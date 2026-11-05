@@ -218,3 +218,48 @@
         font-size: 25px;
     }
 }
+
+.pagina-conheca {
+    margin: 0;
+    padding: 30px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    background-color: #F5F2ED;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+.pagina-conheca #conhecaHelg {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.pagina-conheca .helg-apresentacao {
+    margin: 0;
+}
+
+.pagina-conheca .helg-botao {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 13px 28px;
+    background-color: #E46A24;
+    color: #FFFFFF;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.pagina-conheca .helg-botao:hover {
+    background-color: #C95619;
+    color: #FFFFFF;
+}
+
+@media (max-width: 768px) {
+    .pagina-conheca {
+        padding: 15px;
+    }
+
+    .pagina-conheca .helg-apresentacao {
+        grid-template-columns: 1fr;
+        padding: 25px;
+    }
+}
