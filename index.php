@@ -166,7 +166,7 @@ $resultado_rotas = $conexao->query($sql_rotas);
     <header>
     <nav class="topo-sistema">
         <div class="marca-sistema">
-            <img class="icon" src="./assets/img/icone trem.png" alt="Ícone Ferrorama">
+            <img class="icon" src="./assets/img/icone.trem.png" alt="Ícone Ferrorama">
             <h1>Ferrovia União HELG</h1>
         </div>
 
@@ -553,9 +553,12 @@ $resultado_rotas = $conexao->query($sql_rotas);
         <h2>Gerenciar Rotas</h2>
 
         <?php if (($_SESSION['perfil'] ?? '') === 'admin') { ?>
-            <a href="public/cadastro_rotas.php" class="btn-nova-rota">
-                Nova Rota
-            </a>
+           <button type="button"
+        class="btn-nova-rota"
+        data-bs-toggle="modal"
+        data-bs-target="#modalRota">
+     Cadastrar Rota
+</button>
         <?php } ?>
     </div>
 
@@ -635,6 +638,206 @@ $resultado_rotas = $conexao->query($sql_rotas);
         </tbody>
     </table>
 
+<div class="modal fade" id="modalRota" tabindex="-1">
+
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">Cadastrar Rota</h5>
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <form action="public/cadastro_rotas.php" method="POST">
+
+                    <div class="mb-3">
+                        <label for="nomeRota">Nome da Rota</label>
+
+                        <input type="text"
+                               id="nomeRota"
+                               name="nome"
+                               class="form-control"
+                               maxlength="100"
+                               placeholder="Ex.: Linha Centro - Vila Nova"
+                               required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="statusRota">Status</label>
+
+                        <select id="statusRota"
+                                name="status"
+                                class="form-select"
+                                required>
+
+                            <option value="Ativa">Ativa</option>
+                            <option value="Inativa">Inativa</option>
+
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="tremRota">Trem Responsável</label>
+
+                        <select id="tremRota"
+                                name="trem_id"
+                                class="form-select"
+                                required>
+
+                            <option value="">Selecione um trem</option>
+
+                            <?php
+                            $lista_trens = $conexao->query(
+                                "SELECT id, codigo, modelo
+                                 FROM trens
+                                 ORDER BY codigo ASC"
+                            );
+
+                            while ($trem = $lista_trens->fetch_assoc()) {
+                            ?>
+
+                                <option value="<?= (int)$trem['id'] ?>">
+                                    <?= htmlspecialchars($trem['codigo'] . ' - ' . $trem['modelo']) ?>
+                                </option>
+
+                            <?php } ?>
+
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="saidaRota">Ponto de Saída</label>
+
+                        <select id="saidaRota"
+                                name="saida"
+                                class="form-select"
+                                required>
+
+                            <option value="">Selecione o ponto de saída</option>
+
+                            <?php
+                            $bairros_rota = [
+                                'Adhemar Garcia',
+                                'América',
+                                'Anita Garibaldi',
+                                'Atiradores',
+                                'Aventureiro',
+                                'Boa Vista',
+                                'Boehmerwald',
+                                'Bucarein',
+                                'Centro',
+                                'Costa e Silva',
+                                'Dona Francisca',
+                                'Espinheiros',
+                                'Fátima',
+                                'Floresta',
+                                'Glória',
+                                'Guanabara',
+                                'Iririú',
+                                'Itaum',
+                                'Itinga',
+                                'Jardim Iririú',
+                                'Jardim Paraíso',
+                                'Jarivatuba',
+                                'João Costa',
+                                'Morro do Meio',
+                                'Nova Brasília',
+                                'Paranaguamirim',
+                                'Petrópolis',
+                                'Pirabeiraba',
+                                'Saguaçu',
+                                'Santo Antônio',
+                                'Ulysses Guimarães',
+                                'Vila Nova'
+                            ];
+
+                            foreach ($bairros_rota as $bairro) {
+                            ?>
+
+                                <option value="<?= htmlspecialchars($bairro) ?>">
+                                    <?= htmlspecialchars($bairro) ?>
+                                </option>
+
+                            <?php } ?>
+
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="chegadaRota">Ponto de Chegada</label>
+
+                        <select id="chegadaRota"
+                                name="chegada"
+                                class="form-select"
+                                required>
+
+                            <option value="">Selecione o ponto de chegada</option>
+
+                            <?php foreach ($bairros_rota as $bairro) { ?>
+
+                                <option value="<?= htmlspecialchars($bairro) ?>">
+                                    <?= htmlspecialchars($bairro) ?>
+                                </option>
+
+                            <?php } ?>
+
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+
+                        <h6>Paradas Intermediárias</h6>
+
+                        <div id="lista-paradas-modal"></div>
+
+                        <button type="button"
+                                id="adicionar-parada-modal"
+                                class="btn btn-outline-primary btn-sm mt-2">
+
+                            + Adicionar Parada
+
+                        </button>
+
+                    </div>
+
+                    <div class="modal-footer">
+
+                        <button type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal">
+
+                            Cancelar
+
+                        </button>
+
+                        <button type="submit"
+                                class="btn btn-primary">
+
+                            Cadastrar Rota
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 </div>
 
     
@@ -645,10 +848,13 @@ $resultado_rotas = $conexao->query($sql_rotas);
 
         <h2>Gerenciar Trens</h2>
 
-        <a href="public/cadastro_trens.php"
-           class="btn-novo-trem">
-            Novo Trem
-        </a>
+       <button type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#modalTrem"
+        onclick="novoTrem()">
+     Cadastrar Trem
+</button>
 
     </div>
 
@@ -722,6 +928,138 @@ $resultado_rotas = $conexao->query($sql_rotas);
         </tbody>
     </table>
 
+<div class="modal fade" id="modalTrem" tabindex="-1">
+
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title" id="tituloModalTrem">
+                    Cadastro de Trem
+                </h5>
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <form action="public/cadastro_trens.php"
+                 method="POST"
+                id="formTrem">
+
+                    <input type="hidden"
+                           name="id"
+                           id="id_trem">
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+                            <label>Código do Trem</label>
+                            <input type="text"
+                                   name="codigo"
+                                   id="codigo"
+                                   class="form-control"
+                                   required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Modelo do Trem</label>
+                            <input type="text"
+                                   name="modelo"
+                                   id="modelo"
+                                   class="form-control"
+                                   required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Velocidade (km/h)</label>
+                            <input type="number"
+                                   name="velocidade"
+                                   id="velocidade"
+                                   class="form-control"
+                                   min="0"
+                                   required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Status</label>
+
+                            <select name="status"
+                                    id="status"
+                                    class="form-select">
+
+                                <option value="Parado">Parado</option>
+                                <option value="Em Operação">Em Operação</option>
+                                <option value="Manutenção">Manutenção</option>
+
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Funcionário Responsável</label>
+
+                            <select name="usuario_responsavel_id"
+                                    id="responsavel_id"
+                                    class="form-select"
+                                    required>
+
+                                <option value="">
+                                    Selecione um funcionário
+                                </option>
+
+                                <?php
+                                $funcionarios = $conexao->query(
+                                    "SELECT id, nome FROM usuarios
+                                     WHERE status = 'ativo'
+                                     ORDER BY nome"
+                                );
+
+                                while ($funcionario = $funcionarios->fetch_assoc()):
+                                ?>
+
+                                <option value="<?= $funcionario['id'] ?>">
+                                    <?= htmlspecialchars($funcionario['nome']) ?>
+                                </option>
+
+                                <?php endwhile; ?>
+
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+
+                        <button type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+
+                        <button type="submit"
+                                class="btn btn-primary"
+                                id="botaoSalvarTrem">
+                            Cadastrar Trem
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 </div>
 
 
@@ -731,10 +1069,12 @@ $resultado_rotas = $conexao->query($sql_rotas);
 
     <h2>Gerenciar Sensores</h2>
 
-    <a href="public/cadastro_sensores.php"
-       class="btn-novo-sensor">
-        Novo Sensor
-    </a>
+    <button type="button"
+        class="btn-novo-sensor"
+        data-bs-toggle="modal"
+        data-bs-target="#modalSensor">
+    Novo Sensor
+</button>
 
 </div>
 
@@ -818,6 +1158,118 @@ $resultado_rotas = $conexao->query($sql_rotas);
 </tbody>
 
         </table>
+
+
+<div class="modal fade" id="modalSensor" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Cadastrar Sensor</h5>
+
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Fechar"></button>
+            </div>
+
+            <form method="POST" action="public/cadastro_sensores.php">
+
+                <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label for="nomeSensor" class="form-label">
+                            Nome do Sensor
+                        </label>
+
+                        <input type="text"
+                               class="form-control"
+                               id="nomeSensor"
+                               name="nome"
+                               placeholder="Ex.: Sensor 01"
+                               maxlength="100"
+                               required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="localizacaoSensor" class="form-label">
+                            Localização da Plataforma
+                        </label>
+
+                        <input type="text"
+                               class="form-control"
+                               id="localizacaoSensor"
+                               name="localizacao"
+                               placeholder="Ex.: Plataforma 1"
+                               maxlength="150"
+                               required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="tipoSensor" class="form-label">
+                            Tipo de Sensor
+                        </label>
+
+                        <select class="form-select"
+                                id="tipoSensor"
+                                name="tipo_sensor"
+                                required>
+                            <option value="">Selecione o tipo</option>
+                            <option value="Temperatura">Temperatura</option>
+                            <option value="Movimento">Movimento</option>
+                            <option value="Umidade">Umidade</option>
+                            <option value="Vibração">Vibração</option>
+                            <option value="Proximidade">Proximidade</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="enderecoSensor" class="form-label">
+                            Endereço
+                        </label>
+
+                        <input type="text"
+                               class="form-control"
+                               id="enderecoSensor"
+                               name="endereco"
+                               placeholder="Ex.: Rua Urussanga"
+                               maxlength="200"
+                               required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="statusSensor" class="form-label">
+                            Status
+                        </label>
+
+                        <select class="form-select"
+                                id="statusSensor"
+                                name="status"
+                                required>
+                            <option value="Ativo">Ativo</option>
+                            <option value="Inativo">Inativo</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+
+                    <button type="submit" class="btn btn-primary">
+                        Cadastrar Sensor
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
     </div>
 
 
@@ -838,11 +1290,12 @@ $resultado_rotas = $conexao->query($sql_rotas);
             <h2>Gerenciar Usuário</h2>
 
 
-        <a href="public/cadastro.php">
-            <button class="btn btn-primary" type="button">
-                Novo Usuário
-            </button>
-        </a>
+        <button type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#modalUsuario">
+        Novo Usuário
+</button>
 
     </div>
 
@@ -901,6 +1354,150 @@ $resultado_rotas = $conexao->query($sql_rotas);
         <?php } ?>
         </tbody>
     </table>
+
+<div class="modal fade" id="modalUsuario" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Cadastrar Usuário</h5>
+
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Fechar"></button>
+            </div>
+
+            <form method="POST" action="backend/cadastrar_usuario.php">
+
+                <div class="modal-body">
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label class="form-label">Nome Completo</label>
+                            <input type="text" class="form-control"
+                                   name="nome" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">CPF</label>
+                            <input type="text" class="form-control"
+                                   id="cpf" name="cpf"
+                                   maxlength="14"
+                                   inputmode="numeric"
+                                   placeholder="000.000.000-00"
+                                   pattern="[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}"
+                                   title="Informe um CPF válido"
+                                   required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">E-mail</label>
+                            <input type="email" class="form-control"
+                                   name="email" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">CEP</label>
+                            <input type="text" class="form-control"
+                                   id="cep" name="cep"
+                                   maxlength="9"
+                                   placeholder="00000-000"
+                                   required>
+                            <div id="cep-mensagem" class="form-text"></div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <label class="form-label">Logradouro</label>
+                            <input type="text" class="form-control"
+                                   id="logradouro" name="logradouro"
+                                   maxlength="150" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">Número</label>
+                            <input type="text" class="form-control"
+                                   id="numero" name="numero"
+                                   maxlength="20" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Bairro</label>
+                            <input type="text" class="form-control"
+                                   id="bairro" name="bairro"
+                                   maxlength="100" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Cidade</label>
+                            <input type="text" class="form-control"
+                                   id="cidade" name="cidade"
+                                   maxlength="100" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">Estado (UF)</label>
+                            <input type="text" class="form-control"
+                                   id="uf" name="uf"
+                                   maxlength="2" required>
+                        </div>
+
+                        <div class="col-md-8">
+                            <label class="form-label">Complemento (opcional)</label>
+                            <input type="text" class="form-control"
+                                   name="complemento"
+                                   maxlength="150">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Senha</label>
+                            <input type="password" class="form-control"
+                                   name="senha" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Confirmar Senha</label>
+                            <input type="password" class="form-control"
+                                   name="confirmar_senha" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Perfil</label>
+                            <select class="form-select" name="perfil" required>
+                                <option value="usuario">Usuário</option>
+                                <option value="admin">Administrador</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Status</label>
+                            <select class="form-select" name="status" required>
+                                <option value="ativo">Ativo</option>
+                                <option value="inativo">Inativo</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+
+                    <button type="submit" class="btn btn-primary">
+                        Cadastrar Usuário
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
 </div>
 <?php } ?>
 
@@ -938,5 +1535,9 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+ <script src="script/script.js"></script>
+
+
 </body>
+
 </html>
