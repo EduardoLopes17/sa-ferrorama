@@ -1506,9 +1506,7 @@ button:disabled,
 #gerenciarRotas,
 #gerenciar,
 #gerenciarUsuarios {
-    background-color: #F5F2ED;
-    min-height: 100vh;
-    padding-bottom: 50px;
+    background-color: #E8D8C5;
 }
 
 #gerenciarTrens .cabecalho-gerenciar-trens,
@@ -2232,4 +2230,7 @@ body#P1 {
     max-width: 1000px !important;
     margin: 35px auto !important;
     box-sizing: border-box;
+}
+#gerenciarUsuario {
+    background-color: #E8D8C5 !important;
 }
