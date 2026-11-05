@@ -121,13 +121,12 @@ $cep = substr($cep, 0, 5) . '-' . substr($cep, 5);
 
     if ($stmt->execute()) {
 
-    header("Location: ../public/cadastro.php?sucesso=1");
+    header("Location: ../index.php?sucesso=usuario_cadastrado");
     exit;
 
 } else {
 
-    header("Location: ../public/cadastro.php?erro=cadastro");
-    exit;
+    die("Erro ao cadastrar usuário: " . $stmt->error);
 
 }
 

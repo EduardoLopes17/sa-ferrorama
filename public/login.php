@@ -11,7 +11,7 @@
     <div class="container-principal">
         <div class="lado-esquerdo">
             <div class="logo-circulo">
-                <img src="../assets/img/icone trem.png" alt="Logo Ferrovia">
+                <img src="../assets/img/icone.trem.png" alt="Logo Ferrovia">
             </div>
         </div>
 
