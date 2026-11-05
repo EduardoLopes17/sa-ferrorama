@@ -311,12 +311,6 @@ td {
     color: #5eaf5e;
 }
 
-.alerts-page {
-    font-family: 'Georgia', 'Playfair Display', serif;
-    background-color: #ffffff;
-    color: #1a1a1a;
-    padding: 40px 60px;
-}
 
 .alerts-title {
     font-size: 2rem;
@@ -1367,4 +1361,761 @@ td {
     }
 }
 
+:root {
+    --preto: #151515;
+    --grafite: #242424;
+    --laranja: #E46A24;
+    --dourado: #C49A45;
+    --texto-claro: #F5F2ED;
+}
 
+body,
+button,
+input,
+select,
+textarea,
+table {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+.main-nav,
+.nav-item {
+    background-color: var(--laranja);
+}
+
+.nav-item {
+    color: #ffffff;
+}
+
+.nav-item:hover {
+    background-color: #C75A1C;
+}
+
+
+.btn.btn-primary,
+.btn-entrar,
+.btn-sair,
+.btn-gerar-relatorio,
+.botao-imprimir-relatorio,
+.botao-cadastrar-sensor,
+.btn-novo-sensor,
+.btn-novo-trem,
+.btn-nova-rota,
+.cadastro-usuario button,
+.cadastro-sensor button,
+#gerenciar .btn-novo-sensor,
+#gerenciarTrens .btn-novo-trem,
+#gerenciarRotas .btn-nova-rota,
+#relatorios .btn-gerar-relatorio {
+    background-color: var(--laranja);
+    border: 1px solid var(--laranja);
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn.btn-primary:hover,
+.btn-entrar:hover,
+.btn-sair:hover,
+.btn-gerar-relatorio:hover,
+.botao-imprimir-relatorio:hover,
+.botao-cadastrar-sensor:hover,
+.btn-novo-sensor:hover,
+.btn-novo-trem:hover,
+.btn-nova-rota:hover,
+.cadastro-usuario button:hover,
+.cadastro-sensor button:hover,
+#gerenciar .btn-novo-sensor:hover,
+#gerenciarTrens .btn-novo-trem:hover,
+#gerenciarRotas .btn-nova-rota:hover,
+#relatorios .btn-gerar-relatorio:hover {
+    background-color: #C75A1C;
+    border-color: #C75A1C;
+    color: #ffffff;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--dourado);
+    outline-offset: 3px;
+}
+
+button:disabled,
+.btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+#dashboard,
+#relatorios,
+#monitora,
+.alerts-page {
+    background-color: #F5F2ED;
+}
+
+#dashboard .metrics-grid > .card,
+#dashboard .dashboard-tabela,
+#monitora .monitor-grid > .monitor-card,
+#relatorios .form-relatorios,
+.alerts-card {
+    background-color: #ffffff;
+    border: 1px solid #e4ded6;
+    border-top: 3px solid var(--laranja);
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+#dashboard .metrics-grid .card-value,
+#monitora .monitor-grid .card-main {
+    color: var(--laranja);
+}
+
+#dashboard .dashboard-tabela th,
+.alerts-table th {
+    background-color: #F5F2ED;
+    color: #242424;
+    padding: 14px;
+    font-weight: 600;
+    border-bottom: 2px solid var(--dourado);
+}
+
+#dashboard .dashboard-tabela td,
+.alerts-table td {
+    padding: 14px;
+    border-bottom: 1px solid #e4ded6;
+}
+
+#dashboard .dashboard-tabela tbody tr:hover,
+.alerts-table tbody tr:hover {
+    background-color: #FFF5ED;
+}
+
+#dashboard .dashboard-tabela h3,
+#relatorios h2,
+#monitora .monitor-title,
+.alerts-title {
+    color: #242424;
+}
+
+#gerenciarTrens,
+#gerenciarRotas,
+#gerenciar,
+#gerenciarUsuarios {
+    background-color: #F5F2ED;
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+#gerenciarTrens .cabecalho-gerenciar-trens,
+#gerenciarRotas .cabecalho-gerenciar-rotas,
+#gerenciar .cabecalho-gerenciar-sensores {
+    margin-top: 35px;
+    margin-bottom: 25px;
+}
+
+#gerenciarTrens h2,
+#gerenciarRotas h2,
+#gerenciar h2,
+#gerenciarUsuarios h2 {
+    color: #242424;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-weight: 600;
+}
+
+#gerenciarTrens .table,
+#gerenciarRotas .table,
+#gerenciar .table,
+#gerenciarUsuarios .table {
+    background-color: #ffffff;
+    border: 1px solid #E4DED6;
+}
+
+#gerenciarTrens .table thead th,
+#gerenciarRotas .table thead th,
+#gerenciar .table thead th,
+#gerenciarUsuarios .table thead th {
+    background-color: #FFF5ED;
+    color: #242424;
+    border-bottom: 2px solid var(--dourado);
+    padding: 14px;
+    font-weight: 600;
+}
+
+#gerenciarTrens .table tbody td,
+#gerenciarRotas .table tbody td,
+#gerenciar .table tbody td,
+#gerenciarUsuarios .table tbody td {
+    padding: 12px 14px;
+    vertical-align: middle;
+    border-bottom: 1px solid #E4DED6;
+}
+
+#gerenciarTrens .table tbody tr:hover,
+#gerenciarRotas .table tbody tr:hover,
+#gerenciar .table tbody tr:hover,
+#gerenciarUsuarios .table tbody tr:hover {
+    background-color: #FFF5ED;
+}
+
+#gerenciarTrens .table,
+#gerenciarRotas .table,
+#gerenciar .table,
+#gerenciarUsuarios .table,
+#dashboard .dashboard-tabela table,
+.alerts-table {
+    width: 100%;
+    background-color: #ffffff;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #E6DED4;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+#gerenciarTrens .table thead th,
+#gerenciarRotas .table thead th,
+#gerenciar .table thead th,
+#gerenciarUsuarios .table thead th,
+#dashboard .dashboard-tabela th,
+.alerts-table th {
+    background-color: #FFF8F2;
+    color: #65584D;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 18px 16px;
+    border-bottom: 2px solid var(--dourado);
+    vertical-align: middle;
+}
+
+#gerenciarTrens .table tbody td,
+#gerenciarRotas .table tbody td,
+#gerenciar .table tbody td,
+#gerenciarUsuarios .table tbody td,
+#dashboard .dashboard-tabela td,
+.alerts-table td {
+    background-color: #ffffff;
+    color: #333333;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 14px;
+    padding: 18px 16px;
+    border-bottom: 1px solid #EEE8E1;
+    vertical-align: middle;
+}
+
+#gerenciarTrens .table tbody tr:hover td,
+#gerenciarRotas .table tbody tr:hover td,
+#gerenciar .table tbody tr:hover td,
+#gerenciarUsuarios .table tbody tr:hover td,
+#dashboard .dashboard-tabela tbody tr:hover td,
+.alerts-table tbody tr:hover td {
+    background-color: #FFF8F2;
+}
+
+#gerenciarTrens .table tbody tr:last-child td,
+#gerenciarRotas .table tbody tr:last-child td,
+#gerenciar .table tbody tr:last-child td,
+#gerenciarUsuarios .table tbody tr:last-child td,
+#dashboard .dashboard-tabela tbody tr:last-child td,
+.alerts-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+#gerenciarTrens .table .btn,
+#gerenciarRotas .table .btn,
+#gerenciar .table .btn,
+#gerenciarUsuarios .table .btn {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 6px;
+    padding: 7px 12px;
+}
+
+#gerenciarTrens .table .btn-outline-primary,
+#gerenciarRotas .table .btn-outline-primary,
+#gerenciar .table .btn-outline-primary,
+#gerenciarUsuarios .table .btn-outline-primary {
+    color: var(--laranja);
+    border-color: var(--laranja);
+}
+
+#gerenciarTrens .table .btn-outline-primary:hover,
+#gerenciarRotas .table .btn-outline-primary:hover,
+#gerenciar .table .btn-outline-primary:hover,
+#gerenciarUsuarios .table .btn-outline-primary:hover {
+    background-color: var(--laranja);
+    color: #ffffff;
+}
+
+#gerenciarTrens .table .btn-outline-danger,
+#gerenciarRotas .table .btn-outline-danger,
+#gerenciar .table .btn-outline-danger,
+#gerenciarUsuarios .table .btn-outline-danger {
+    color: #C0392B;
+    border-color: #C0392B;
+}
+
+#gerenciarTrens .table .btn-outline-danger:hover,
+#gerenciarRotas .table .btn-outline-danger:hover,
+#gerenciar .table .btn-outline-danger:hover,
+#gerenciarUsuarios .table .btn-outline-danger:hover {
+    background-color: #C0392B;
+    color: #ffffff;
+}
+
+#gerenciarTrens .table,
+#gerenciarRotas .table,
+#gerenciar .table,
+#gerenciarUsuarios .table {
+    width: calc(100% - 60px);
+    max-width: 1350px;
+    margin: 25px auto;
+}
+
+#gerenciarUsuario {
+    background-color: #F5F2ED;
+    min-height: 100vh;
+    padding: 35px 0 50px;
+}
+
+#gerenciarUsuario .table {
+    width: calc(100% - 50px);
+    max-width: 1350px;
+    margin: 25px auto;
+    background-color: #ffffff;
+    border: 1px solid #E6DED4;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+#gerenciarUsuario .table thead th {
+    background-color: #FFF8F2;
+    color: #65584D;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 18px 16px;
+    border-bottom: 2px solid var(--dourado);
+}
+
+#gerenciarUsuario .table tbody td {
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 14px;
+    padding: 18px 16px;
+    border-bottom: 1px solid #EEE8E1;
+    vertical-align: middle;
+}
+
+#gerenciarUsuario .table tbody tr:hover td {
+    background-color: #FFF8F2;
+}
+
+#gerenciarUsuario .table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+#gerenciarUsuario .table .btn {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 12px;
+    border-radius: 6px;
+}
+
+#gerenciarUsuario .table .btn-outline-primary {
+    color: var(--laranja);
+    border-color: var(--laranja);
+}
+
+#gerenciarUsuario .table .btn-outline-primary:hover {
+    background-color: var(--laranja);
+    color: #ffffff;
+}
+
+body {
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 560px;
+height: 180px;
+bottom: 0;
+    left: 0;
+    background-image: url("../img/trem-helg-v3.svg");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 1;
+    animation: trem-helg 14s linear infinite;
+}
+
+@keyframes trem-helg {
+    from {
+        transform: translateX(-600px);
+    }
+
+    to {
+        transform: translateX(100vw);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body::before {
+        animation: none;
+        transform: none;
+    }
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    bottom: 12px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #C49A45;
+    opacity: 0.65;
+    pointer-events: none;
+    z-index: 0;
+}
+#gerenciarTrens .table,
+#gerenciarRotas .table,
+#gerenciar .table,
+#gerenciarUsuario .table,
+#dashboard .dashboard-tabela,
+.alerts-card,
+#relatorios .form-relatorios,
+#monitora .monitor-card {
+    position: relative;
+    z-index: 2;
+    background-color: #ffffff;
+}
+
+.cadastro-usuario,
+.cadastro-sensor,
+.formulario-cadastro-sensor {
+    background-color: #ffffff;
+    border: 1px solid #E6DED4;
+    border-top: 3px solid var(--laranja);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.cadastro-usuario label,
+.cadastro-sensor label,
+.campos-cadastro-sensor label {
+    color: #333333;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.cadastro-usuario input,
+.cadastro-usuario select,
+.cadastro-sensor input,
+.cadastro-sensor select,
+.campos-cadastro-sensor input,
+.campos-cadastro-sensor select {
+    background-color: #FFFDFB;
+    border: 1px solid #D8D0C7;
+    border-radius: 8px;
+    color: #242424;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 15px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cadastro-usuario input:focus,
+.cadastro-usuario select:focus,
+.cadastro-sensor input:focus,
+.cadastro-sensor select:focus,
+.campos-cadastro-sensor input:focus,
+.campos-cadastro-sensor select:focus {
+    outline: none;
+    border-color: var(--laranja);
+    box-shadow: 0 0 0 3px rgba(228, 106, 36, 0.12);
+}
+
+.cadastro-usuario h2,
+.cadastro-sensor h2,
+.formulario-cadastro-sensor h2 {
+    color: #242424;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-weight: 600;
+}
+
+#dashboard > h1,
+#dashboard > h2,
+#relatorios h2,
+#monitora .monitor-title,
+.alerts-title,
+#gerenciarTrens .cabecalho-gerenciar-trens h2,
+#gerenciarRotas .cabecalho-gerenciar-rotas h2,
+#gerenciar .cabecalho-gerenciar-sensores h2,
+#gerenciarUsuario h2 {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: #242424;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1.3;
+}
+
+#dashboard,
+#relatorios,
+#monitora,
+#gerenciarTrens,
+#gerenciarRotas,
+#gerenciar,
+#gerenciarUsuario,
+.alerts-page {
+    padding-top: 45px;
+}
+
+#gerenciarTrens .cabecalho-gerenciar-trens,
+#gerenciarRotas .cabecalho-gerenciar-rotas,
+#gerenciar .cabecalho-gerenciar-sensores {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 35px;
+    min-height: 45px;
+}
+
+#gerenciarTrens .cabecalho-gerenciar-trens .btn-novo-trem,
+#gerenciarRotas .cabecalho-gerenciar-rotas .btn-nova-rota,
+#gerenciar .cabecalho-gerenciar-sensores .btn-novo-sensor {
+    position: absolute;
+    right: 25px;
+}
+
+body {
+    background-color: #F5F2ED;
+}
+
+#home,
+#dashboard,
+#relatorios,
+#monitora,
+#gerenciarUsuario,
+.alerts-page {
+    background-color: #F5F2ED;
+}
+
+.alerts-page {
+    min-height: 100vh;
+}
+
+#dashboard > h1,
+#dashboard > h2,
+#relatorios h2,
+#monitora .monitor-title,
+.alerts-page .alerts-title,
+#gerenciarUsuario h2 {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 42px;
+    color: #242424;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0 0 35px;
+}
+
+.alerts-page {
+    padding-top: 45px;
+}
+
+.alerts-page .alerts-title {
+    margin-bottom: 35px;
+}
+
+.alerts-page {
+    background-color: #F5F2ED !important;
+    min-height: 100vh;
+    padding: 45px 30px 60px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+.alerts-page .alerts-title {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: #242424;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0 0 35px;
+}
+
+.alerts-page .alerts-card {
+    background-color: #ffffff;
+}
+
+.alerts-page {
+    background-color: #F5F2ED !important;
+    min-height: 100vh;
+    padding: 45px 30px 60px;
+    box-sizing: border-box;
+}
+
+.alerts-page .alerts-title {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 42px;
+    color: #242424;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0 auto 75px;
+}
+
+.alerts-page .alerts-card {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0;
+    background-color: #ffffff;
+    border: 1px solid #E6DED4;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.alerts-page .alerts-table {
+    width: 100%;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+#alertas {
+    background-color: #F5F2ED;
+    min-height: 100vh;
+    padding: 45px 30px 60px;
+    box-sizing: border-box;
+}
+
+#alertas .titulo-alertas {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 42px;
+    color: #242424;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0 0 75px;
+}
+
+#alertas .alerts-card {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0;
+    background-color: #ffffff;
+    border: 1px solid #E6DED4;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+#alertas .alerts-table {
+    width: 100%;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+
+#gerenciarUsuario .col-md-12 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - 50px);
+    max-width: 1350px;
+    margin: 0 auto 45px;
+    padding: 0;
+    min-height: 60px;
+}
+
+
+#gerenciarUsuario .col-md-12 h2 {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    color: #242424;
+}
+
+
+#gerenciarUsuario .col-md-12 > a {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    text-decoration: none;
+}
+
+
+#gerenciarUsuario .col-md-12 > a .btn {
+    background-color: var(--laranja);
+    border: 1px solid var(--laranja);
+    border-radius: 8px;
+    padding: 10px 16px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+@media (max-width: 600px) {
+    #gerenciarUsuario .col-md-12 {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    #gerenciarUsuario .col-md-12 > a {
+        position: static;
+    }
+}
+
+.boas-vindas-home {
+    text-align: center;
+    margin: 25px auto 30px;
+    padding: 0 20px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+.boas-vindas-home h2 {
+    font-size: 27px;
+    font-weight: 600;
+    color: #242424;
+    margin-bottom: 10px;
+}
+
+.boas-vindas-home p {
+    font-size: 16px;
+    color: #65584D;
+    margin: 0;
+}

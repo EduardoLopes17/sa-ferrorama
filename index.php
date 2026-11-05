@@ -534,9 +534,18 @@ $resultado_rotas = $conexao->query($sql_rotas);
     <div id="home" class="content active">
         <br>
 
-        <p class="saudacao-usuario">
-            Olá, <?= htmlspecialchars($_SESSION['nome'] ?? 'Usuário', ENT_QUOTES, 'UTF-8') ?>!
-        </p>
+        
+<div class="boas-vindas-home">
+    <h2>
+        Bem-vindo(a) à Ferrovia HELG,
+        <?= htmlspecialchars($_SESSION['nome'] ?? 'Usuário', ENT_QUOTES, 'UTF-8') ?>!
+    </h2>
+
+    <p>
+        É um prazer ter você aqui! Acompanhe e gerencie as operações ferroviárias em nossa plataforma.
+    </p>
+</div>
+
 
         <div id="carouselExampleIndicators" class="carousel slide">
             <div class="carousel-indicators">
@@ -575,8 +584,7 @@ $resultado_rotas = $conexao->query($sql_rotas);
             </div>
 
     <div id="dashboard" class="content">
-        <br>
-        <br>
+        
         <center><h2>DASHBOARD</h2>
 
         <section class="clima-painel" aria-label="Informações meteorológicas">
@@ -683,7 +691,7 @@ $resultado_rotas = $conexao->query($sql_rotas);
     
 
    <div id="monitora" class="content monitor-page">
-    <br>
+    
 
     <h2 class="monitor-title">Monitor de Trens</h2>
 
@@ -753,12 +761,9 @@ $resultado_rotas = $conexao->query($sql_rotas);
 
 
     <div id="alertas" class="content">
-        <br>
-        <br>
-        <center><h2>Monitorar Alertas e Falhas</h2>
+    <h2 class="titulo-alertas">Monitorar Alertas e Falhas</h2>
 
 
-<br>
     <div class="alerts-card">
         <table class="alerts-table">
             <thead>
@@ -821,6 +826,7 @@ $resultado_rotas = $conexao->query($sql_rotas);
     
     <div id="relatorios" class="content">
     <div class="relatorios-container">
+
         <h2>Relatórios</h2>
 
         <form id="form-relatorios" class="form-relatorios" method="GET" action="./public/gerar_relatorio.php">
@@ -959,8 +965,7 @@ $resultado_rotas = $conexao->query($sql_rotas);
 
     
     <div id="gerenciarTrens" class="content">
-    
-    <br><br>
+
 
     <div class="cabecalho-gerenciar-trens">
 
@@ -1155,17 +1160,11 @@ $resultado_rotas = $conexao->query($sql_rotas);
     </div>
 <?php endif; ?>
 
-    <br>
-    <br>
 
     <div class="col-md-12">
 
-        <center>
             <h2>Gerenciar Usuário</h2>
-        </center>
 
-        <br>
-        <br>
 
         <a href="public/cadastro.php">
             <button class="btn btn-primary" type="button">
