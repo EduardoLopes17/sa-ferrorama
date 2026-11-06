@@ -1536,14 +1536,22 @@ button:disabled,
     transform: translateY(-50%);
 }
 
-#gerenciarUsuario .btn-novo-usuario {
-    background-color: #e9691b;
-    color: white;
-    border: none;
+#gerenciarUsuario .cabecalho-gerenciar-rotas .btn-novo-usuario {
+    background-color: #E46A24;
+    color: #FFFFFF;
+    border: 1px solid #E46A24;
     border-radius: 8px;
-    padding: 10px 15px;
-    cursor: pointer;
+    padding: 12px 18px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 15px;
     font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#gerenciarUsuario .cabecalho-gerenciar-rotas .btn-novo-usuario:hover {
+    background-color: #C75A1C;
+    border-color: #C75A1C;
 }
 
 
@@ -1705,7 +1713,7 @@ button:disabled,
 #gerenciarUsuarios .table {
     width: calc(100% - 60px);
     max-width: 1350px;
-    margin: 25px auto;
+    padding: 45px 0 50px;
 }
 
 #gerenciarUsuario {
@@ -1956,16 +1964,6 @@ body::after {
 }
 
 
-#gerenciarUsuario .btn-novo-usuario {
-    background-color: #e9691b;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
 
 body {
     background-color: #F5F2ED;
@@ -2105,49 +2103,6 @@ body {
     box-shadow: none;
 }
 
-
-#gerenciarUsuario .col-md-12 {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: calc(100% - 50px);
-    max-width: 1350px;
-    margin: 0 auto 45px;
-    padding: 0;
-    min-height: 60px;
-}
-
-
-#gerenciarUsuario .col-md-12 h2 {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    font-size: 32px;
-    font-weight: 600;
-    text-align: center;
-    text-transform: uppercase;
-    color: #242424;
-}
-
-
-#gerenciarUsuario .col-md-12 > a {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    text-decoration: none;
-}
-
-
-#gerenciarUsuario .col-md-12 > a .btn {
-    background-color: var(--laranja);
-    border: 1px solid var(--laranja);
-    border-radius: 8px;
-    padding: 10px 16px;
-    color: #ffffff;
-    font-size: 15px;
-    font-weight: 500;
-}
 
 @media (max-width: 600px) {
     #gerenciarUsuario .col-md-12 {
@@ -2289,4 +2244,71 @@ body#P1 {
 }
 #gerenciarUsuario {
     background-color: #E8D8C5 !important;
+}
+
+#gerenciarUsuario .cabecalho-gerenciar-usuario {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - 50px);
+    max-width: 1350px;
+    min-height: 55px;
+    margin: 0 auto 35px;
+    padding: 0;
+}
+
+#gerenciarUsuario .cabecalho-gerenciar-usuario .btn-novo-usuario {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: auto;
+    transform: translateY(-50%);
+    display: inline-block;
+    width: auto;
+    background-color: #E46A24;
+    color: #FFFFFF;
+    border: 1px solid #E46A24;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.5;
+    cursor: pointer;
+}
+#gerenciarTrens .table,
+#gerenciarRotas .table,
+#gerenciar .table,
+#gerenciarUsuario .table {
+    width: calc(100% - 60px);
+    max-width: 1350px;
+    margin: 25px auto;
+    box-sizing: border-box;
+}
+#gerenciarUsuario .cabecalho-gerenciar-usuario {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 50px);
+    max-width: 1350px;
+    min-height: 45px;
+    margin: 0 auto 35px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#gerenciarUsuario .cabecalho-gerenciar-usuario .btn-novo-sensor {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-block;
+    width: auto;
+    padding: 10px 16px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: normal;
+    text-decoration: none;
 }
