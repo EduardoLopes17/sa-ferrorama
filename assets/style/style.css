@@ -1509,12 +1509,43 @@ button:disabled,
     background-color: #E8D8C5;
 }
 
+
 #gerenciarTrens .cabecalho-gerenciar-trens,
 #gerenciarRotas .cabecalho-gerenciar-rotas,
-#gerenciar .cabecalho-gerenciar-sensores {
-    margin-top: 35px;
-    margin-bottom: 25px;
+#gerenciar .cabecalho-gerenciar-sensores,
+#gerenciarUsuario .cabecalho-gerenciar-rotas {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1230px;
+    min-height: 45px;
+    margin: 0 auto 35px;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+#gerenciarTrens .cabecalho-gerenciar-trens .btn-novo-trem,
+#gerenciarRotas .cabecalho-gerenciar-rotas .btn-nova-rota,
+#gerenciar .cabecalho-gerenciar-sensores .btn-novo-sensor,
+#gerenciarUsuario .cabecalho-gerenciar-rotas .btn-novo-usuario {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#gerenciarUsuario .btn-novo-usuario {
+    background-color: #e9691b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
 
 #gerenciarTrens h2,
 #gerenciarRotas h2,
@@ -1893,23 +1924,48 @@ body::after {
     padding-top: 45px;
 }
 
+
 #gerenciarTrens .cabecalho-gerenciar-trens,
 #gerenciarRotas .cabecalho-gerenciar-rotas,
-#gerenciar .cabecalho-gerenciar-sensores {
+#gerenciar .cabecalho-gerenciar-sensores,
+
+#gerenciarUsuario .cabecalho-gerenciar-rotas {
     position: relative;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    width: calc(100% - 50px);
+    max-width: 1350px;
     margin: 0 auto 35px;
     min-height: 45px;
 }
 
+
+
+
+
 #gerenciarTrens .cabecalho-gerenciar-trens .btn-novo-trem,
 #gerenciarRotas .cabecalho-gerenciar-rotas .btn-nova-rota,
-#gerenciar .cabecalho-gerenciar-sensores .btn-novo-sensor {
+#gerenciar .cabecalho-gerenciar-sensores .btn-novo-sensor,
+
+#gerenciarUsuario .cabecalho-gerenciar-rotas .btn-novo-usuario {
     position: absolute;
     right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
 }
+
+
+#gerenciarUsuario .btn-novo-usuario {
+    background-color: #e9691b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
 
 body {
     background-color: #F5F2ED;
