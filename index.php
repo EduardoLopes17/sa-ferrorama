@@ -83,7 +83,7 @@ $dados_total_alertas = $resultado_total_alertas->fetch_assoc();
 
 $total_alertas = (int) $dados_total_alertas['total'];
 
-$sql_usuarios = "SELECT id, nome, cpf, email, status FROM usuarios";
+$sql_usuarios = "SELECT id, nome, cpf, email, perfil, status FROM usuarios";
 
 $resultado_usuarios = $conexao->query($sql_usuarios);
 
@@ -96,6 +96,7 @@ $sql_trens = "SELECT
             trens.modelo,
             trens.velocidade,
             trens.status,
+            trens.usuario_responsavel_id,
             usuarios.nome AS responsavel
             FROM trens
             LEFT JOIN usuarios
@@ -594,12 +595,14 @@ $resultado_rotas = $conexao->query($sql_rotas);
                         <td>
                             <?php if (($_SESSION['perfil'] ?? '') === 'admin') { ?>
                                 <div class="acoes-rotas">
-                                    <a
-                                        href="public/editar_rota.php?id=<?= urlencode($rota['id']) ?>"
-                                        class="btn btn-outline-primary btn-sm"
-                                    >
-                                        Editar
-                                    </a>
+                                    <button type="button"
+                                    class="btn btn-outline-primary btn-sm"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalRota"
+                                    data-id="<?= (int) $rota['id'] ?>"
+                                    onclick="editarRota(this)">
+                                    Editar
+                                </button>
 
                                     <form
                                         action="backend/excluir_rota.php"
@@ -646,8 +649,7 @@ $resultado_rotas = $conexao->query($sql_rotas);
 
             <div class="modal-header">
 
-                <h5 class="modal-title">Cadastrar Rota</h5>
-
+                <h5 class="modal-title" id="tituloModalRota">Cadastrar Rota</h5>
                 <button type="button"
                         class="btn-close"
                         data-bs-dismiss="modal">
@@ -657,7 +659,11 @@ $resultado_rotas = $conexao->query($sql_rotas);
 
             <div class="modal-body">
 
-                <form action="public/cadastro_rotas.php" method="POST">
+                <form action="public/cadastro_rotas.php"
+                method="POST"
+                id="formRota">
+
+                <input type="hidden" name="id" id="idRota">
 
                     <div class="mb-3">
                         <label for="nomeRota">Nome da Rota</label>
@@ -757,7 +763,16 @@ $resultado_rotas = $conexao->query($sql_rotas);
                                 'Saguaçu',
                                 'Santo Antônio',
                                 'Ulysses Guimarães',
-                                'Vila Nova'
+                                'Vila Nova',
+                                'Bom Retiro',
+                                'Comasa',
+                                'Jardim Sofia',
+                                'Parque Guarani',
+                                'Profipo',
+                                'Rio Bonito',
+                                'São Marcos',
+                                'Vila Cubatão',
+                                'Zona Industrial Norte'
                             ];
 
                             foreach ($bairros_rota as $bairro) {
@@ -819,12 +834,11 @@ $resultado_rotas = $conexao->query($sql_rotas);
 
                         </button>
 
-                        <button type="submit"
-                                class="btn btn-primary">
-
-                            Cadastrar Rota
-
-                        </button>
+                    <button type="submit"
+                        class="btn btn-primary"
+                        id="botaoSalvarRota">
+                        Cadastrar Rota
+                    </button>
 
                     </div>
 
@@ -897,10 +911,19 @@ $resultado_rotas = $conexao->query($sql_rotas);
                         <td>
                             <div class="acoes-trens">
 
-                                <a href="public/editar_trem.php?id=<?= urlencode($trem['id']) ?>"
-                                   class="btn btn-outline-primary btn-sm">
-                                    Editar
-                                </a>
+                            <button type="button"
+                                    class="btn btn-outline-primary btn-sm"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalTrem"
+                                    onclick="editarTrem(this)"
+                                    data-id="<?= (int) $trem['id'] ?>"
+                                    data-codigo="<?= htmlspecialchars($trem['codigo'], ENT_QUOTES, 'UTF-8') ?>"
+                                    data-modelo="<?= htmlspecialchars($trem['modelo'], ENT_QUOTES, 'UTF-8') ?>"
+                                    data-velocidade="<?= htmlspecialchars($trem['velocidade'], ENT_QUOTES, 'UTF-8') ?>"
+                                    data-status="<?= htmlspecialchars($trem['status'], ENT_QUOTES, 'UTF-8') ?>"
+                                    data-responsavel="<?= (int) $trem['usuario_responsavel_id'] ?>">
+                                Editar
+                            </button>
 
                                 <form action="backend/excluir_trem.php"
                                       method="POST"
@@ -986,8 +1009,12 @@ $resultado_rotas = $conexao->query($sql_rotas);
                                    id="velocidade"
                                    class="form-control"
                                    min="0"
+                                   max="9999.99"
+                                   step="0.01"
                                    required>
                         </div>
+
+                    <option value="Inativo">Inativo</option>
 
                         <div class="col-md-6 mb-3">
                             <label>Status</label>
@@ -1126,10 +1153,19 @@ $resultado_rotas = $conexao->query($sql_rotas);
         
     <div class="acoes-sensores">
 
-        <a href="public/editar_sensor.php?id=<?= urlencode($sensor['id']) ?>"
-           class="btn btn-outline-primary btn-sm">
+        <button type="button"
+            class="btn btn-outline-primary btn-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#modalSensor"
+            data-id="<?= (int) $sensor['id'] ?>"
+            data-nome="<?= htmlspecialchars($sensor['nome'], ENT_QUOTES, 'UTF-8') ?>"
+            data-localizacao="<?= htmlspecialchars($sensor['localizacao'], ENT_QUOTES, 'UTF-8') ?>"
+            data-tipo="<?= htmlspecialchars($sensor['tipo_sensor'], ENT_QUOTES, 'UTF-8') ?>"
+            data-endereco="<?= htmlspecialchars($sensor['endereco'], ENT_QUOTES, 'UTF-8') ?>"
+            data-status="<?= htmlspecialchars($sensor['status'], ENT_QUOTES, 'UTF-8') ?>"
+            onclick="editarSensor(this)">
             Editar
-        </a>
+        </button>
 
         <form action="backend/excluir_sensor.php" method="POST"
               onsubmit="return confirm('Tem certeza que deseja excluir este sensor?');">
@@ -1167,14 +1203,17 @@ $resultado_rotas = $conexao->query($sql_rotas);
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title">Cadastrar Sensor</h5>
-
+                <h5 class="modal-title" id="tituloModalSensor">Cadastrar Sensor</h5>
                 <button type="button" class="btn-close"
                         data-bs-dismiss="modal"
                         aria-label="Fechar"></button>
             </div>
 
-            <form method="POST" action="public/cadastro_sensores.php">
+            <form method="POST"
+            action="public/cadastro_sensores.php"
+            id="formSensor">
+
+            <input type="hidden" name="id" id="idSensor">
 
                 <div class="modal-body">
 
@@ -1261,9 +1300,11 @@ $resultado_rotas = $conexao->query($sql_rotas);
                         Cancelar
                     </button>
 
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit"
+                        class="btn btn-primary"
+                        id="botaoSalvarSensor">
                         Cadastrar Sensor
-                    </button>
+</button>
                 </div>
 
             </form>
@@ -1291,11 +1332,12 @@ $resultado_rotas = $conexao->query($sql_rotas);
     <h2>Gerenciar Usuário</h2>
 
     <button type="button"
-        class="btn-novo-sensor"
-        data-bs-toggle="modal"
-        data-bs-target="#modalUsuario">
-        Novo Usuário
-    </button>
+    class="btn-novo-sensor"
+    id="botaoNovoUsuario"
+    data-bs-toggle="modal"
+    data-bs-target="#modalUsuario">
+    Novo Usuário
+</button>
 
 
     </div>
@@ -1340,10 +1382,19 @@ $resultado_rotas = $conexao->query($sql_rotas);
                 </td>
 
                 <td>
-                    <a href="public/editar_usuario.php?id=<?= $usuario['id'] ?>"
-                       class="btn btn-sm btn-outline-primary">
+                    <button type="button"
+                        class="btn btn-sm btn-outline-primary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalUsuario"
+                        data-id="<?= (int) $usuario['id'] ?>"
+                        data-nome="<?= htmlspecialchars($usuario['nome'], ENT_QUOTES, 'UTF-8') ?>"
+                        data-cpf="<?= htmlspecialchars($usuario['cpf'], ENT_QUOTES, 'UTF-8') ?>"
+                        data-email="<?= htmlspecialchars($usuario['email'], ENT_QUOTES, 'UTF-8') ?>"
+                        data-perfil="<?= htmlspecialchars($usuario['perfil'], ENT_QUOTES, 'UTF-8') ?>"
+                        data-status="<?= htmlspecialchars($usuario['status'], ENT_QUOTES, 'UTF-8') ?>"
+                        onclick="editarUsuario(this)">
                         Editar
-                    </a>
+                    </button>
 
                     <a href="backend/excluir_usuario.php?id=<?= $usuario['id'] ?>"
                        class="btn btn-sm btn-outline-danger"
@@ -1361,14 +1412,18 @@ $resultado_rotas = $conexao->query($sql_rotas);
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title">Cadastrar Usuário</h5>
+                <h5 class="modal-title" id="tituloModalUsuario">Cadastrar Usuário</h5>
 
                 <button type="button" class="btn-close"
                         data-bs-dismiss="modal"
                         aria-label="Fechar"></button>
             </div>
 
-            <form method="POST" action="backend/cadastrar_usuario.php">
+            <form method="POST"
+                action="backend/cadastrar_usuario.php"
+                id="formUsuario">
+
+            <input type="hidden" name="id" id="idUsuario">
 
                 <div class="modal-body">
 
@@ -1387,7 +1442,7 @@ $resultado_rotas = $conexao->query($sql_rotas);
                                    maxlength="14"
                                    inputmode="numeric"
                                    placeholder="000.000.000-00"
-                                   pattern="[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}"
+                                   pattern="([0-9]{11}|[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2})"
                                    title="Informe um CPF válido"
                                    required>
                         </div>
@@ -1398,7 +1453,23 @@ $resultado_rotas = $conexao->query($sql_rotas);
                                    name="email" required>
                         </div>
 
-                        <div class="col-md-6">
+                <div class="col-md-6 campo-edicao-usuario">
+                        <label class="form-label">Perfil</label>
+                        <select name="perfil" id="perfilUsuario" class="form-select">
+                        <option value="usuario">Usuário</option>
+                        <option value="admin">Administrador</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 campo-edicao-usuario">
+                        <label class="form-label">Status</label>
+                        <select name="status" id="statusUsuario" class="form-select">
+                        <option value="ativo">Ativo</option>
+                        <option value="inativo">Inativo</option>
+                    </select>
+                </div>
+
+                        <div class="col-md-6 campo-cadastro-usuario">
                             <label class="form-label">CEP</label>
                             <input type="text" class="form-control"
                                    id="cep" name="cep"
@@ -1408,61 +1479,61 @@ $resultado_rotas = $conexao->query($sql_rotas);
                             <div id="cep-mensagem" class="form-text"></div>
                         </div>
 
-                        <div class="col-md-8">
+                        <div class="col-md-6 campo-cadastro-usuario">
                             <label class="form-label">Logradouro</label>
                             <input type="text" class="form-control"
                                    id="logradouro" name="logradouro"
                                    maxlength="150" required>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-6 campo-cadastro-usuario">
                             <label class="form-label">Número</label>
                             <input type="text" class="form-control"
                                    id="numero" name="numero"
                                    maxlength="20" required>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 campo-cadastro-usuario">
                             <label class="form-label">Bairro</label>
                             <input type="text" class="form-control"
                                    id="bairro" name="bairro"
                                    maxlength="100" required>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 campo-cadastro-usuario">
                             <label class="form-label">Cidade</label>
                             <input type="text" class="form-control"
                                    id="cidade" name="cidade"
                                    maxlength="100" required>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-6 campo-cadastro-usuario">
                             <label class="form-label">Estado (UF)</label>
                             <input type="text" class="form-control"
                                    id="uf" name="uf"
                                    maxlength="2" required>
                         </div>
 
-                        <div class="col-md-8">
+                        <div class="col-md-6 campo-cadastro-usuario">
                             <label class="form-label">Complemento (opcional)</label>
                             <input type="text" class="form-control"
                                    name="complemento"
                                    maxlength="150">
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 campo-cadastro-usuario">
                             <label class="form-label">Senha</label>
                             <input type="password" class="form-control"
                                    name="senha" required>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 campo-cadastro-usuario">
                             <label class="form-label">Confirmar Senha</label>
                             <input type="password" class="form-control"
                                    name="confirmar_senha" required>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 campo-cadastro-usuario">
                             <label class="form-label">Perfil</label>
                             <select class="form-select" name="perfil" required>
                                 <option value="usuario">Usuário</option>
@@ -1470,7 +1541,7 @@ $resultado_rotas = $conexao->query($sql_rotas);
                             </select>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-6 campo-cadastro-usuario">
                             <label class="form-label">Status</label>
                             <select class="form-select" name="status" required>
                                 <option value="ativo">Ativo</option>
@@ -1488,9 +1559,11 @@ $resultado_rotas = $conexao->query($sql_rotas);
                         Cancelar
                     </button>
 
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit"
+                        class="btn btn-primary"
+                        id="botaoSalvarUsuario">
                         Cadastrar Usuário
-                    </button>
+                </button>
                 </div>
 
             </form>
@@ -1537,6 +1610,156 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
  <script src="script/script.js"></script>
+
+
+<script>
+function novoSensor() {
+    const formulario = document.getElementById('formSensor');
+
+    formulario.reset();
+    formulario.action = 'public/cadastro_sensores.php';
+
+    document.getElementById('idSensor').value = '';
+    document.getElementById('tituloModalSensor').textContent = 'Cadastrar Sensor';
+    document.getElementById('botaoSalvarSensor').textContent = 'Cadastrar Sensor';
+}
+
+function editarSensor(botao) {
+    const formulario = document.getElementById('formSensor');
+
+    formulario.reset();
+    formulario.action = 'backend/atualizar_sensor.php';
+
+    document.getElementById('idSensor').value = botao.dataset.id;
+    document.getElementById('nomeSensor').value = botao.dataset.nome;
+    document.getElementById('localizacaoSensor').value = botao.dataset.localizacao;
+    document.getElementById('tipoSensor').value = botao.dataset.tipo;
+    document.getElementById('enderecoSensor').value = botao.dataset.endereco;
+    document.getElementById('statusSensor').value = botao.dataset.status;
+
+    document.getElementById('tituloModalSensor').textContent = 'Editar Sensor';
+    document.getElementById('botaoSalvarSensor').textContent = 'Salvar Alterações';
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const botaoNovoSensor = document.querySelector('.btn-novo-sensor');
+
+    if (botaoNovoSensor) {
+        botaoNovoSensor.addEventListener('click', novoSensor);
+    }
+});
+</script>
+
+ 
+<script>
+function novoTrem() {
+    const formulario = document.getElementById('formTrem');
+
+    formulario.reset();
+    formulario.action = 'public/cadastro_trens.php';
+
+    document.getElementById('id_trem').value = '';
+    document.getElementById('tituloModalTrem').textContent = 'Cadastrar Trem';
+    document.getElementById('botaoSalvarTrem').textContent = 'Cadastrar Trem';
+
+    document.getElementById('codigo').readOnly = false;
+    document.getElementById('modelo').readOnly = false;
+    document.getElementById('responsavel_id').disabled = false;
+}
+
+function editarTrem(botao) {
+    const formulario = document.getElementById('formTrem');
+
+    formulario.reset();
+    formulario.action = 'backend/atualizar_trem.php';
+
+    document.getElementById('id_trem').value = botao.dataset.id;
+    document.getElementById('codigo').value = botao.dataset.codigo;
+    document.getElementById('modelo').value = botao.dataset.modelo;
+    document.getElementById('velocidade').value = botao.dataset.velocidade;
+    document.getElementById('status').value = botao.dataset.status;
+    document.getElementById('responsavel_id').value = botao.dataset.responsavel;
+
+    document.getElementById('tituloModalTrem').textContent = 'Editar Trem';
+    document.getElementById('botaoSalvarTrem').textContent = 'Salvar Alterações';
+
+    const ehAdmin = <?= json_encode(($_SESSION['perfil'] ?? '') === 'admin') ?>;
+
+    document.getElementById('codigo').readOnly = !ehAdmin;
+    document.getElementById('modelo').readOnly = !ehAdmin;
+    document.getElementById('responsavel_id').disabled = !ehAdmin;
+}
+</script>
+
+
+<script>
+function novoUsuario() {
+    const formulario = document.getElementById('formUsuario');
+
+    formulario.reset();
+    formulario.action = 'backend/cadastrar_usuario.php';
+
+    document.getElementById('idUsuario').value = '';
+    document.getElementById('tituloModalUsuario').textContent = 'Cadastrar Usuário';
+    document.getElementById('botaoSalvarUsuario').textContent = 'Cadastrar Usuário';
+
+    document.querySelectorAll('.campo-cadastro-usuario').forEach(campo => {
+    campo.style.display = '';
+    campo.querySelectorAll('input, select').forEach(input => {
+        input.disabled = false;
+    });p
+});
+
+document.querySelectorAll('.campo-edicao-usuario').forEach(campo => {
+    campo.style.display = 'none';
+    campo.querySelectorAll('input, select').forEach(input => {
+        input.disabled = true;
+    });
+});
+}
+
+function editarUsuario(botao) {
+    const formulario = document.getElementById('formUsuario');
+
+    formulario.reset();
+    formulario.action = 'backend/atualizar_usuario.php';
+
+    document.getElementById('idUsuario').value = botao.dataset.id;
+
+    formulario.elements['nome'].value = botao.dataset.nome;
+    formulario.elements['cpf'].value = botao.dataset.cpf;
+    formulario.elements['email'].value = botao.dataset.email;
+    formulario.elements['perfil'].value = botao.dataset.perfil.toLowerCase();
+formulario.elements['status'].value = botao.dataset.status.toLowerCase();
+    formulario.elements['perfil'].disabled = false;
+    formulario.elements['status'].disabled = false;
+
+    document.getElementById('tituloModalUsuario').textContent = 'Editar Usuário';
+    document.getElementById('botaoSalvarUsuario').textContent = 'Salvar Alterações';
+
+   document.querySelectorAll('.campo-cadastro-usuario').forEach(campo => {
+    campo.style.display = 'none';
+    campo.querySelectorAll('input, select').forEach(input => {
+        input.disabled = true;
+    });
+});
+
+document.querySelectorAll('.campo-edicao-usuario').forEach(campo => {
+    campo.style.display = '';
+    campo.querySelectorAll('input, select').forEach(input => {
+        input.disabled = false;
+    });
+});
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const botaoNovoUsuario = document.getElementById('botaoNovoUsuario');
+
+    if (botaoNovoUsuario) {
+        botaoNovoUsuario.addEventListener('click', novoUsuario);
+    }
+});
+</script>
 
 
 </body>
