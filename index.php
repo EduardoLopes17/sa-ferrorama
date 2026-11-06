@@ -549,7 +549,7 @@ $resultado_rotas = $conexao->query($sql_rotas);
        
 <div id="gerenciarRotas" class="content">
 
-    <div class="cabecalho-gerenciar-rotas">
+    <div class="cabecalho-gerenciar-rotas cabecalho-gerenciar-usuario">
         <h2>Gerenciar Rotas</h2>
 
         <?php if (($_SESSION['perfil'] ?? '') === 'admin') { ?>
@@ -1287,11 +1287,11 @@ $resultado_rotas = $conexao->query($sql_rotas);
 <?php endif; ?>
 
 
-    <div class="cabecalho-gerenciar-rotas">
+    <div class="cabecalho-gerenciar-usuario">
     <h2>Gerenciar Usuário</h2>
 
     <button type="button"
-        class="btn-novo-usuario"
+        class="btn-novo-sensor"
         data-bs-toggle="modal"
         data-bs-target="#modalUsuario">
         Novo Usuário
