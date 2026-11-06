@@ -844,19 +844,21 @@ $resultado_rotas = $conexao->query($sql_rotas);
     <div id="gerenciarTrens" class="content">
 
 
-    <div class="cabecalho-gerenciar-trens">
+    
+<div class="cabecalho-gerenciar-trens">
 
-        <h2>Gerenciar Trens</h2>
+    <h2>Gerenciar Trens</h2>
 
-       <button type="button"
-        class="btn btn-primary"
+    <button type="button"
+        class="btn-novo-trem"
         data-bs-toggle="modal"
         data-bs-target="#modalTrem"
         onclick="novoTrem()">
-     Cadastrar Trem
-</button>
+        Cadastrar Trem
+    </button>
 
-    </div>
+</div>
+
 
     <table class="table">
         <thead>
@@ -1285,17 +1287,16 @@ $resultado_rotas = $conexao->query($sql_rotas);
 <?php endif; ?>
 
 
-    <div class="col-md-12">
+    <div class="cabecalho-gerenciar-rotas">
+    <h2>Gerenciar Usuário</h2>
 
-            <h2>Gerenciar Usuário</h2>
-
-
-        <button type="button"
-        class="btn btn-primary"
+    <button type="button"
+        class="btn-novo-usuario"
         data-bs-toggle="modal"
         data-bs-target="#modalUsuario">
         Novo Usuário
-</button>
+    </button>
+
 
     </div>
 
