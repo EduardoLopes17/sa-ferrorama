@@ -23,6 +23,15 @@ if (
     !in_array($perfil, ['usuario', 'admin'], true) ||
     !in_array($status, ['ativo', 'inativo'], true)
 ) {
+    error_log('Falha na validação de atualização de usuário: ' . json_encode([
+        'id_valido' => (bool) $id,
+        'nome_preenchido' => $nome !== '',
+        'cpf_preenchido' => $cpf !== '',
+        'email_valido' => (bool) filter_var($email, FILTER_VALIDATE_EMAIL),
+        'perfil_valido' => in_array($perfil, ['usuario', 'admin'], true),
+        'status_valido' => in_array($status, ['ativo', 'inativo'], true)
+    ]));
+
     header('Location: ../public/editar_usuario.php?id=' . (int) $id . '&erro=1');
     exit;
 }
@@ -50,6 +59,7 @@ try {
     exit;
 
 } catch (mysqli_sql_exception $e) {
+    error_log('Erro SQL ao atualizar usuário: ' . $e->getMessage());
 
     header('Location: ../public/editar_usuario.php?id=' . $id . '&erro=1');
     exit;
