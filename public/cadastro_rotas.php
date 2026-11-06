@@ -59,6 +59,16 @@ $bairros = [
     'Santo Antônio',
     'Ulysses Guimarães',
     'Vila Nova',
+    'Bom Retiro',
+    'Comasa',
+    'Jardim Sofia',
+    'Parque Guarani',
+    'Profipo',
+    'Rio Bonito',
+    'Santa Catarina',
+    'São Marcos',
+    'Vila Cubatão',
+    'Zona Industrial Norte'
 ];
 
 $erro = '';
