@@ -233,7 +233,7 @@ $resultado_rotas = $conexao->query($sql_rotas);
             </section>
 
 
-        <div id="carouselExampleIndicators" class="carousel slide">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
             <div class="carousel-indicators">
 
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
