@@ -157,7 +157,7 @@ $resultado_rotas = $conexao->query($sql_rotas);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SA Ferrorama</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/style/style.css?v=5">
+    <link rel="stylesheet" href="./assets/style/style.css?v=8">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
@@ -1453,7 +1453,7 @@ $resultado_rotas = $conexao->query($sql_rotas);
                                    name="email" required>
                         </div>
 
-                <div class="col-md-6 campo-edicao-usuario">
+                <div class="col-md-6">
                         <label class="form-label">Perfil</label>
                         <select name="perfil" id="perfilUsuario" class="form-select">
                         <option value="usuario">Usuário</option>
@@ -1461,7 +1461,7 @@ $resultado_rotas = $conexao->query($sql_rotas);
                     </select>
                 </div>
 
-                <div class="col-md-6 campo-edicao-usuario">
+                <div class="col-md-6">
                         <label class="form-label">Status</label>
                         <select name="status" id="statusUsuario" class="form-select">
                         <option value="ativo">Ativo</option>
@@ -1480,7 +1480,7 @@ $resultado_rotas = $conexao->query($sql_rotas);
                         </div>
 
                         <div class="col-md-6 campo-cadastro-usuario">
-                            <label class="form-label">Logradouro</label>
+                            <label class="form-label">Rua</label>
                             <input type="text" class="form-control"
                                    id="logradouro" name="logradouro"
                                    maxlength="150" required>
@@ -1533,22 +1533,6 @@ $resultado_rotas = $conexao->query($sql_rotas);
                                    name="confirmar_senha" required>
                         </div>
 
-                        <div class="col-md-6 campo-cadastro-usuario">
-                            <label class="form-label">Perfil</label>
-                            <select class="form-select" name="perfil" required>
-                                <option value="usuario">Usuário</option>
-                                <option value="admin">Administrador</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-6 campo-cadastro-usuario">
-                            <label class="form-label">Status</label>
-                            <select class="form-select" name="status" required>
-                                <option value="ativo">Ativo</option>
-                                <option value="inativo">Inativo</option>
-                            </select>
-                        </div>
-
                     </div>
 
                 </div>
@@ -1588,7 +1572,7 @@ $resultado_rotas = $conexao->query($sql_rotas);
 <script src="./script/monitorar_trens.js"></script>
 <script src="./script/clima.js" defer></script>
 
-    <script src="./script/botoes.js"></script>
+    <script src="./script/botoes.js?v=2"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
@@ -1707,7 +1691,7 @@ function novoUsuario() {
     campo.style.display = '';
     campo.querySelectorAll('input, select').forEach(input => {
         input.disabled = false;
-    });p
+    });
 });
 
 document.querySelectorAll('.campo-edicao-usuario').forEach(campo => {
@@ -1760,6 +1744,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 </script>
+
+                <script src="script/viacep.js?v=2" defer></script>
 
 
 </body>

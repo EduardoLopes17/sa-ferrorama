@@ -3,6 +3,8 @@
 
 session_start();
 
+date_default_timezone_set('America/Sao_Paulo');
+
 if (!isset($_SESSION['usuario_id'])) {
     header('Location: login.php');
     exit;
@@ -245,7 +247,7 @@ if ($formato === 'csv') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/style/style.css">
+    <link rel="stylesheet" href="../assets/style/style.css?v=7">
     <title><?= htmlspecialchars($titulo, ENT_QUOTES, 'UTF-8') ?> - Ferrovia União HELG</title>
 
     <style>
@@ -349,7 +351,7 @@ if ($formato === 'csv') {
         }
     </style>
 </head>
-<body>
+<body class="pagina-relatorio">
 
 
     <h1>Ferrovia União HELG</h1>
