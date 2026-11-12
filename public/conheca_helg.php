@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conheça a HELG</title>
-    <link rel="stylesheet" href="../assets/style/conheca_helg.css">
+    <link rel="stylesheet" href="../assets/style/conheca_helg.css?v=2">
 </head>
 
 <body class="pagina-conheca">
