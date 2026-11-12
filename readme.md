@@ -1,76 +1,81 @@
-<div align="center">
-
-Ferrovia União HELG
+<div align="center">Ferrovia União HELG
 Sistema de Gerenciamento e Monitoramento Ferroviário
+<img src="./assets/img/icone.trem.png" alt="Ícone da Ferrovia HELG" width="180">Projeto da Situação de Aprendizagem Ferrorama
+</div>Sobre o projeto
+A Ferrovia HELG é um projeto de desenvolvimento de sistemas voltado ao gerenciamento e monitoramento ferroviário. Reúne informações sobre usuários, trens, rotas e sensores, além de indicadores, alertas e relatórios.
 
-
-<p align="center">
-  <img class="icon" src="./assets/img/icone.trem.png" alt="Ícone Ferrorama"> 
-</p>
-  
-
-</div>
-
-**Sobre o projeto**
-A Ferrovia HELG é um projeto de desenvolvimento de sistemas voltado ao gerenciamento e monitoramento ferroviário. A proposta é reunir informações operacionais de uma ferrovia em uma interface web, facilitando o acompanhamento dos trens, o controle de cadastros e a consulta de dados.
-
-O sistema também trabalha com conceitos de IoT, envolvendo sensores físicos e simulações para acompanhar o funcionamento da ferrovia.
+A ideia é facilitar o acompanhamento das operações e organizar os cadastros em um só sistema.
 Objetivos
-- Desenvolver uma interface para gerenciamento ferroviário.
-- Organizar os cadastros de usuários, trens e sensores.
-- Possibilitar o acompanhamento das operações dos trens.
-- Explorar a visualização de trajetos em um mapa interativo.
-- Integrar simulações e dados de sensores físicos ao sistema, conforme a evolução do projeto.
-️ Funcionalidades
-Estas são as funcionalidades do projeto. O andamento será atualizado conforme as entregas.
-Área	Funcionalidade prevista ou em desenvolvimento	Situação
-Acesso	Login e logout de usuários	Em revisão
-Usuários	Cadastro, consulta, alteração e exclusão de usuários	Em revisão
-Permissões	Controle de perfis de acesso	Em revisão
-Trens	Cadastro, consulta, alteração e exclusão de trens	Em revisão
-Trens	Definição e alteração do usuário responsável pelo trem	Em revisão
-Sensores	Cadastro e gerenciamento de sensores	Em revisão
-Monitoramento	Acompanhamento dos trens e suas informações	Em desenvolvimento
-Rotas	Representação de trajetos em mapa interativo	Planejado
-Simulação	Execução de rotas com tempo simulado	Planejado
-IoT	Integração com sensores físicos	Em desenvolvimento
-Relatórios	Consulta e visualização de informações operacionais	Em revisão
+- Organizar o cadastro e o gerenciamento de usuários, trens, rotas e sensores.
+- Permitir a consulta de informações operacionais.
+- Apresentar indicadores e relatórios em uma interface centralizada.
+- Disponibilizar recursos de acompanhamento e simulação de rotas.
+- Aplicar conceitos de banco de dados, desenvolvimento web, autenticação e IoT.
+Funcionalidades
+Área	Funcionalidade
+Autenticação	Login, logout e controle de sessão.
+Perfis	Diferenciação entre administrador e usuário comum, com restrições de acesso.
+Usuários	Cadastro, consulta, edição e exclusão, respeitando as regras do sistema.
+Trens	Cadastro, consulta, edição, exclusão e associação com um responsável.
+Rotas	Cadastro, consulta, edição e gerenciamento de rotas associadas aos trens.
+Sensores	Cadastro, consulta, edição e gerenciamento de sensores.
+Dashboard	Visualização de indicadores e informações gerais da operação.
+Monitoramento	Tela de acompanhamento e simulação de trajetos de trens.
+Alertas e falhas	Consulta de ocorrências registradas no sistema.
+Relatórios	Consulta e geração de informações operacionais.
+Página de apresentação	Área Conheça HELG, acessível antes do login.
 
 
-**Tecnologias utilizadas**
-Tecnologia	Utilização no projeto
-HTML5	Estrutura das páginas
-CSS3	Estilização da interface
-JavaScript	Interatividade e funcionalidades no navegador
-PHP	Lógica do sistema no servidor
-MySQL	Armazenamento e consulta de dados
-XAMPP	Ambiente de desenvolvimento local
-Git e GitHub	Versionamento e colaboração
-IoT / sensores	Integração física proposta para monitoramento
+Perfis de acesso
+O sistema possui dois perfis de usuário:
+- Administrador: acesso às funcionalidades administrativas de gerenciamento, conforme as permissões implementadas.
+- Usuário comum: acesso às funcionalidades autorizadas para seu perfil.
+As permissões são verificadas no sistema para impedir operações não autorizadas.
+Integrações
+- ViaCEP: preenchimento automático de informações de endereço durante o cadastro de usuários.
+- API de clima: apresentação de informações meteorológicas na página principal.
+Tecnologias utilizadas
+Tecnologia	Utilização
+HTML5	Estrutura das páginas.
+CSS3	Estilização e identidade visual.
+JavaScript	Interações e funcionalidades no navegador.
+PHP	Processamento das operações no servidor.
+MySQL	Armazenamento dos dados.
+XAMPP	Ambiente local com Apache e MySQL.
+Git e GitHub	Versionamento e colaboração.
+Scrum e Kanban	Organização das atividades da equipe.
 
 
-️**Estrutura do projeto**
-A estrutura de pastas será adicionada após a conferência da versão atual do repositório.
-
-Repositório: EduardoLopes17/sa-ferrorama
+Estrutura do projeto
+sa-ferrorama/
+├── assets/           # Imagens e estilos
+├── backend/          # Processamento das operações
+├── db/               # Banco de dados SQL
+├── infra/            # Conexão e verificações de acesso
+├── public/           # Páginas do sistema
+├── script/           # Arquivos JavaScript
+├── index.php         # Interface principal
+└── readme.md         # Documentação do projeto
 Como executar o projeto
-Este projeto utiliza um ambiente local com PHP, MySQL e XAMPP. 
-1. Instale o XAMPP e o Git.
-2. Clone o repositório dentro da pasta htdocs do XAMPP:
+Requisitos: XAMPP com Apache, PHP e MySQL, navegador e Git (para clonar o repositório).
+1. Instale o XAMPP e inicie os serviços Apache e MySQL.
+2. Na pasta htdocs do XAMPP, clone o repositório:
    git clone https://github.com/EduardoLopes17/sa-ferrorama.git
-3. Inicie os serviços Apache e MySQL no painel do XAMPP.
-4. Acesse o phpMyAdmin e importe o arquivo SQL correspondente ao banco de dados do projeto, disponível no projeto.
-5. Confira as credenciais e a porta do MySQL no arquivo de conexão utilizado pelo projeto.
-6. Abra o projeto pelo navegador usando o endereço local correspondente à pasta clonada, por exemplo:
-   http://localhost/sa-ferrorama/
-Monitoramento e IoT
-A proposta da Ferrovia HELG contempla duas formas de trabalho:
-- Simulação digital: representação do deslocamento dos trens e de seus trajetos no sistema.
-- Integração física: utilização de sensores e componentes de IoT para coletar informações relacionadas à operação ferroviária.
-As duas partes fazem parte do desenvolvimento do projeto.
-
-**Requisitos Funcionais**
-
+3. Acesse o phpMyAdmin e importe o arquivo db/ferroramas.sql. Confira o nome do banco definido no arquivo SQL.
+4. Verifique as configurações de conexão no arquivo infra/conexao.php, especialmente usuário, senha e porta do MySQL. No ambiente utilizado pela equipe, a porta padrão é 3306.
+5. Abra o projeto no navegador. Se a pasta clonada estiver com o nome sa-ferrorama, utilize:
+   http://localhost/sa-ferrorama/public/conheca_helg.php
+6. Acesse a tela de login e utilize uma conta de demonstração previamente cadastrada no banco de dados.
+Observação: não publique credenciais reais de acesso ou senhas do banco no repositório.
+Capturas de tela
+<div align="center">Página inicial
+<img src="./assets/img/tutorial/home.png" alt="Página inicial da Ferrovia HELG" width="750">
+Dashboard
+<img src="./assets/img/tutorial/dashboard.png" alt="Dashboard da Ferrovia HELG" width="750">
+Gerenciamento de trens
+<img src="./assets/img/tutorial/gerenciarT.png" alt="Gerenciamento de trens" width="750">
+Monitoramento
+<img src="./assets/img/tutorial/monitorarT.png" alt="Monitoramento de trens" width="750"></div>Requisitos Funcionais
 RF1 - O sistema deve permitir login com nome de usuário e senha, bloqueando o acesso em caso de credenciais inválidas. 
 
 RF2 - O sistema deve disponibilizar ao Adm a tela de cadastro com os campos: nome completo, CPF, telefone, e-mail, endereço, cidade, estado, senha e confirmação de senha. 
@@ -110,9 +115,7 @@ RF18 - O sistema deve listar os relatórios gerados recentemente com nome e data
 RF19 - O sistema deve suportar ao menos o formato PDF como saída disponível para geração de relatórios. 
 
 RF20 - O sistema deve disponibilizar barra de navegação persistente em todas as telas internas, com acesso a todos os módulos e à opção de sair, além do logotipo da empresa no cabeçalho. 
-
-**Requisitos Não Funcionais**
-
+Requisitos Não Funcionais
 RN1 - A interface deve ser intuitiva, com nomenclatura em português brasileiro e feedback visual claro para ações do usuário. 
 
 RN2 - As senhas devem ser armazenadas de forma criptografada. A sessão deve ser encerrada de forma segura ao clicar em "Sair". 
@@ -127,25 +130,17 @@ RN6 - O código deve ser modular por tela/módulo para facilitar evolução e ma
 
 RN7 - A identidade da marca deve ser mantida em todas as telas. 
 
-RN8 - Todos os alertas gerados devem ser armazenados com registro de data/hora para fins de auditoria. 
-
-**Metodologia de desenvolvimento**
-A equipe utiliza Scrum e Kanban para organizar o desenvolvimento.
-
-O Scrum é utilizado para planejar as entregas, enquanto o Kanban ajuda a acompanhar as tarefas pendentes, em andamento e concluídas.
-
-O código é mantido no GitHub.
-Desenvolvedores
-1. Eduardo Lopes
-2. Guilherme Floriano
-3. Hugo Gramme
-4. Luis Gustavo
+RN8 - Todos os alertas gerados devem ser armazenados com registro de data/hora para fins de auditoria.
+Metodologia de desenvolvimento
+A equipe utilizou Scrum e Kanban para organizar as etapas do projeto. As atividades foram acompanhadas pelo GitHub Projects, e as alterações no código foram registradas por commits no repositório.
+Equipe de desenvolvimento
+- Eduardo Lopes
+- Guilherme Floriano
+- Hugo Gramme
+- Luis Gustavo
+Projeto desenvolvido em equipe no curso técnico em Desenvolvimento de Sistemas.
 Repositório
-GitHub: Ferrovia HELG — SA Ferrorama
-<div align="center">
-
-Ferrovia HELG
+GitHub — Ferrovia HELG (SA Ferrorama)
+<div align="center">Ferrovia União HELG
 Sistema de Gerenciamento e Monitoramento Ferroviário
-
-Projeto em desenvolvimento
 </div>
