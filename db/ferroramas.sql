@@ -84,6 +84,13 @@ CREATE TABLE `usuarios` (
   `senha` varchar(255) NOT NULL,
   `perfil` enum('admin','usuario') NOT NULL DEFAULT 'usuario',
   `status` enum('ativo','inativo') NOT NULL DEFAULT 'ativo',
+  `cep` varchar(9) DEFAULT NULL,
+  `logradouro` varchar(150) DEFAULT NULL,
+  `bairro` varchar(100) DEFAULT NULL,
+  `cidade` varchar(100) DEFAULT NULL,
+  `uf` char(2) DEFAULT NULL,
+  `numero` varchar(20) DEFAULT NULL,
+  `complemento` varchar(150) DEFAULT NULL,
   `criado_em` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
