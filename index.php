@@ -1,5 +1,9 @@
 <?php
 
+if (($_GET['erro_usuario'] ?? '') === 'ultimo_admin') {
+    echo "<script>alert('Não é possível excluir ou desativar o último administrador do sistema.');</script>";
+}
+
 session_start();
 
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');

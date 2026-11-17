@@ -36,6 +36,32 @@ if (
     exit;
 }
 
+    $consulta = $conexao->prepare(
+    "SELECT id FROM usuarios
+     WHERE id = ? AND perfil = 'admin'
+     AND status = 'ativo'"
+);
+
+$consulta->bind_param("i", $id);
+$consulta->execute();
+$consulta->store_result();
+
+if ($consulta->num_rows > 0 &&
+    ($perfil !== 'admin' || $status !== 'ativo')) {
+
+    $total = $conexao->query(
+        "SELECT COUNT(*) AS total FROM usuarios
+         WHERE perfil = 'admin' AND status = 'ativo'"
+    )->fetch_assoc();
+
+    if ($total['total'] <= 1) {
+        header("Location: ../index.php?erro_usuario=ultimo_admin");
+        exit;
+    }
+}
+
+$consulta->close();
+
 $sql = "UPDATE usuarios
         SET nome = ?, cpf = ?, email = ?, perfil = ?, status = ?
         WHERE id = ?";

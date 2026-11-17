@@ -7,6 +7,30 @@ if (isset($_GET['id'])) {
 
     $id = $_GET['id'];
 
+    $sql_admin = "SELECT id FROM usuarios
+              WHERE id = ? AND perfil = 'admin'
+              AND status = 'ativo'";
+
+$stmt_admin = $conexao->prepare($sql_admin);
+$stmt_admin->bind_param("i", $id);
+$stmt_admin->execute();
+$stmt_admin->store_result();
+
+if ($stmt_admin->num_rows > 0) {
+
+    $total = $conexao->query(
+        "SELECT COUNT(*) AS total FROM usuarios
+         WHERE perfil = 'admin' AND status = 'ativo'"
+    )->fetch_assoc();
+
+    if ($total['total'] <= 1) {
+        header("Location: ../index.php?erro_usuario=ultimo_admin");
+        exit;
+    }
+}
+
+$stmt_admin->close();
+
     $sql_verificar = "SELECT id FROM trens WHERE usuario_responsavel_id = ? LIMIT 1";
 
 $stmt_verificar = $conexao->prepare($sql_verificar);
