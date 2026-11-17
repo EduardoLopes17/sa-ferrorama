@@ -13,6 +13,7 @@ $conexao = new mysqli(
     3389
 );
 
+
 if ($conexao->connect_error) {
     die("Erro na conexão com o banco de dados: " . $conexao->connect_error);
 }
