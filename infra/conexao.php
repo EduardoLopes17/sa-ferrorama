@@ -10,7 +10,7 @@ $conexao = new mysqli(
     $usuario,
     $senha,
     $banco,
-    3306
+    3389
 );
 
 if ($conexao->connect_error) {

@@ -1,4 +1,3 @@
-
 <?php
 
 require_once __DIR__ . '/../infra/verificar_admin.php';
@@ -15,10 +14,10 @@ $resultado_usuarios = $conexao->query($sql_usuarios);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-$responsavel_id = filter_var(
-    $_POST['usuario_responsavel_id'] ?? null,
-    FILTER_VALIDATE_INT
-);
+    $responsavel_id = filter_var(
+        $_POST['usuario_responsavel_id'] ?? null,
+        FILTER_VALIDATE_INT
+    );
 
     if (($_SESSION['perfil'] ?? '') !== 'admin') {
         http_response_code(403);
@@ -51,52 +50,48 @@ $responsavel_id = filter_var(
         $erro = 'Preencha os campos corretamente.';
     } else {
 
-    $sql_verificar = "SELECT id FROM usuarios
-                     WHERE id = ? AND status = 'ativo'";
+        $sql_verificar = "SELECT id FROM usuarios WHERE id = ? AND status = 'ativo'";
+        $stmt_verificar = $conexao->prepare($sql_verificar);
+        $stmt_verificar->bind_param("i", $responsavel_id);
+        $stmt_verificar->execute();
+        $usuario_valido = $stmt_verificar->get_result()->fetch_assoc();
+        $stmt_verificar->close();
 
-    $stmt_verificar = $conexao->prepare($sql_verificar);
-    $stmt_verificar->bind_param("i", $responsavel_id);
-    $stmt_verificar->execute();
+        if (!$usuario_valido) {
+            $erro = 'Selecione um funcionário responsável válido.';
+        } else {
 
-    $usuario_valido = $stmt_verificar->get_result()->fetch_assoc();
-    $stmt_verificar->close();
-
-    if (!$usuario_valido) {
-        $erro = 'Selecione um funcionário responsável válido.';
-    } else {
-
-    $sql = "INSERT INTO trens
+            $sql = "INSERT INTO trens
                 (codigo, modelo, velocidade, status, usuario_responsavel_id)
                 VALUES (?, ?, ?, ?, ?)";
 
-        $stmt = $conexao->prepare($sql);
+            $stmt = $conexao->prepare($sql);
 
-        $velocidade_numero = (float) $velocidade;
+            $velocidade_numero = (float) $velocidade;
 
-        $stmt->bind_param(
-    "ssdsi",
-    $codigo,
-    $modelo,
-    $velocidade_numero,
-    $status,
-    $responsavel_id
-);
+            $stmt->bind_param(
+                "ssdsi",
+                $codigo,
+                $modelo,
+                $velocidade_numero,
+                $status,
+                $responsavel_id
+            );
 
-        try {
-            $stmt->execute();
-            $stmt->close();
+            try {
+                $stmt->execute();
+                $stmt->close();
 
-            header('Location: ../index.php?trem_cadastrado=sucesso');
-            exit;
-
-        } catch (mysqli_sql_exception $e) {
-            $erro = $e->getCode() == 1062
-                ? 'Já existe um trem com esse código.'
-                : 'Não foi possível cadastrar o trem.';
-            $stmt->close();
-                }
+                header('Location: ../index.php?trem_cadastrado=sucesso');
+                exit;
+            } catch (mysqli_sql_exception $e) {
+                $erro = $e->getCode() == 1062
+                    ? 'Já existe um trem com esse código.'
+                    : 'Não foi possível cadastrar o trem.';
+                $stmt->close();
+            }
+        }
     }
-}
 }
 ?>
 
@@ -104,13 +99,14 @@ $responsavel_id = filter_var(
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Trem - Ferrorama</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+        rel="stylesheet">
 
     <link rel="stylesheet" href="../assets/style/style.css">
 </head>
@@ -134,26 +130,26 @@ $responsavel_id = filter_var(
                 <div>
                     <label for="codigo">Código do Trem</label>
                     <input type="text" id="codigo" name="codigo"
-                           placeholder="Ex.: TR-2401"
-                           maxlength="30" required
-                           value="<?= htmlspecialchars($codigo ?? '') ?>">
+                        placeholder="Ex.: TR-2401"
+                        maxlength="30" required
+                        value="<?= htmlspecialchars($codigo ?? '') ?>">
                 </div>
 
                 <div>
                     <label for="modelo">Modelo do Trem</label>
                     <input type="text" id="modelo" name="modelo"
-                           placeholder="Ex.: Trem-bala"
-                           maxlength="100" required
-                           value="<?= htmlspecialchars($modelo ?? '') ?>">
+                        placeholder="Ex.: Trem-bala"
+                        maxlength="100" required
+                        value="<?= htmlspecialchars($modelo ?? '') ?>">
                 </div>
 
                 <div>
                     <label for="velocidade">Velocidade (km/h)</label>
                     <input type="number" id="velocidade"
-                           name="velocidade"
-                           min="0" max="9999.99" step="0.01"
-                           value="<?= htmlspecialchars($velocidade ?? '0') ?>"
-                           required>
+                        name="velocidade"
+                        min="0" max="9999.99" step="0.01"
+                        value="<?= htmlspecialchars($velocidade ?? '0') ?>"
+                        required>
                 </div>
 
                 <div>
@@ -169,26 +165,24 @@ $responsavel_id = filter_var(
                 </div>
 
                 <div>
-    <label for="usuario_responsavel_id">Funcionário Responsável</label>
+                    <label for="usuario_responsavel_id">Funcionário Responsável</label>
 
-    <select
-        id="usuario_responsavel_id"
-        name="usuario_responsavel_id"
-        required
-    >
-        <option value="">Selecione um funcionário</option>
+                    <select
+                        id="usuario_responsavel_id"
+                        name="usuario_responsavel_id"
+                        required>
+                        <option value="">Selecione um funcionário</option>
 
-        <?php while ($usuario = $resultado_usuarios->fetch_assoc()): ?>
-            <option
-                value="<?= (int) $usuario['id'] ?>"
-                <?= (int) ($responsavel_id ?? 0) === (int) $usuario['id'] ? 'selected' : '' ?>
-            >
-                <?= htmlspecialchars($usuario['nome'], ENT_QUOTES, 'UTF-8') ?>
-                - <?= htmlspecialchars($usuario['email'], ENT_QUOTES, 'UTF-8') ?>
-            </option>
-        <?php endwhile; ?>
-    </select>
-</div>
+                        <?php while ($usuario = $resultado_usuarios->fetch_assoc()): ?>
+                            <option
+                                value="<?= (int) $usuario['id'] ?>"
+                                <?= (int) ($responsavel_id ?? 0) === (int) $usuario['id'] ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($usuario['nome'], ENT_QUOTES, 'UTF-8') ?>
+                                - <?= htmlspecialchars($usuario['email'], ENT_QUOTES, 'UTF-8') ?>
+                            </option>
+                        <?php endwhile; ?>
+                    </select>
+                </div>
 
             </div>
 
@@ -204,4 +198,5 @@ $responsavel_id = filter_var(
     </div>
 
 </body>
+
 </html>
